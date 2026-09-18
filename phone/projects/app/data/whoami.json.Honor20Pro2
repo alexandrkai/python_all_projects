@@ -1,0 +1,21 @@
+{
+    "name": "HONOR20PRO2",
+    "sims": [
+        {
+            "slot": 0,
+            "number": "+79309758010",
+            "status": "active",
+            "operator":"tele2"
+        },
+        {
+            "slot": 1,
+            "number": "+79911296020",
+            "status": "inactive",
+            "operator":"tele2"
+        }
+    ],
+    "mac": null,
+    "ip": null,
+    "url": null,
+    "port": null
+}

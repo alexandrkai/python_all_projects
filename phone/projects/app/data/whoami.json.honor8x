@@ -1,0 +1,21 @@
+{
+    "name": "HONOR8X",
+    "sims": [
+        {
+            "slot": 0,
+            "number": "+79998855693",
+            "status": 1,
+            "operator":"tele2"
+        },
+        {
+            "slot": 1,
+            "number": "+79779988565",
+            "status": 0,
+            "operator":"tele2"
+        }
+    ],
+    "mac": null,
+    "ip": null,
+    "url": null,
+    "port": null
+}

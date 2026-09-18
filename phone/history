@@ -1,0 +1,282 @@
+    1  pip install requests
+    2  ping -c 4 google.com
+    3  pip install -i https://mirrors.aliyun.com/pypi/simple/ requests
+    4  pip config set global.index-url https://mirrors.aliyun.com/pypi/simple/
+    5  pip install fastapi
+    6  top
+    7  history
+    8  cd mkdir -p /data/data/com.termux/files/home/storage/shared/myfolder/projects/rest-api/app
+    9  mkdir -p /data/data/com.termux/files/home/storage/shared/myfolder/projects/rest-api/app
+   10  cd  /data/data/com.termux/files/home/storage/shared/myfolder/projects/rest-api/app
+   11  pip install fastapi
+   12  pkg install rust
+   13  pkg install binutils build-essential
+   14  export ANDROID_API_LEVEL=33
+   15  pip install fastapi
+   16  history
+   17  cd  /data/data/com.termux/files/home/storage/shared/myfolder/projects/rest-api/app
+   18  ls
+   19  pip install req.txt
+   20  pip install -r req.txt
+   21  nano  req.txt
+   22  pip install -r req.txt
+   23  pkg install rsync
+   24  top
+   25  pkg install termux-api
+   26  pip install -r req.txt
+   27  history
+   28  cd  /data/data/com.termux/files/home/storage/shared/myfolder/projects/rest-api/app
+   29  cd .
+   30  cd 
+   31  pwd
+   32  cd  /data/data/com.termux/files/home/storage/shared/myfolder/projects/rest-api/app
+   33  ls
+   34  cd
+   35  cd  /data/data/com.termux/files/home/storage/shared/myfolder/projects/rest-api/app
+   36  ls -la
+   37  cd .
+   38  cd ./
+   39  cd  /data/data/com.termux/files/home/storage/shared/myfolder/projects/rest-api
+   40  ls
+   41  cd app
+   42  cd  /data/data/com.termux/files/home/storage/shared/myfolder/projects/rest-api
+   43  cd app
+   44  cd log/logs
+   45  ls
+   46  ls -la
+   47  tail -n 200 -f service_messages.log 
+   48  pkg update
+   49  termux-setup-storage
+   50  apt update
+   51  apt upgrade -y
+   52  pkg install rust git python -y
+   53  python
+   54  pip install fastapi
+   55  sshd
+   56  passwd
+   57  whoami
+   58  termux-wake-lock
+   59  pip install fastapi
+   60  pwd
+   61  python
+   62  ps uax
+   63  ip a
+   64  ifconfig
+   65  top
+   66  cd storage
+   67  cd ..
+   68  ls
+   69  pwd
+   70  cd storage
+   71  ls
+   72  cd shared
+   73  ls
+   74  cd myfolder/
+   75  ls
+   76  cd projects/
+   77  cd rest-api/
+   78  ls
+   79  cd app/
+   80  ls
+   81  ls -la
+   82  cd log/
+   83  ls
+   84  ls -la
+   85  tail -f api
+   86  tail -f apicd ..
+   87  cd ..
+   88  tail -f api.log 
+   89  tail -f api.log -n 500
+   90  top
+   91  history
+   92  cd  /data/data/com.termux/files/home/storage/shared/myfolder/projects/rest-api
+   93  sh run.sh
+   94  ls
+   95  cd app
+   96  ls
+   97  sh run.sh
+   98  top
+   99  ip a
+  100  ifconfig
+  101  sshd
+  102  history
+  103  sshd
+  104  cd  /data/data/com.termux/files/home/storage/shared/myfolder/projects/rest-api
+  105  cd app
+  106  sh run.sh
+  107  history
+  108  apt update
+  109  apt upgrade -y
+  110  python --version 
+  111  whoami
+  112  top
+  113  ls
+  114  history
+  115  cd  /data/data/com.termux/files/home/storage/shared/myfolder/projects/rest-api
+  116  cd app/
+  117  cat requirements.txt 
+  118  pip install -r requirements.txt 
+  119  pkg install postgresql
+  120  which pg_config
+  121  pkg install which
+  122  which pg_config
+  123  pip install -r requirements.txt
+  124  pkg install python rust git -y
+  125  pip install -r requirements.txt
+  126  export ANDROID_API_LEVEL=$(getprop ro.build.version.sdk)
+  127  echo $ANDROID_API_LEVEL
+  128  echo 'export ANDROID_API_LEVEL=$(getprop ro.build.version.sdk)' >> ~/.bashrc
+  129  source ~/.bashrc
+  130  pip install -r requirements.txt
+  131  top
+  132  ssh-keygen -t rsa
+  133  ssh-copy-id kai@89.125.188.172
+  134  ssh 'kai@89.125.188.172'
+  135  ssh -D 9090 -C -N kai@89.125.188.172
+  136  ssh -D 9090 -N -f kai@89.125.188.172
+  137  top
+  138  kill -9 14638
+  139  top
+  140  kill -9 17590
+  141  kill -9 17579
+  142  top
+  143  exit
+  144  top
+  145  history
+  146  top
+  147  history
+  148  cd  /data/data/com.termux/files/home/storage/shared/myfolder/projects/rest-api
+  149  ls
+  150  cd app
+  151  ls
+  152  tail api.log
+  153  pip install -r requirements.txt 
+  154  top
+  155  exit
+  156  top
+  157  kill -9 28795 
+  158  top
+  159  history
+  160  cd  /data/data/com.termux/files/home/storage/shared/myfolder/projects/rest-api/app
+  161  sh run.sh
+  162  top
+  163  exit
+  164  top
+  165  pkg install autossh
+  166  autossh -M 0 -f -N -D 9090 -o "ServerAliveInterval=30" -o "ServerAliveCountMax=3" kai@89.125.188.172
+  167  ещз
+  168  top
+  169  kill -9 4166
+  170  top
+  171  kill -9 4165
+  172  top
+  173  kill -9 4175
+  174  top
+  175  history
+  176  autossh -M 0 -f -N -D 9090 -o "ServerAliveInterval=30" -o "ServerAliveCountMax=3" kai@89.125.188.172
+  177  top
+  178  history
+  179  pkg update
+  180  pip install psutil
+  181  top
+  182  kill -9 30665
+  183  top
+  184  kill -9 4183
+  185  kill -9 27505
+  186  top
+  187  exit
+  188  top
+  189  kill -9 28199
+  190  top
+  191  kill -9 28694
+  192  top
+  193  history
+  194  cd  /data/data/com.termux/files/home/storage/shared/myfolder/projects/rest-api/app
+  195  cd core
+  196  ls
+  197  cat phone
+  198  cat phone.py
+  199  top
+  200  exit
+  201  etopexit
+  202  top
+  203  kill -9 28909
+  204  top
+  205  history
+  206  cd  /data/data/com.termux/files/home/storage/shared/myfolder/projects/rest-api/app
+  207  sh run.sh
+  208  top
+  209  exit
+  210  top
+  211  kill -9 13598
+  212  top
+  213  history
+  214  cd  /data/data/com.termux/files/home/storage/shared/myfolder/projects/rest-api/app
+  215  sh run.sh
+  216  top
+  217  kill -9 14808
+  218  history
+  219  cd  /data/data/com.termux/files/home/storage/shared/myfolder/projects/rest-api/app
+  220  sh run.sh
+  221  top
+  222  exit
+  223  top
+  224  kill -9 7918
+  225  top
+  226  history
+  227  cd  /data/data/com.termux/files/home/storage/shared/myfolder/projects/rest-api/app
+  228  sh run.sh
+  229  top
+  230  exit
+  231  top
+  232  kill -9 8994
+  233  top
+  234  history
+  235  cd  /data/data/com.termux/files/home/storage/shared/myfolder/projects/rest-api/app
+  236  sh run.sh
+  237  top
+  238  exit
+  239  xit
+  240  exit
+  241  top
+  242  kill -9 4856
+  243  top
+  244  history
+  245  cd  /data/data/com.termux/files/home/storage/shared/myfolder/projects/rest-api/app
+  246  sh run.sh
+  247  top
+  248  exit
+  249  top
+  250  kill -9 10209
+  251  cd  /data/data/com.termux/files/home/storage/shared/myfolder/projects/rest-api/app
+  252  sh run.sh
+  253  top
+  254  exit
+  255  history
+  256  cd  /data/data/com.termux/files/home/storage/shared/myfolder/projects/rest-api/app
+  257  sh run.sh
+  258  top
+  259  sshd
+  260  ip a
+  261  ifconfig
+  262  top
+  263  history
+  264  cd  /data/data/com.termux/files/home/storage/shared/myfolder/projects/rest-api/app
+  265  sh run.sh
+  266  top
+  267  cd  /data/data/com.termux/files/home/storage/shared/myfolder/projects/rest-api/app
+  268  sh run.sh
+  269  cd  /data/data/com.termux/files/home/storage/shared/myfolder/projects/rest-api/app
+  270  sh run.sh
+  271  top
+  272  cd  /data/data/com.termux/files/home/storage/shared/myfolder/projects/rest-api/app
+  273  sh run.sh
+  274  exit
+  275  top
+  276  ls
+  277  pwd
+  278  cd  /data/data/com.termux/files/home/storage/shared/myfolder/projects/rest-api/app
+  279  scp
+  280  ls
+  281  cd  /data/data/com.termux/files/home/storage/shared/myfolder/projects/rest-api/app
+  282  history >> history

@@ -1,0 +1,22 @@
+# D:/myprogramms/Python/Phones/PROJECT/PHONE/app/models/senders.py
+from ._base import BaseModel,Optional,List
+from .email import EmailSender
+from .dictionary.enums import SimStatus,OperatorPhone
+
+class SIM(BaseModel):
+    slot:int
+    number:str
+    status:SimStatus
+    operator:Optional[OperatorPhone]=None
+    
+class PhoneSender(BaseModel):
+    name: str
+    sims: List[SIM]
+    mac: Optional[str] = None
+    ip: Optional[str] = None
+    url: Optional[str] = None
+    port: Optional[int] = None
+    
+class Senders(BaseModel):
+    email:Optional[list[EmailSender]]=None
+    phone:Optional[list[PhoneSender]]=None

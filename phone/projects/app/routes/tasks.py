@@ -1,0 +1,296 @@
+# D:/myprogramms/Python/Phones/PROJECT/PHONE/app/routes/tasks.py
+from fastapi import APIRouter, HTTPException, Body
+from datetime import datetime, timedelta
+from typing import List, Optional
+from models.task import TaskRequest, TaskResponse, TaskType, TaskStatus
+# from core.scheduler import scheduler
+from core import common, email, phone,scheduler
+from core.email import myEmail
+from routes.routes import actualeNetworkInfo
+from log.log import get_logger
+
+logger=get_logger(__name__)
+router = APIRouter(prefix="/tasks", tags=["Tasks"])
+
+# Словарь доступных функций
+AVAILABLE_FUNCTIONS = {
+    # Системные функции
+    "battery_status": common.batteryStatus,
+    "call_log": common.callLog,
+    "contact_list": common.contactList,
+    "sms_list": common.smsList,
+    "update_network_info": actualeNetworkInfo,
+    
+    # Email функции
+    "send_email": myEmail.send,
+    
+    # SMS функции
+    "send_sms": phone.Phone.sendSMS,
+    
+    # Утилиты
+    "start_ssh": common.startSSH,
+}
+
+@router.post("/schedule", response_model=dict)
+async def schedule_task(request: TaskRequest):
+    """
+    Планирует новую задачу
+    """
+    # Получаем функцию по имени
+    if request.function_name not in AVAILABLE_FUNCTIONS:
+        raise HTTPException(
+            status_code=400,
+            detail=f"Function '{request.function_name}' not available"
+        )
+    
+    func = AVAILABLE_FUNCTIONS[request.function_name]
+    
+    # Планируем задачу в зависимости от типа
+    if request.task_type == TaskType.ONE_TIME:
+        if not request.execute_at:
+            raise HTTPException(
+                status_code=400,
+                detail="execute_at required for one_time tasks"
+            )
+        task_id = scheduler.schedule_one_time(
+            name=request.task_name,
+            func=func,
+            execute_at=request.execute_at,
+            args=(),
+            kwargs=request.function_kwargs
+        )
+        
+    elif request.task_type == TaskType.PERIODIC:
+        if not request.interval_seconds:
+            raise HTTPException(
+                status_code=400,
+                detail="interval_seconds required for periodic tasks"
+            )
+        task_id = scheduler.schedule_periodic(
+            name=request.task_name,
+            func=func,
+            interval_seconds=request.interval_seconds,
+            args=(),
+            kwargs=request.function_kwargs
+        )
+        
+    elif request.task_type == TaskType.CRON:
+        if not request.cron_expression:
+            raise HTTPException(
+                status_code=400,
+                detail="cron_expression required for cron tasks"
+            )
+        task_id = scheduler.schedule_cron(
+            name=request.task_name,
+            func=func,
+            cron_expression=request.cron_expression,
+            args=(),
+            kwargs=request.function_kwargs
+        )
+    
+    return {
+        "status": "success",
+        "message": "Task scheduled",
+        "task_id": task_id,
+        "next_run": scheduler.get_task(task_id).get_next_run().isoformat() if scheduler.get_task(task_id) else None
+    }
+
+@router.post("/schedule-sms")
+async def schedule_sms(
+    number: str = Body(...),
+    message: str = Body(...),
+    execute_at: datetime = Body(...),
+    sim_slot: Optional[int] = Body(None)
+):
+    """
+    Планирует отправку SMS на указанное время
+    """
+    phone_instance = phone.Phone()
+    phone_sender = phone.getPhoneSender(phone.SMSRequest(number=number, message=message, simSlot=sim_slot))
+    
+    task_id = scheduler.schedule_one_time(
+        name=f"Send SMS to {number}",
+        func=phone_instance.sendSMS,
+        execute_at=execute_at,
+        args=(phone.SMSRequest(number=number, message=message, simSlot=sim_slot), phone_sender)
+    )
+    
+    return {
+        "status": "success",
+        "message": "SMS scheduled",
+        "task_id": task_id,
+        "scheduled_time": execute_at.isoformat()
+    }
+
+@router.post("/schedule-email")
+async def schedule_email(
+    to_email: str = Body(...),
+    subject: str = Body(...),
+    body: Optional[str] = Body(None),
+    html_body: Optional[str] = Body(None),
+    execute_at: datetime = Body(...)
+):
+    """
+    Планирует отправку email на указанное время
+    """
+    from models.email import EmailCreate
+    from core.email import getEmailSender
+    
+    email_sender = getEmailSender()
+    email_data = EmailCreate(
+        toEmail=to_email,
+        subject=subject,
+        body=body,
+        htmlBody=html_body,
+        sender=email_sender
+    )
+    
+    email_instance = email.myEmail()
+    
+    task_id = scheduler.schedule_one_time(
+        name=f"Send email to {to_email}",
+        func=email_instance.send,
+        execute_at=execute_at,
+        args=(email_data,)
+    )
+    
+    return {
+        "status": "success",
+        "message": "Email scheduled",
+        "task_id": task_id,
+        "scheduled_time": execute_at.isoformat()
+    }
+
+@router.post("/schedule-daily-report")
+async def schedule_daily_report(
+    time_str: str = Body(default="09:00"),
+    email_to: str = Body(default="admin@example.com")
+):
+    """
+    Планирует ежедневный отчет на указанное время
+    """
+    from datetime import time as dt_time
+    
+    try:
+        hour, minute = map(int, time_str.split(":"))
+        schedule_time = dt_time(hour=hour, minute=minute)
+    except:
+        raise HTTPException(status_code=400, detail="Invalid time format. Use HH:MM")
+    
+    # Создаем cron выражение для ежедневного выполнения
+    cron_expr = f"{minute} {hour} * * *"
+    
+    task_id = scheduler.schedule_cron(
+        name=f"Daily report to {email_to}",
+        func=_generate_daily_report,
+        cron_expression=cron_expr,
+        kwargs={"email_to": email_to}
+    )
+    
+    return {
+        "status": "success",
+        "message": "Daily report scheduled",
+        "task_id": task_id,
+        "cron_expression": cron_expr
+    }
+
+async def _generate_daily_report(email_to: str):
+    """
+    Функция для генерации ежедневного отчета
+    """
+    from core.email import myEmail, getEmailSender
+    from models.email import EmailCreate
+    
+    # Собираем данные
+    battery = common.batteryStatus()
+    network_info = Network.actualeNetworkInfo()
+    
+    # Формируем отчет
+    report = f"""
+    Ежедневный отчет:
+    - Время: {datetime.now()}
+    - Статус батареи: {battery.get('status', 'unknown')}
+    - IP адрес: {network_info.SENDER.get('ip', 'unknown')}
+    - Сервис работает
+    """
+    
+    # Отправляем email
+    email_sender = getEmailSender()
+    email_data = EmailCreate(
+        toEmail=email_to,
+        subject=f"Ежедневный отчет {datetime.now().date()}",
+        body=report,
+        sender=email_sender
+    )
+    
+    email_instance = myEmail()
+    return email_instance.send(email_data)
+
+@router.get("/list", response_model=List[dict])
+async def list_tasks(
+    status: Optional[TaskStatus] = None,
+    limit: int = 50
+):
+    """
+    Возвращает список запланированных задач
+    """
+    tasks = scheduler.list_tasks(status=status)
+    
+    result = []
+    for task in tasks[:limit]:
+        result.append({
+            "task_id": task.task_id,
+            "name": task.name,
+            "status": task.status,
+            "execute_at": task.execute_at.isoformat() if task.execute_at else None,
+            "created_at": task.created_at.isoformat(),
+            "next_run": task.get_next_run().isoformat() if task.get_next_run() else None,
+            "result": task.result,
+            "error": task.error
+        })
+    
+    return result
+
+@router.get("/{task_id}", response_model=dict)
+async def get_task(task_id: str):
+    """
+    Получает информацию о задаче
+    """
+    task = scheduler.get_task(task_id)
+    if not task:
+        raise HTTPException(status_code=404, detail="Task not found")
+    
+    return {
+        "task_id": task.task_id,
+        "name": task.name,
+        "status": task.status,
+        "execute_at": task.execute_at.isoformat() if task.execute_at else None,
+        "created_at": task.created_at.isoformat(),
+        "next_run": task.get_next_run().isoformat() if task.get_next_run() else None,
+        "result": task.result,
+        "error": task.error
+    }
+
+@router.delete("/{task_id}")
+async def cancel_task(task_id: str):
+    """
+    Отменяет запланированную задачу
+    """
+    if scheduler.cancel_task(task_id):
+        return {"status": "success", "message": "Task cancelled"}
+    else:
+        raise HTTPException(status_code=404, detail="Task not found")
+
+@router.post("/execute-now/{task_id}")
+async def execute_task_now(task_id: str):
+    """
+    Выполняет задачу немедленно
+    """
+    task = scheduler.get_task(task_id)
+    if not task:
+        raise HTTPException(status_code=404, detail="Task not found")
+    
+    # Устанавливаем время выполнения на текущее
+    task.execute_at = datetime.now()
+    
+    return {"status": "success", "message": "Task will be executed immediately"}

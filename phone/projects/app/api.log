@@ -1,0 +1,91 @@
+=== LOGGING CONFIGURATION ===
+PROJECT_ROOT: /storage/emulated/0/myfolder/projects/rest-api/app
+PATH_LOG_FOLDER: /storage/emulated/0/myfolder/projects/rest-api/app/log/logs
+PATH_CONFIG_FOLDER: /storage/emulated/0/myfolder/projects/rest-api/app/config
+✓ Директория логов создана/проверена: /storage/emulated/0/myfolder/projects/rest-api/app/log/logs
+✓ Директория конфигов создана/проверена: /storage/emulated/0/myfolder/projects/rest-api/app/config
+✓ Директория /storage/emulated/0/myfolder/projects/rest-api/app/log/logs доступна для записи
+Лог-файл: /storage/emulated/0/myfolder/projects/rest-api/app/log/logs/service_messages.log
+✓ Файловый обработчик добавлен
+ℹ️ 2026-09-14 22:24:30,437 [INFO] Лог-сессия начата: 2026-09-14 22:24:30.437455
+ℹ️ 2026-09-14 22:24:30,438 [INFO] Окружение: development
+✓ Логгер service_messages инициализирован в development режиме
+✓ Логи пишутся в: /storage/emulated/0/myfolder/projects/rest-api/app/log/logs/service_messages.log
+🐛2026-09-14 22:24:31,719 [DEBUG] service_messages.core.network:network.py:338 - {
+  "bssid": "02:00:00:00:00:00",
+  "frequency_mhz": 5180,
+  "ip": "192.168.1.70",
+  "link_speed_mbps": 433,
+  "mac_address": "02:00:00:00:00:00",
+  "network_id": -1,
+  "rssi": -44,
+  "ssid": "<unknown ssid>",
+  "ssid_hidden": true,
+  "supplicant_state": "COMPLETED"
+}
+
+ℹ️ 2026-09-14 22:24:31,720 [INFO] IP из termux-wifi: 192.168.1.70
+ℹ️ 2026-09-14 22:24:31,721 [INFO] BSSID из termux-wifi: 02:00:00:00:00:00
+ℹ️ 2026-09-14 22:24:31,722 [INFO] Получены номера телефонов: ['79629665157', '79309524050']
+ℹ️ 2026-09-14 22:24:31,728 [INFO] [Mon Sep 14 22:24:31 2026] INFO: Starting API Service...
+ℹ️ 2026-09-14 22:24:31,994 [INFO] [Mon Sep 14 22:24:31 2026] INFO: Wakelock acquired via termux-api
+ℹ️ 2026-09-14 22:24:32,139 [INFO] Создание приложения
+ℹ️ 2026-09-14 22:24:32,139 [INFO] Создаем роуты
+ℹ️ 2026-09-14 22:24:32,141 [INFO] Создаем роуты
+ℹ️ 2026-09-14 22:24:32,183 [INFO] [Mon Sep 14 22:24:32 2026] INFO: Uvicorn starting on http://0.0.0.0:8000
+ℹ️ 2026-09-14 22:24:32,183 [INFO] [Mon Sep 14 22:24:32 2026] INFO: Logging to standard output (handled by nohup)
+🐛2026-09-14 22:24:32,189 [DEBUG] asyncio:selector_events.py:64 - Using selector: EpollSelector
+INFO:     Started server process [16110]
+INFO:     Waiting for application startup.
+ℹ️ 2026-09-14 22:24:32,217 [INFO] ============================================================
+ℹ️ 2026-09-14 22:24:32,217 [INFO] ЗАПУСК ПРИЛОЖЕНИЯ
+ℹ️ 2026-09-14 22:24:32,217 [INFO] ============================================================
+ℹ️ 2026-09-14 22:24:32,217 [INFO] Python version: 3.14.6 (main, Jul  5 2026, 10:35:55) [Clang 21.0.0 (https://android.googlesource.com/toolchain/llvm-project 5e96669f0
+ℹ️ 2026-09-14 22:24:32,218 [INFO] FastAPI version: 0.139.0
+ℹ️ 2026-09-14 22:24:32,218 [INFO] Запускаем фоновые задачи
+ℹ️ 2026-09-14 22:24:32,218 [INFO] ✓ Фоновые задачи запущены
+ℹ️ 2026-09-14 22:24:32,218 [INFO] ============================================================
+ℹ️ 2026-09-14 22:24:32,218 [INFO] Запуск фоновой задачи UPDATE_CONFIGURATION в 2026-09-14T22:24:32.218497 каждые 100 минуты
+ℹ️ 2026-09-14 22:24:32,222 [INFO] Получены номера телефонов: ['79629665157', '79309524050']
+ℹ️ 2026-09-14 22:24:32,223 [INFO] Выполнили фоновую задачу UPDATE_CONFIGURATION. Теперь ждем 100 минут
+🐛2026-09-14 22:24:32,230 [DEBUG] urllib3.connectionpool:connectionpool.py:1062 - Starting new HTTPS connection (1): api.telegram.org:443
+🐛2026-09-14 22:24:32,231 [DEBUG] socks:socks.py:799 - Error connecting to SOCKS5 proxy 127.0.0.1:9090 due to: [Errno 111] Connection refused
+❌ 2026-09-14 22:24:32,232 [ERROR] service_messages.core.telegram.telega:telega.py:30 - Проблема с отправкой лога в Телеграмм
+None
+ℹ️ 2026-09-14 22:24:32,232 [INFO] Запуск фоновой задачи PING в 2026-09-14T22:24:32.232408 каждые 3600 секунды
+ℹ️ 2026-09-14 22:24:32,232 [INFO] Делаем запрос оркестратору, что я жив с передачей своих параметров.
+🐛2026-09-14 22:24:32,233 [DEBUG] urllib3.connectionpool:connectionpool.py:241 - Starting new HTTP connection (1): 192.168.1.111:80
+⚠️ 2026-09-14 22:24:35,293 [WARNING] service_messages.core.ping:ping.py:26 - Не удалось отправить ping оркестратору: HTTPConnectionPool(host='192.168.1.111', port=80): Max retries exceeded with url: /ping (Caused by NewConnectionError("HTTPConnection(host='192.168.1.111', port=80): Failed to establish a new connection: [Errno 113] No route to host"))
+🐛2026-09-14 22:24:35,293 [DEBUG] service_messages.core.ping:ping.py:33 - Делаем запрос сервису по работе с заказами, что я жив с передачей своих параметров.
+🐛2026-09-14 22:24:35,297 [DEBUG] urllib3.connectionpool:connectionpool.py:241 - Starting new HTTP connection (1): 192.168.1.111:8080
+⚠️ 2026-09-14 22:24:38,364 [WARNING] service_messages.core.ping:ping.py:49 - Не удалось отправить ping сервису заказов: HTTPConnectionPool(host='192.168.1.111', port=8080): Max retries exceeded with url: /ping (Caused by NewConnectionError("HTTPConnection(host='192.168.1.111', port=8080): Failed to establish a new connection: [Errno 113] No route to host"))
+ℹ️ 2026-09-14 22:24:38,364 [INFO] Выполнили фоновую задачу PING. Теперь ждем 3600 секунд. Результат: {'workers': False, 'orders': False}
+🐛2026-09-14 22:24:38,366 [DEBUG] urllib3.connectionpool:connectionpool.py:1062 - Starting new HTTPS connection (1): api.telegram.org:443
+🐛2026-09-14 22:24:38,369 [DEBUG] socks:socks.py:799 - Error connecting to SOCKS5 proxy 127.0.0.1:9090 due to: [Errno 111] Connection refused
+❌ 2026-09-14 22:24:38,370 [ERROR] service_messages.core.telegram.telega:telega.py:30 - Проблема с отправкой лога в Телеграмм
+None
+ℹ️ 2026-09-14 22:24:38,370 [INFO] Запуск канарейки в 2026-09-14 22:24:38.370540 каждые 60 минуты
+ℹ️ 2026-09-14 22:24:39,515 [INFO] Email успешно отправлен на kaiby@yandex.ru
+🐛2026-09-14 22:24:39,525 [DEBUG] urllib3.connectionpool:connectionpool.py:1062 - Starting new HTTPS connection (1): api.telegram.org:443
+🐛2026-09-14 22:24:39,530 [DEBUG] socks:socks.py:799 - Error connecting to SOCKS5 proxy 127.0.0.1:9090 due to: [Errno 111] Connection refused
+❌ 2026-09-14 22:24:39,532 [ERROR] service_messages.core.telegram.telega:telega.py:30 - Проблема с отправкой лога в Телеграмм
+None
+🐛2026-09-14 22:24:39,533 [DEBUG] service_messages.core.common:common.py:69 - Выполняем команду ['termux-sms-send', '-s', '0', '-n', '+79175729812', '14.09.2026 22:24:39. HONOR20PRO.+79629665157. SMS.Канарейка']
+🐛2026-09-14 22:24:39,694 [DEBUG] service_messages.core.common:common.py:76 - process.stdout: 
+🐛2026-09-14 22:24:39,695 [DEBUG] service_messages.core.common:common.py:77 - process.stderr: 
+🐛2026-09-14 22:24:39,695 [DEBUG] service_messages.core.common:common.py:69 - Выполняем команду ['termux-sms-send', '-s', '1', '-n', '+79175729812', '14.09.2026 22:24:39. HONOR20PRO.+79309524050. SMS.Канарейка']
+🐛2026-09-14 22:24:39,796 [DEBUG] service_messages.core.common:common.py:76 - process.stdout: 
+🐛2026-09-14 22:24:39,797 [DEBUG] service_messages.core.common:common.py:77 - process.stderr: 
+🐛2026-09-14 22:24:39,805 [DEBUG] urllib3.connectionpool:connectionpool.py:1062 - Starting new HTTPS connection (1): api.telegram.org:443
+🐛2026-09-14 22:24:39,809 [DEBUG] socks:socks.py:799 - Error connecting to SOCKS5 proxy 127.0.0.1:9090 due to: [Errno 111] Connection refused
+❌ 2026-09-14 22:24:39,810 [ERROR] service_messages.core.telegram.telega:telega.py:30 - Проблема с отправкой лога в Телеграмм
+None
+ℹ️ 2026-09-14 22:24:39,811 [INFO] Запуск проверки работоспособности autossh 2026-09-14 22:24:39.811676 каждые 180 минуты
+ℹ️ 2026-09-14 22:24:39,849 [INFO] 🔍 Туннель не найден, запускаем...
+⚠️ 2026-09-14 22:24:39,862 [WARNING] service_messages.core.autossh:autossh.py:51 - ⚠️ autossh не найден, используется обычный ssh (без автоматического перезапуска).
+ℹ️ 2026-09-14 22:24:39,868 [INFO] 🚀 Туннель запущен (порт 9090)
+ℹ️ 2026-09-14 22:24:41,887 [INFO] ✅ Туннель успешно запущен.
+🐛2026-09-14 22:24:41,893 [DEBUG] urllib3.connectionpool:connectionpool.py:1062 - Starting new HTTPS connection (1): api.telegram.org:443
+🐛2026-09-14 22:24:42,332 [DEBUG] urllib3.connectionpool:connectionpool.py:544 - https://api.telegram.org:443 "POST /bot8524403686:AAEjbYgXaHP70PHTifQDxA9em4nJkPPHfcU/sendMessage HTTP/1.1" 200 322
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://0.0.0.0:5555 (Press CTRL+C to quit)

@@ -1,0 +1,1 @@
+sudo docker run -d     --restart always     --name postgresql_container     --network app-network     -p 5432:5432     -e TZ=Europe/Moscow     -e POSTGRES_USER=kai     -e POSTGRES_PASSWORD=291297     -e POSTGRES_DB=postgres     -v $(pwd)/data:/var/lib/postgresql     postgres:18.6
