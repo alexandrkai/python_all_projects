@@ -1,2 +1,3 @@
-2026/09/17-23:00:51.705 1804 Creating DB D:\myprogramms\Python\SSH-PROXY-TO-INTERNET\brave_proxy_profile\Default\shared_proto_db since it was missing.
-2026/09/17-23:00:51.711 1804 Reusing MANIFEST D:\myprogramms\Python\SSH-PROXY-TO-INTERNET\brave_proxy_profile\Default\shared_proto_db/MANIFEST-000001
+2026/09/22-22:10:42.467 393c Reusing MANIFEST D:\myprogramms\Python\SSH-PROXY-TO-INTERNET\brave_proxy_profile\Default\shared_proto_db/MANIFEST-000001
+2026/09/22-22:10:42.467 393c Recovering log #3
+2026/09/22-22:10:42.468 393c Reusing old log D:\myprogramms\Python\SSH-PROXY-TO-INTERNET\brave_proxy_profile\Default\shared_proto_db/000003.log 
