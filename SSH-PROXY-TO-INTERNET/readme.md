@@ -1,6 +1,8 @@
 Если ключ ещё не сгенерирован и не скопирован на сервер, выполните в PowerShell:
 PowerShell
 
+
+
 ssh-keygen -t ed25519
 type $env:USERPROFILE\.ssh\id_ed25519.pub | ssh kai@89.125.188.172 "mkdir -p ~/.ssh && cat >> ~/.ssh/authorized_keys"
 
