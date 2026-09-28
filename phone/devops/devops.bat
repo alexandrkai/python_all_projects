@@ -1,0 +1,1 @@
+type %USERPROFILE%\.ssh\id_ed25519.pub | ssh -p 8022 u0_a199@192.168.1.70 "mkdir -p ~/.ssh && cat >> ~/.ssh/authorized_keys"

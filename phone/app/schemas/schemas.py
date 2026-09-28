@@ -5,26 +5,63 @@ from datetime import datetime
 from typing import Any
 
 from fastapi.responses import JSONResponse
-from pydantic import BaseModel, ConfigDict, EmailStr, Field, model_validator
+from pydantic import (
+    BaseModel,
+    EmailStr,
+    Field,
+    conint,
+    field_validator,
+    model_validator,
+)
 from typing_extensions import Self
 
-from .enums import OperatorPhone, ResultStatus, SimStatus, TaskStatus, TaskType
+from .enums import ResultStatus, SimStatus, TaskStatus, TaskType
 
-PHONE_PATTERN_RUSSIA = re.compile(
-    r"^\+7(?:\(\d{3}\)|\d{3})[ -]?\d{3}[ -]?\d{2}[ -]?\d{2}$"
-)
+PHONE_PATTERN_RUSSIA = re.compile(r"^\+7(?:\(\d{3}\)|\d{3})[ -]?\d{3}[ -]?\d{2}[ -]?\d{2}$")
+EMAIL_REGEX = re.compile(r"^[^@\s]+@[^@\s]+\.[^@\s]+$")
+
+# class ORMBaseModel(BaseModel):
+#     model_config = ConfigDict(from_attributes=True)
 
 
-class ORMBaseModel(BaseModel):
-    model_config = ConfigDict(from_attributes=True)
+class PhoneBase(BaseModel):
+    number: str
 
+    @field_validator("number")
+    @classmethod
+    def validate_phone(cls, v: str) -> str:
+        clean_phone = re.sub(r"[\s\(\)\-]", "", v)
+        if clean_phone.startswith("8") and len(clean_phone) == 11:
+            clean_phone = "+7" + clean_phone[1:]
+        if not re.match(PHONE_PATTERN_RUSSIA, clean_phone):
+            raise ValueError(
+                "Номер телефона должен быть в формате +7XXXXXXXXXX"
+            )
+        return clean_phone
+
+
+class EmailParameters(BaseModel):
+    SMTP_SERVER: str
+    SMTP_PORT: int
+    SMTP_USERNAME: EmailStr
+    SMTP_PASSWORD: str
+
+    @field_validator("SMTP_USERNAME")
+    @classmethod
+    def validate_email(cls, v: str) -> str:
+        if not v:
+            raise ValueError("SMTP_USERNAME не может быть пустым")
+        clean_email = v.strip().lower()
+        if not re.match(EMAIL_REGEX, clean_email):
+            raise ValueError("Некорректный формат SMTP_USERNAME")
+        if len(clean_email) > 100:
+            raise ValueError("Email не должен превышать 100 символов")
+        return clean_email
 
 class EmailSender(BaseModel):
-    smtp_server: str
-    smtp_port: int = Field(default=587)
-    smtp_username: EmailStr
-    smtp_password: str
-
+    name: str
+    description: str | None = None
+    settings: EmailParameters
 
 class EmailCreate(BaseModel):
     to_email: EmailStr
@@ -49,8 +86,9 @@ class SMSRequest(BaseModel):
     to_phone_number: str
     from_phone_number: str | None = None
     message: str = Field(
-        ..., max_length=300, description="Размер сообщения (не более 300 символов)"
+        ..., max_length=500, description="Размер сообщения (не более 300 символов)"
     )
+    
     sim_slot: int | None = Field(
         default=None, ge=0, le=1, description="Номер слота симки (от 0 до 1)"
     )
@@ -65,20 +103,21 @@ class SMSRequest(BaseModel):
         return self
 
 
-class SIM(BaseModel):
-    slot: int
-    number: str
+class SIM(PhoneBase):
+    slot: conint(ge=0, le=1)  # type: ignore
     status: SimStatus
-    operator: OperatorPhone | None = None
+    operator: str | None = None
 
 
 class PhoneSender(BaseModel):
     name: str
-    sims: list[SIM]
+    description: str | None = None
     mac: str | None = None
     ip: str | None = None
     url: str | None = None
     port: int | None = None
+    sims: list[SIM]
+    updated_at: datetime = Field(default_factory=lambda: datetime.now())  # noqa: DTZ005
 
 
 class Result(BaseModel):
@@ -112,9 +151,12 @@ class Senders(BaseModel):
 class TaskRequest(BaseModel):
     task_name: str = Field(..., description="Название задачи")
     task_type: TaskType = Field(default=TaskType.ONE_TIME)
-    execute_at: datetime | None = Field(None, description="Время выполнения для one_time")
-    cron_expression: str | None = Field(None, description="Cron выражение для cron задач")
-    interval_seconds: int | None = Field(None, description="Интервал в секундах для периодических задач")
+    execute_at: datetime | None = Field(
+        None, description="Время выполнения для one_time")
+    cron_expression: str | None = Field(
+        None, description="Cron выражение для cron задач")
+    interval_seconds: int | None = Field(
+        None, description="Интервал в секундах для периодических задач")
     function_name: str = Field(..., description="Имя функции для выполнения")
     function_args: dict[str, Any] = Field(default_factory=dict)
     function_kwargs: dict[str, Any] = Field(default_factory=dict)

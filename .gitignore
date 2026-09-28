@@ -5,3 +5,4 @@ __pycache__/
 *.pyo
 *.pyd
 .Python
+SSH-PROXY-TO-INTERNET/brave_proxy_profile/

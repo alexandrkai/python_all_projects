@@ -1,11 +1,12 @@
 
-from core.telegram.config import TOKEN
 import requests
+from core.telegram.config import TOKEN
 from log.log import get_logger
 
-logger=get_logger(__name__)
+logger = get_logger(__name__)
 
-def send_messege_to_boot(text,CHAT_ID="5151092623"):
+
+def send_messege_to_boot(text, CHAT_ID="5151092623"):
     """ ОТправка сообщения через телеграм бот
 
     Args:
@@ -26,5 +27,5 @@ def send_messege_to_boot(text,CHAT_ID="5151092623"):
 
         response = requests.post(url, json=payload, proxies=proxies)
         print(response.json())
-    except Exception as e:
-        logger.error('Проблема с отправкой лога в Телеграмм')
+    except Exception as e:  # noqa: BLE001
+        logger.error('Проблема с отправкой лога в Телеграмм'+str(e))

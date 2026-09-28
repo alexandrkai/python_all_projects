@@ -11,6 +11,7 @@
         
         {
             "name": "AUPAD",
+            "description":null,
             "sims": [
                 {
                     "slot": 0,
@@ -33,6 +34,7 @@
         
         {
             "name": "HONOR8X",
+            "description":null,
             "sims": [
                 {
                     "slot": 0,
@@ -47,13 +49,14 @@
                     "operator": "tele2"
                 }
             ],
-            "mac": "02:00:00:00:00:00",
-            "ip": "192.168.1.50",
-            "url": "http://192.168.1.50:5555",
-            "port": 5555
+            "mac": null,
+            "ip": null,
+            "url": null,
+            "port": null
         },
         {
             "name": "HONOR20PRO",
+            "description":null,
             "sims": [
                 {
                     "slot": 0,
@@ -68,13 +71,14 @@
                     "operator": "tele2"
                 }
             ],
-            "mac": "02:00:00:00:00:00",
-            "ip": "192.168.1.70",
-            "url": "http://192.168.1.70:5555",
-            "port": 5555
+            "mac": null,
+            "ip": null,
+            "url": null,
+            "port": null
         },
         {
             "name": "POCOX3PRO",
+            "description":null,
             "sims": [
                 {
                     "slot": 0,
@@ -89,13 +93,14 @@
                     "operator": "tele2"
                 }
             ],
-            "mac": "02:00:00:00:00:00",
-            "ip": "192.168.1.80",
-            "url": "http://192.168.1.80:5555",
-            "port": 5555
+           "mac": null,
+            "ip": null,
+            "url": null,
+            "port": null
         },
         {
             "name": "HONOR20PRO2",
+            "description":null,
             "sims": [
                 {
                     "slot": 0,
@@ -110,10 +115,10 @@
                     "operator": "tele2"
                 }
             ],
-            "mac": "02:00:00:00:00:00",
-            "ip": "192.168.1.90",
-            "url": "http://192.168.1.90:5555",
-            "port": 5555
+            "mac": null,
+            "ip": null,
+            "url": null,
+            "port": null
         }
     ]
 }

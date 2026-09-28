@@ -2,6 +2,7 @@
 import random
 import re
 
+from config.config import Config
 from log.log import get_logger
 from schemas import SIM, SimStatus, SMSRequest
 
@@ -17,7 +18,6 @@ class Phone:
 
     @staticmethod
     def getSim(data: SMSRequest) -> SIM:
-        from config.config import Config
         if not data.simSlot is None:
             active_sims = [sim for sim in Config.SENDER.sims if sim.status ==
                            SimStatus.ACTIVE and sim.slot == data.simSlot]
@@ -39,9 +39,7 @@ class Phone:
         Отправляет SMS через termux-sms-send.
         Возвращает объект dict.
         """
-        from config.config import Config
-        from models.results import Result
-        from app.schemas.enums import ResultStatus
+        from schemas.enums import ResultStatus
         # Проверка валидности номера (доп. проверка на уровне выполнения)
         if not Phone.PHONE_PATTERN_RUSSIA.match(data.to_phone_number):
             error_message = f"⚠️Неправильный номер телефона {data.to_phone_number}. Он должен соответствовать формату +71234567890"

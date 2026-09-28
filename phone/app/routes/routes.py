@@ -1,31 +1,34 @@
 # D:/myprogramms/Python/Phones/PROJECT/PHONE/app/routes/routes.py
-import requests
+import os
 import subprocess
 import sys
-import os
 from datetime import datetime
-from typing import Union, List, Annotated, Optional
 
-from fastapi import APIRouter, HTTPException, Query, Body
-from fastapi.responses import JSONResponse, RedirectResponse
-
-# Импорты моделей и конфига
-from models import *
-from models._base import *
-from app.schemas.enums import ResultStatus, SimStatus
 from config.config import Config
-from routes.period_task import *
-from core.telegram.telega import send_messege_to_boot
 
 # Импорты функций ядра
 from core.common import (
-    batteryStatus, callLog,
-    contactList, smsList, startSSH, networkInfo
+    batteryStatus,
+    callLog,
+    contactList,
+    networkInfo,
+    smsList,
+    startSSH,
 )
-from core.email import myEmail
+from core.email import getEmailSender, myEmail
+
 # Импортируем вспомогательные функции получения отправителей
 from core.phone import Phone, get_logger
-from core.email import getEmailSender
+from core.telegram.telega import send_messege_to_boot
+from fastapi import APIRouter, HTTPException, Query
+from fastapi.responses import RedirectResponse
+
+# Импорты моделей и конфига
+# from models import *
+# from models._base import *
+from routes.period_task import *
+from schemas import ResultStatus, SMSRequest,TelegramRequest
+
 # from log.log import get_logger
 
 logger = get_logger(__name__)

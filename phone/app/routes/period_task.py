@@ -1,16 +1,23 @@
 # D:/myprogramms/Python/Phones/PROJECT/PHONE/app/routes/period_task.py
-import fastapi
-from fastapi import FastAPI
-from contextlib import asynccontextmanager
 import asyncio
 import sys
+from contextlib import asynccontextmanager
+
 # import requests
 from datetime import datetime
 
+import fastapi
+
 # Используем новую перезагружаемую конфигурацию
 from config.config import Config  # Это теперь ReloadableConfig
-from core import ensure_tunnel, send_messege_to_boot, ping_services, get_current_time, EmailCreate, myEmail, getEmailSender
+from core.autossh import ensure_tunnel
+from core.common import get_current_time_str
+from core.email import getEmailSender, myEmail
+from core.ping import ping_services
+from core.telegram.telega import send_messege_to_boot
+from fastapi import FastAPI
 from log.log import get_logger
+from schemas import EmailCreate
 
 # Флаг для остановки фоновых задач
 background_tasks = []
@@ -109,13 +116,13 @@ async def task_canary():
                 # from core.email import EmailCreate,myEmail,getEmailSender
                 sender = Config.SENDER
                 data = EmailCreate(
-                    toEmail="kaiby@yandex.ru", subject=f"{get_current_time()}. {sender.name}. Канарейка", body="Проверка связи")
+                    toEmail="kaiby@yandex.ru", subject=f"{get_current_time_str()}. {sender.name}. Канарейка", body="Проверка связи")
                 email = myEmail()
                 if not data.sender:
                     # Теперь getEmailSender найден, так как импортирован
                     data.sender = getEmailSender()
                 result = email.send(data)
-                message = f"{get_current_time()}. {sender.name}. EMAIL.Канарейка. Результат:{result}"
+                message = f"{get_current_time_str()}. {sender.name}. EMAIL.Канарейка. Результат:{result}"
                 # from_phone_number=data.from_number_phone if data.from_number_phone else ''
             except Exception as e:
                 message = f"⚠️Ошибка при запуске канарейки email: {e}"
@@ -129,7 +136,7 @@ async def task_canary():
                 from core.phone import Phone
                 # sim = Phone.getSim(data)
                 for sim in sender.sims:
-                    message = f"{get_current_time()}. {sender.name}.{sim.number}. SMS.Канарейка"
+                    message = f"{get_current_time_str()}. {sender.name}.{sim.number}. SMS.Канарейка"
                     data: SMSRequest = SMSRequest(
                         to_phone_number="+79175729812", from_phone_number=sim.number, message=message)
                     if sim.status == "active":
@@ -160,14 +167,13 @@ async def task_autossh_tunnel():
             try:
                 # TODO
                 from core.telegram.telega import send_messege_to_boot
-                from core.common import get_current_time
-                message = f"{get_current_time()}. {sender.name}. AUTOSSH работает"
+                from core.common import get_current_time_str
+                message = f"{get_current_time_str()}. {sender.name}. AUTOSSH работает"
                 # запуск autossh
                 if Config.get("LOG_TELEGRAM"):
-                    if Config.get("IP_ADDRESS_VPN_SERVER") and Config.get("PORT_VPN_SERVER") and Config.get("USERNAME_VPN_SERVER"):
+                    if Config.get("IP_ADDRESS_SSH_SERVER") and Config.get("PORT_SERVER") and Config.get("USERNAME_SSH_SERVER"):
                         # def ensure_tunnel(port=9090, remote="89.125.188.172", user="kai"):
-                        ensure_tunnel(
-                            port=Config.PORT_VPN_SERVER, remote=Config.IP_ADDRESS_VPN_SERVER, user="kai")
+                        ensure_tunnel(port=Config.PORT_SERVER, remote=Config.IP_ADDRESS_SSH_SERVER, user="kai",ssh_port=Config.SSH_PORT)
                 pass
             except Exception as e:
                 message = f"⚠️Ошибка проверки работоспособности autossh: {e}"
