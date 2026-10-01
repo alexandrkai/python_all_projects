@@ -7,6 +7,7 @@ ssh -p 8022 u0_a108@192.168.1.50
 mkdir -p /data/data/com.termux/files/home/storage/shared/myfolder/projects/rest-api/app
 cd  /data/data/com.termux/files/home/storage/shared/myfolder/projects/rest-api/app
 sh run.sh HONOR8X
+
 rsync -av -i -e 'ssh -p 8022' \
   --exclude=".venv" \
   --exclude="node_modules" \

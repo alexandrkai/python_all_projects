@@ -33,3 +33,7 @@ if not errorlevel 1 goto wait_firefox
 echo Firefox closed. Terminating SSH tunnel...
 taskkill /F /IM ssh.exe >nul 2>&1
 echo Done.
+
+::ssh -p 443 kai@89.125.188.172
+::sudo nano /etc/ssh/sshd_config
+::AllowTcpForwarding yes

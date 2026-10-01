@@ -1,7 +1,9 @@
 Если ключ ещё не сгенерирован и не скопирован на сервер, выполните в PowerShell:
 PowerShell
 
-
+sudo nano /etc/ssh/sshd_config
+AllowTcpForwarding yes
+PermitTunnel yes
 
 ssh-keygen -t ed25519
 type $env:USERPROFILE\.ssh\id_ed25519.pub | ssh kai@89.125.188.172 "mkdir -p ~/.ssh && cat >> ~/.ssh/authorized_keys"
@@ -27,3 +29,13 @@ start /wait "" "C:\Program Files\Mozilla Firefox\firefox.exe" -P "ProxyProfile" 
 
 echo Closing SSH tunnel...
 taskkill /FI "WINDOWTITLE eq SSHTunnel*" /T /F >nul 2>&1
+
+
+
+ровень	Смысл	Emoji	Unicode/символ	ASCII	Цвет в консоли
+TRACE	трассировка, очень подробно	🔍	🔍	[TRC]	серый
+DEBUG	отладка	🐞 / 🐛	🐞	[DBG]	cyan/синий
+INFO	обычное событие	ℹ️ / ✅	ℹ	[INF]	зелёный
+WARN / WARNING	предупреждение	⚠️	⚠	[WRN]	жёлтый
+ERROR	ошибка	❌ / 🛑 / ‼️	✖ / ❗	[ERR]	красный
+FATAL / CRITICAL	критическая ошибка, падение	💀 / ☠️ / 🔥	☠	[FTL]	magenta / белый на красном
