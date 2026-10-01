@@ -6,17 +6,18 @@ import subprocess
 from datetime import datetime
 
 from log.log import get_logger
-from schemas import Result, ResultStatus
+from schemas import ResultShellCommand, ResultStatus
 
 logger = get_logger(__name__)
 
 
-def get_current_time() -> datetime:
+def get_current_datetime() -> datetime:
     return datetime.now()  # noqa: DTZ005
 
 
-def get_current_time_str() -> str:
-    return get_current_time().strftime("%d.%m.%Y %H:%M:%S")
+def get_current_datetime_str() -> str:
+    return get_current_datetime().strftime("%d.%m.%Y %H:%M:%S")
+
 
 
 def _decode_output(stdout: bytes, stderr: bytes) -> tuple[str, str]:
@@ -52,23 +53,16 @@ def _decode_output(stdout: bytes, stderr: bytes) -> tuple[str, str]:
     )
 
 
-def runShellCommand(command: list, timeout: int = 30) -> Result:
+def runShellCommand(command: list, timeout: int = 30) -> ResultShellCommand:
     """
     Выполняет shell команду и возвращает объект Result.
     """
-    # from config.config import Config
-    # Получаем отправителя из Config.
-    # Config.SENDER теперь возвращает объект PhoneSender.
-    # Используем model_copy(), чтобы зафиксировать состояние на момент вызова
-    # и не зависеть от будущих изменений в конфиге.
-    # sender_copy = Config.SENDER.model_copy()
-
     # Инициализируем результат с текущей датой
-    result = Result(
+    result = ResultShellCommand(
         status=ResultStatus.ERROR,
         due_date=datetime.now(),
         # sender=sender_copy,
-        detail="Команда даже не стартовала"
+        error="Команда даже не стартовала"
     )
 
     try:
@@ -85,26 +79,26 @@ def runShellCommand(command: list, timeout: int = 30) -> Result:
 
         if process.returncode == 0:
             result.status = ResultStatus.OK
-            result.detail = None
+            result.error = err_str
             result.data = out_str
         else:
             result.status = ResultStatus.ERROR
-            result.detail = f"Ошибка выполнения. stdout:{out_str}, stderr:{err_str}"
+            result.error = f"Ошибка выполнения. stdout:{out_str}, stderr:{err_str}"
             result.data = out_str
 
     except subprocess.TimeoutExpired:
         mess = "⚠️Ошибка! Время выполнения истекло (timeout)."
         logger.error(mess, exc_info=True)
-        result.detail = f"Ошибка: {mess}"
+        result.error = f"Ошибка: {mess}"
     except Exception as e:
         mess = str(e)
         logger.error("⚠️"+mess, exc_info=True)
-        result.detail = f"Ошибка: {mess}"
+        result.error = f"Ошибка: {mess}"
 
     return result
 
 
-def convertData(result: Result) -> Result:
+def convertData(result: ResultShellCommand) -> ResultShellCommand:
     """
     Преобразует поле data (строку JSON) в словарь, если это возможно.
     """
@@ -120,17 +114,17 @@ def convertData(result: Result) -> Result:
     return result
 
 
-def batteryStatus() -> Result:
+def batteryStatus() -> ResultShellCommand:
     """Статус батареи"""
     command = ["termux-battery-status"]
     result = convertData(runShellCommand(command))
     if result.is_ok:
         return result
     else:
-        raise Exception(result.detail)
+        raise Exception(result.error)
 
 
-def callLog(limit: int = 10, offset: int = 0) -> Result:
+def callLog(limit: int = 10, offset: int = 0) -> ResultShellCommand:
     """Список вызовов"""
     command = ["termux-call-log"]
     command.extend(["-l", str(limit)])
@@ -139,21 +133,21 @@ def callLog(limit: int = 10, offset: int = 0) -> Result:
     if result.is_ok:
         return result
     else:
-        raise Exception(result.detail)
+        raise Exception(result.error)
 
 
-def contactList() -> Result:
+def contactList() -> ResultShellCommand:
     """Список контактов"""
     command = ["termux-contact-list"]
     result = convertData(runShellCommand(command))
     if result.is_ok:
         return result
     else:
-        raise Exception(result.detail)
+        raise Exception(result.error)
 
 
 def smsList(showDate: bool = True, limit: int = 10, showNumberPhone: bool = True,
-            offset: int = 0, typeSMS: str = "all") -> Result:
+            offset: int = 0, typeSMS: str = "all") -> ResultShellCommand:
     """Список СМС"""
 
     # Валидация типа SMS
@@ -181,25 +175,25 @@ def smsList(showDate: bool = True, limit: int = 10, showNumberPhone: bool = True
     if result.is_ok:
         return result
     else:
-        raise Exception(result.detail)
+        raise Exception(result.error)
 
 
-def startSSH() -> Result:
+def startSSH() -> ResultShellCommand:
     command = ["sshd"]
-    result: Result = runShellCommand(command)
+    result: ResultShellCommand = runShellCommand(command)
     if result.is_ok:
         return result
     else:
-        raise Exception(result.detail)
+        raise Exception(result.error)
 
 
-def networkInfo() -> Result:
+def networkInfo() -> ResultShellCommand:
     command = ['termux-wifi-connectioninfo']
     result = convertData(runShellCommand(command))
     if result.is_ok:
         return result
     else:
-        raise Exception(result.detail)
+        raise Exception(result.error)
 
 
 class Comments:

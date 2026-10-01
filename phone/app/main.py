@@ -45,10 +45,6 @@ async def validation_exception_handler(request: Request, exc: RequestValidationE
         }
     )
 
-# Подключаем роутер управления конфигурацией (из period_task.py)
-config_router = create_router_for_management()
-app.include_router(config_router)
-
 # Подключаем основной роутер (из routes.py)
 others_router = create_router_others()
 app.include_router(others_router)

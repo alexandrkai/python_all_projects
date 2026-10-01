@@ -1,18 +1,21 @@
 
 from log.log import get_logger
 import requests
+from core.telegram.telega import send_message_to_boot
 
-logger=get_logger(__name__)
+logger = get_logger(__name__)
+
 
 def ping_services():
     from config.config import Config
-    
+
     url_worker_service = Config.URL_WORKERS_SERVICE
-    url_orders_service=Config.URL_ORDERS_SERVICE
-    result={"workers":False,"orders":False}
+    url_orders_service = Config.URL_ORDERS_SERVICE
+    result = {"workers": False, "orders": False}
     # Отправляем ping оркестратору, если URL указан
     if url_worker_service:
-        logger.info("Делаем запрос оркестратору, что я жив с передачей своих параметров.")
+        logger.info(
+            "Делаем запрос оркестратору, что я жив с передачей своих параметров.")
         try:
             # Используем model_dump() для сериализации Pydantic модели в dict для requests
             response = requests.post(
@@ -20,17 +23,18 @@ def ping_services():
                 json=Config.SENDER.model_dump(),
                 timeout=30
             )
-            logger.info(f"Ping отправлен. Ответ: {response.status_code}")
-            result["workers"]=True
+            logger.info(f"❌Ping отправлен. Ответ: {response.status_code}")
+            result["workers"] = True
         except requests.exceptions.RequestException as e:
             logger.warning(f"Не удалось отправить ping оркестратору: {e}")
     else:
-        msg="URL_WORKERS_SERVICE не указан, пропускаем ping"
+        msg = "URL_WORKERS_SERVICE не указан, пропускаем ping"
         logger.critical(msg)
-        
+
     # Отправляем ping оркестратору, если URL указан
     if url_orders_service:
-        logger.debug("Делаем запрос сервису по работе с заказами, что я жив с передачей своих параметров.")
+        logger.debug(
+            "Делаем запрос сервису по работе с заказами, что я жив с передачей своих параметров.")
         try:
             # Используем model_dump() для сериализации Pydantic модели в dict для requests
             response = requests.post(
@@ -38,15 +42,16 @@ def ping_services():
                 json=Config.SENDER.model_dump(),
                 timeout=100
             )
-            logger.info(f"Успешно отправлен ping сервису по работе с заказами по адресу {url_orders_service}/ping. Ответ: {response.status_code}")
-            if response.status_code==200:
-                result["orders"]=True
-            elif response.status_code==422:
-                data=response.json()
+            logger.info(
+                f"❌Успешно отправлен ping сервису по работе с заказами по адресу {url_orders_service}/ping. Ответ: {response.status_code}")
+            if response.status_code == 200:
+                result["orders"] = True
+            elif response.status_code == 422:
+                data = response.json()
                 logger.debug(data)
-                
+
         except requests.exceptions.RequestException as e:
             logger.warning(f"Не удалось отправить ping сервису заказов: {e}")
     else:
         logger.critical("URL_ORDERS_SERVICE не указан, пропускаем ping")
-    return result  
+    return result

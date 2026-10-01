@@ -7,22 +7,15 @@ from contextlib import contextmanager
 from typing import Any
 
 import redis
+from log.log import get_logger
 from redis import ConnectionPool
 from redis.exceptions import WatchError
 
+logger = get_logger(__name__)
+
 
 class MyRedis:
-    """Синглтон-обёртка над connection pool redis-py.
-
-    Использование:
-        MyRedis.initialize(Config.REDIS_URL)   # один раз при старте
-        r = MyRedis.get_client()               # короткоживущий клиент
-        with MyRedis.session() as r:           # контекстный менеджер
-            r.set("k", "v")
-        # FastAPI:
-        def route(r: redis.Redis = Depends(MyRedis.dependency)):
-            ...
-    """
+    """Синглтон-обёртка над connection pool redis-py."""
 
     _instance = None
     _pool: ConnectionPool | None = None
@@ -34,16 +27,8 @@ class MyRedis:
             cls._instance = super().__new__(cls)
         return cls._instance
 
-    # ------------------------------------------------------------------ #
-    #                       ИНИЦИАЛИЗАЦИЯ ПУЛА                            #
-    # ------------------------------------------------------------------ #
     @classmethod
     def initialize(cls, redis_url: str, force: bool = False) -> None:
-        """Создаёт пул соединений. Идемпотентно.
-
-        force=True — пересоздать пул (например, если REDIS_URL поменялся
-        в конфиге и вы сделали Config.reload()).
-        """
         with cls._lock:
             if cls._pool is not None and not force:
                 return
@@ -59,25 +44,17 @@ class MyRedis:
     @classmethod
     def _ensure_pool(cls) -> ConnectionPool:
         if cls._pool is None:
-            raise RuntimeError(
-                "MyRedis не инициализирован. Вызовите MyRedis.initialize(url) "
-                "при старте приложения."
-            )
+            error_message = "⚠️ MyRedis не инициализирован. Вызовите MyRedis.initialize(url) при старте приложения."
+            logger.warning(error_message)
+            raise RuntimeError(error_message)
         return cls._pool
 
-    # ------------------------------------------------------------------ #
-    #                            КЛИЕНТЫ                                  #
-    # ------------------------------------------------------------------ #
     @classmethod
     def get_client(cls) -> redis.Redis:
-        """Новый клиент на общем пуле. Закрывать не обязательно —
-        соединение вернётся в пул, но при желании можно r.close()."""
         return redis.Redis(connection_pool=cls._ensure_pool())
 
     @classmethod
     def dependency(cls) -> Generator[redis.Redis, None, None]:
-        """FastAPI-зависимость: Depends(MyRedis.dependency).
-        Без аргументов — поэтому корректно работает с Depends."""
         client = cls.get_client()
         try:
             yield client
@@ -87,23 +64,54 @@ class MyRedis:
     @classmethod
     @contextmanager
     def session(cls) -> Generator[redis.Redis, None, None]:
-        """Контекстный менеджер: with MyRedis.session() as r: ..."""
         client = cls.get_client()
         try:
             yield client
         finally:
             client.close()
 
+    @classmethod
+    def ping(cls) -> bool:
+        """Проверяет доступность Redis сервера."""
+        try:
+            with cls.session() as r:
+                return bool(r.ping())
+        except Exception:
+            return False
+
+    @classmethod
+    def get_raw(cls, key: str) -> str | None:
+        """Читает строковое значение без JSON-десериализации."""
+        try:
+            with cls.session() as r:
+                return r.get(key)
+        except Exception as e:
+            logger.error(f"❌ Ошибка MyRedis.get_raw для ключа {key}: {e}")
+            return None
+
+    @classmethod
+    def set_raw(cls, key: str, value: str, expires_in_seconds: int | None = None) -> bool:
+        """Записывает строковое значение без JSON-сериализации."""
+        try:
+            with cls.session() as r:
+                if expires_in_seconds:
+                    r.setex(name=key, time=expires_in_seconds, value=value)
+                else:
+                    r.set(name=key, value=value)
+                return True
+        except Exception as e:
+            logger.error(f"❌ Ошибка MyRedis.set_raw для ключа {key}: {e}")
+            return False
+
 
 # ---------------------------------------------------------------------- #
-#                      ГЛОБАЛЬНЫЙ КЛИЕНТ ДЛЯ ХЕЛПЕРОВ                     #
+#                        ГЛОБАЛЬНЫЙ КЛИЕНТ ДЛЯ ХЕЛПЕРОВ                  #
 # ---------------------------------------------------------------------- #
 _default_client: redis.Redis | None = None
 _default_client_lock = threading.Lock()
 
 
 def get_default_client() -> redis.Redis:
-    """Ленивый глобальный клиент — берётся из пула MyRedis."""
     global _default_client
     if _default_client is None:
         with _default_client_lock:
@@ -117,15 +125,14 @@ def _get_active_client(client: redis.Redis | None) -> redis.Redis:
 
 
 # ---------------------------------------------------------------------- #
-#                             CRUD-ХЕЛПЕРЫ                                #
+#                             CRUD-ХЕЛПЕРЫ                               #
 # ---------------------------------------------------------------------- #
 def write_value(
     key: str,
-    obj: dict,
+    obj: Any,
     expires_in_seconds: int | None = None,
     client: redis.Redis | None = None,
 ) -> dict[str, Any]:
-    """Сохраняет объект. Без expires_in_seconds — ключ бессрочный."""
     r = _get_active_client(client)
     payload = json.dumps(obj)
     if expires_in_seconds:
@@ -138,12 +145,13 @@ def write_value(
 def read_value(
     key: str,
     client: redis.Redis | None = None,
-) -> dict:
-    """Читает и десериализует значение по ключу."""
+) -> Any:
     r = _get_active_client(client)
     raw_data = r.get(key)
     if not raw_data:
-        raise ValueError("Срок действия ключа истек или токен недействителен")
+        error_message = f"⚠️ Срок действия ключа {key} истек или ключ недействителен"
+        logger.warning(error_message)
+        raise ValueError(error_message)
     return json.loads(raw_data)
 
 
@@ -154,8 +162,6 @@ def update_value(
     retry_delay: float = 0.05,
     client: redis.Redis | None = None,
 ) -> dict:
-    """Атомарно модифицирует ключ (optimistic locking, WATCH/MULTI/EXEC).
-    TTL ключа сохраняется."""
     r = _get_active_client(client)
 
     for attempt in range(max_retries):
@@ -165,8 +171,9 @@ def update_value(
                 raw_data = pipe.get(key)
                 if not raw_data:
                     pipe.unwatch()
-                    raise ValueError(
-                        "Срок действия ключа истек или токен недействителен")
+                    error_message = f"⚠️ Ключ {key} не найден при обновлении"
+                    logger.warning(error_message)
+                    raise ValueError(error_message)
 
                 current_ttl = pipe.ttl(key)
                 current_data = json.loads(raw_data)
@@ -182,10 +189,9 @@ def update_value(
 
             except WatchError:
                 if attempt == max_retries - 1:
-                    raise RuntimeError(
-                        f"Не удалось обновить ключ {key} из-за высокой "
-                        f"конкуренции ({max_retries} попыток)"
-                    )
+                    error_message = f"⚠️ Не удалось обновить ключ {key} из-за высокой конкуренции ({max_retries} попыток)"
+                    logger.warning(error_message)
+                    raise RuntimeError(error_message)
                 time.sleep(retry_delay)
 
 
@@ -196,23 +202,20 @@ def redis_lock(
     blocking_timeout: int = 5,
     client: redis.Redis | None = None,
 ):
-    """Пессимистическая блокировка. Пример:
-        with redis_lock("sms_session:123"):
-            ...
-    """
     r = _get_active_client(client)
-    lock = r.lock(f"lock:{lock_name}", timeout=timeout,
-                  blocking_timeout=blocking_timeout)
+    lock = r.lock(f"lock:{lock_name}", timeout=timeout, blocking_timeout=blocking_timeout)
     acquired = lock.acquire()
     if not acquired:
-        raise TimeoutError(f"Не удалось захватить блокировку для {lock_name}")
+        error_message = f"⚠️ Не удалось захватить блокировку для {lock_name}"
+        logger.warning(error_message)
+        raise TimeoutError(error_message)
     try:
         yield
     finally:
         try:
             lock.release()
         except redis.exceptions.LockError:
-            pass
+            logger.warning("⚠️ Ошибка освобождения блокировки")
 
 
 def delete_value(

@@ -9,7 +9,7 @@ from pathlib import Path
 # Определяем пути
 
 PATH_APPLICATION_FOLDER = Path(__file__).resolve().parent.parent
-PATH_LOG_FOLDER = os.path.join(PATH_APPLICATION_FOLDER, "log", "logs")
+PATH_LOG_FOLDER = os.path.join(PATH_APPLICATION_FOLDER, "logs")
 PATH_CONFIG_FOLDER = os.path.join(PATH_APPLICATION_FOLDER, "config")
 
 # Создаем директории (без выбрасывания исключений)
@@ -20,9 +20,9 @@ print(f"PATH_CONFIG_FOLDER: {PATH_CONFIG_FOLDER}")
 
 try:
     os.makedirs(PATH_LOG_FOLDER, exist_ok=True)
-    print(f"✓ Директория логов создана/проверена: {PATH_LOG_FOLDER}")
+    print(f"✅ Директория логов создана/проверена: {PATH_LOG_FOLDER}")
 except Exception as e:
-    print(f"✗ Ошибка при создании директории логов: {e}")
+    print(f"❌ Ошибка при создании директории логов: {e}")
     # Используем временную директорию
     PATH_LOG_FOLDER = '/tmp/logs'
     os.makedirs(PATH_LOG_FOLDER, exist_ok=True)
@@ -30,9 +30,9 @@ except Exception as e:
 
 try:
     os.makedirs(PATH_CONFIG_FOLDER, exist_ok=True)
-    print(f"✓ Директория конфигов создана/проверена: {PATH_CONFIG_FOLDER}")
+    print(f"✅ Директория конфигов создана/проверена: {PATH_CONFIG_FOLDER}")
 except Exception as e:
-    print(f"✗ Ошибка при создании директории конфигов: {e}")
+    print(f"❌ Ошибка при создании директории конфигов: {e}")
     print(f"⚠️ Приложение может работать некорректно без конфигурации")
 
 # Проверяем наличие .env файла (только предупреждение, не исключение)
@@ -95,8 +95,8 @@ class SmartLogger:
         # Настраиваем логирование
         self._setup_logging()
 
-        print(f"✓ Логгер {app_name} инициализирован в {environment} режиме")
-        print(f"✓ Логи пишутся в: {os.path.join(self.log_dir, f'{self.app_name.lower()}.log')}")
+        print(f"✅ Логгер {app_name} инициализирован в {environment} режиме")
+        print(f"✅ Логи пишутся в: {os.path.join(self.log_dir, f'{self.app_name.lower()}.log')}")
 
     def _ensure_log_directory(self):
         """Создание и проверка директории для логов"""
@@ -107,9 +107,9 @@ class SmartLogger:
             with open(test_file, 'w') as f:
                 f.write('test')
             os.remove(test_file)
-            print(f"✓ Директория {self.log_dir} доступна для записи")
+            print(f"✅ Директория {self.log_dir} доступна для записи")
         except Exception as e:
-            print(f"✗ Ошибка доступа к директории {self.log_dir}: {e}")
+            print(f"❌ Ошибка доступа к директории {self.log_dir}: {e}")
             # Пробуем использовать /tmp
             self.log_dir = '/tmp/logs'
             os.makedirs(self.log_dir, exist_ok=True)
@@ -138,9 +138,9 @@ class SmartLogger:
             file_handler.setLevel(logging.DEBUG)
             file_handler.setFormatter(LevelFormatter())
             root_logger.addHandler(file_handler)
-            print(f"✓ Файловый обработчик добавлен")
+            print(f"✅ Файловый обработчик добавлен")
         except Exception as e:
-            print(f"✗ Ошибка при создании файлового обработчика: {e}")
+            print(f"❌ Ошибка при создании файлового обработчика: {e}")
             print(f"⚠️ Будут использоваться только консольные логи")
 
         # Консольный обработчик (всегда добавляем)
@@ -152,7 +152,7 @@ class SmartLogger:
         root_logger.addHandler(console_handler)
 
         # Логируем начало сессии
-        logging.info(f"Лог-сессия начата: {datetime.now()}")
+        logging.info(f"Лог-сессия начата: {datetime.now()}")  # noqa: DTZ005
         logging.info(f"Окружение: {self.environment}")
 
     def get_logger(self, name=None):

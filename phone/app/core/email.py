@@ -1,139 +1,132 @@
 # D:/myprogramms/Python/Phones/PROJECT/PHONE/app/core/email.py
 import random
-import re
 import smtplib
 from datetime import datetime
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
-from typing import Optional
 
+from config.config import (
+    Config,
+    get_full_error_message,
+    send_message_to_telegram,
+)
 from log.log import get_logger
-from schemas import EmailCreate, EmailSender, Result, ResultStatus
-
-from core.telegram.telega import send_messege_to_boot
+from schemas import EmailRequest, EmailSender, ResultStatus
 
 logger = get_logger(__name__)
 
-def getEmailSender() -> Optional[EmailSender]:
+
+def getEmailSender() -> EmailSender | None:
     """
-    Получение случайного отправителя из файла senders.json.
-    Возвращает объект EmailSender или None в случае ошибки.
+    Получение случайного email-отправителя из конфигурации.
+    Возвращает объект EmailSender или None, если список пуст.
+    При критических ошибках отправляет алерт в Telegram.
     """
-    from config.config import Config
-    email_senders=Config.get('EMAIL_SENDERS')
-    if email_senders:
-        email_sender=random.choice(email_senders)
-        SMTP_SERVER=email_sender['SMTP_SERVER']
-        SMTP_PORT=email_sender['SMTP_PORT']
-        SMTP_USERNAME=email_sender['SMTP_USERNAME']
-        SMTP_PASSWORD=email_sender['SMTP_PASSWORD']
-        if SMTP_SERVER and SMTP_PORT and SMTP_USERNAME and SMTP_PASSWORD:
-            return EmailSender(
-                SMTP_SERVER=SMTP_SERVER,
-                SMTP_PORT=SMTP_PORT,
-                SMTP_USERNAME=SMTP_USERNAME,
-                SMTP_PASSWORD=SMTP_PASSWORD
-            )
-    # try:
-    #     path_to_senders = os.path.join(
-    #         Config.PATH_APPLICATION_FOLDER, "data", "senders.json")
+    email_senders = Config.get("EMAIL_SENDERS")
+    if not email_senders:
+        err = RuntimeError("Список EMAIL_SENDERS пуст или не настроен в конфигурации")
+        full_msg = get_full_error_message(
+            e=err,
+            error_message="Отсутствуют почтовые серверы в конфигурации",
+            prefix="EMAIL_CONFIG",
+        )
+        logger.critical(full_msg)
+        send_message_to_telegram(full_msg)
+        return None
 
-    #     if not os.path.exists(path_to_senders):
-    #         error_msg = f"⚠️Файл отправителей не найден: {path_to_senders}"
-    #         logger.error(error_msg)
-    #         raise Exception(error_msg)
+    chosen = random.choice(email_senders)
 
-    #     with open(path_to_senders, "r", encoding="utf-8") as file:
-    #         context = file.read()
-    #         data = json.loads(context)
+    if isinstance(chosen, EmailSender):
+        return chosen
 
-    #         if "email" not in data or not data["email"]:
-    #             error_msg = "⚠️В файле senders.json отсутствует ключ 'email' или список пуст"
-    #             logger.error(error_msg)
-    #             raise Exception(error_msg)
-
-    #         emaiSenderDict = random.choice(data["email"])
-
-    #         return EmailSender(
-    #             SMTP_SERVER=emaiSenderDict.get("SMTP_SERVER"),
-    #             SMTP_PORT=emaiSenderDict.get("SMTP_PORT"),
-    #             SMTP_USERNAME=emaiSenderDict.get("SMTP_USERNAME"),
-    #             SMTP_PASSWORD=emaiSenderDict.get("SMTP_PASSWORD")
-    #         )
-
-    # except Exception as e:
-    #     mess = f"⚠️Ошибка при чтении отправителей: {str(e)}"
-    #     logger.error(mess)
-    #     raise
-
+    try:
+        return EmailSender.model_validate(chosen)
+    except Exception as e:
+        full_msg = get_full_error_message(
+            e=e,
+            error_message="Ошибка валидации EmailSender из senders.json / Redis",
+            prefix="EMAIL_VALIDATION",
+        )
+        logger.critical(full_msg, exc_info=True)
+        send_message_to_telegram(full_msg)
+        return None
 
 class myEmail:
-    EMAIL_PATTERN = re.compile(r"^[^@\s]+@[^@\s]+\.[^@\s]+$")
-
-    def send(self, email: EmailCreate) -> dict:
+    @classmethod
+    def send(cls, email: EmailRequest, sender: EmailSender | None = None) -> dict:
         """
-        Отправка email уведомления.
-        Возвращает объект Result.
+        Отправка email-уведомления на основе EmailRequest.
+        Если sender не передан, выбирается случайный из конфигурации.
         """
-        from_phone_number=email.from_number_phone if email.from_number_phone else ""
-        # Проверка формата email
-        if not self.EMAIL_PATTERN.match(email.toEmail):
-            error_msg = f"⚠️Неправильный формат email адреса {email.toEmail}"
-            logger.error(error_msg)
-            raise ValueError(error_msg)
+        active_sender = sender or getEmailSender()
+        if not active_sender or not getattr(active_sender, "settings", None):
+            err = RuntimeError("SMTP credentials не настроены или отсутствуют")
+            full_msg = get_full_error_message(
+                e=err,
+                error_message="Отсутствуют настройки почтового отправителя",
+                prefix="EMAIL_INIT",
+            )
+            logger.error(full_msg)
+            send_message_to_telegram(full_msg)
+            raise err
 
-        # Проверка учетных данных (если sender не передан, getEmailSender вернет None, но роутер это должен обработать или мы здесь)
-        # В данном случае проверяем поля внутри объекта email.sender
-        if not email.sender or not email.sender.SMTP_USERNAME or not email.sender.SMTP_PASSWORD:
-            error_msg = "⚠️SMTP credentials не настроены или отсутствуют"
-            logger.error(error_msg)
-            raise Exception(error_msg)
+        smtp_settings = active_sender.settings
+        from_email = smtp_settings.SMTP_USERNAME
 
-        fromEmail = email.sender.SMTP_USERNAME
+        # Формируем тело письма
+        full_text_body = email.message.body
+        if email.message.footer:
+            full_text_body = f"{full_text_body}\n\n---\n{email.message.footer}"
 
+        # Собираем MIME-сообщение
         msg = MIMEMultipart("alternative")
-        msg["Subject"] = email.subject
-        msg["From"] = fromEmail
-        msg["To"] = email.toEmail
+        msg["Subject"] = email.message.title
+        msg["From"] = from_email
+        msg["To"] = email.to_email
+        msg.attach(MIMEText(full_text_body, "plain", "utf-8"))
 
-        # Текстовая версия
-        if email.body:
-            part1 = MIMEText(email.body, "plain")
-            msg.attach(part1)
-
-        # HTML версия, если есть
-        if email.htmlBody:
-            part2 = MIMEText(email.htmlBody, "html")
-            msg.attach(part2)
-
+        # Отправка через SMTP
         try:
-            # Отправка
-            with smtplib.SMTP(email.sender.SMTP_SERVER, email.sender.SMTP_PORT) as server:
+            with smtplib.SMTP(smtp_settings.SMTP_SERVER, smtp_settings.SMTP_PORT) as server:
                 server.starttls()
-                server.login(email.sender.SMTP_USERNAME,
-                             email.sender.SMTP_PASSWORD)
+                server.login(
+                    smtp_settings.SMTP_USERNAME,
+                    smtp_settings.SMTP_PASSWORD.get_secret_value(),
+                )
                 server.send_message(msg)
-            logger.info(f"Email успешно отправлен на {email.toEmail}")
-            from config.config import Config
-            # Формируем успешный результат
+
+            logger.info(f"✅ Email успешно отправлен на {email.to_email}")
+            send_message_to_telegram(f"✅ EMAIL: {from_email} -> {email.to_email}")
+
+            sender_name = getattr(Config.SENDER, "name", "SYSTEM")
             return {
                 "status": ResultStatus.OK,
                 "due_date": datetime.now(),
-                "sender": Config.SENDER.name,
+                "sender": sender_name,
                 "data": {
-                    "message": "Email отправлен",
-                    "to": email.toEmail,
-                    "sender_email": fromEmail
-                }
+                    "message": "Email успешно отправлен",
+                    "to": email.to_email,
+                    "title": email.message.title,
+                    "sender_email": from_email,
+                },
             }
 
         except smtplib.SMTPException as e:
-            # Специфичная ошибка SMTP
-            logger.error(f"⚠️Ошибка SMTP при отправке на {email.toEmail}: {e}")
-            raise Exception(f"Не удалось отправить письмо: {str(e)}")
+            full_msg = get_full_error_message(
+                e=e,
+                error_message=f"Ошибка SMTP при отправке на {email.to_email}",
+                prefix="EMAIL_SMTP",
+            )
+            logger.error(full_msg)
+            send_message_to_telegram(full_msg)
+            raise RuntimeError(f"Не удалось отправить письмо: {e}") from e
 
         except Exception as e:
-            # Любая другая ошибка
-            logger.error(f"⚠️Неожиданная ошибка при отправке email: {e}")
-            raise Exception(
-                f"Внутренняя ошибка сервера при отправке email: {str(e)}")
+            full_msg = get_full_error_message(
+                e=e,
+                error_message=f"Неожиданная ошибка при отправке на {email.to_email}",
+                prefix="EMAIL_UNEXPECTED",
+            )
+            logger.error(full_msg)
+            send_message_to_telegram(full_msg)
+            raise RuntimeError(f"Внутренняя ошибка при отправке email: {e}") from e

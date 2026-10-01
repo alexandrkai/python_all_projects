@@ -1,10 +1,30 @@
+import shutil
 import subprocess
 import time
 
+from config.config import Config
 from log.log import get_logger
 
 logger = get_logger(__name__)
 
+
+def check_autossh_available() -> bool:
+    """Проверяет наличие autossh в системе."""
+    # 1. Быстрая проверка наличия исполняемого файла в PATH
+    if shutil.which("autossh") is None:
+        return False
+
+    # 2. Тестовый запуск с корректным флагом -V (не --version!)
+    try:
+        res = subprocess.run(
+            ["autossh", "-V"],
+            capture_output=True,
+            text=True
+        )
+        # У autossh вывод версии может возвращать 0 или писать в stderr
+        return res.returncode == 0 or "autossh" in (res.stdout + res.stderr).lower()
+    except Exception:
+        return False
 
 def is_tunnel_running(port, remote, ssh_port):
     """
@@ -67,9 +87,12 @@ def start_tunnel(port, remote, user, ssh_port):
     ssh_port = int(ssh_port)
 
     try:
-        subprocess.run(["autossh", "--version"],
-                       capture_output=True, check=True)
-        use_autossh = True
+        use_autossh = check_autossh_available()
+
+        if not use_autossh:
+            logger.warning("⚠️ autossh не найден, используется обычный ssh (без автоматического перезапуска).")
+        else:
+            logger.info("🛠️ Используется autossh для поддержания туннеля.")
     except (subprocess.CalledProcessError, FileNotFoundError):
         use_autossh = False
         logger.warning(
@@ -96,7 +119,7 @@ def start_tunnel(port, remote, user, ssh_port):
             "-o", "ServerAliveCountMax=3",
             f"{user}@{remote}",
         ]
-
+    print("Выполняем команду"," ".join(cmd))
     try:
         subprocess.Popen(
             cmd,
@@ -116,7 +139,7 @@ def start_tunnel(port, remote, user, ssh_port):
 def ensure_tunnel(port:int, remote:str, user:str, ssh_port:int):
     """Главная функция: проверяет и при необходимости запускает туннель."""
     ssh_port = int(ssh_port)
-
+    
     if not is_tunnel_running(port, remote, ssh_port):
         logger.info(
             f"🔍 Туннель не найден, запускаем "
@@ -127,7 +150,9 @@ def ensure_tunnel(port:int, remote:str, user:str, ssh_port:int):
 
         if is_tunnel_running(port, remote, ssh_port):
             logger.info("✅ Туннель успешно запущен.")
+            setattr(Config, "StartSSHTunnel", True)
         else:
+            setattr(Config, "StartSSHTunnel", False)
             logger.error(
                 "❌ Не удалось запустить туннель. "
                 "Проверьте доступность сервера, порт и ключи/пароль."
@@ -137,7 +162,7 @@ def ensure_tunnel(port:int, remote:str, user:str, ssh_port:int):
 
 
 # Пример использования (можно вызвать при старте бота)
-if __name__ == "__main__":
+# if __name__ == "__main__":
     # Для нестандартного SSH-порта:
     # ensure_tunnel(port=9090, remote="89.125.188.172", user="kai", ssh_port=2222)
-    ensure_tunnel()
+    # ensure_tunnel()

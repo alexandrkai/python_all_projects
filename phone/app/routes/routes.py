@@ -3,10 +3,16 @@ import os
 import subprocess
 import sys
 from datetime import datetime
+from enum import Enum
 
-from config.config import Config
+from fastapi import APIRouter, HTTPException, Query
+from fastapi.responses import RedirectResponse
 
-# Импорты функций ядра
+from config.config import (
+    Config,
+    get_full_error_message,
+    send_message_to_telegram,
+)
 from core.common import (
     batteryStatus,
     callLog,
@@ -15,28 +21,21 @@ from core.common import (
     smsList,
     startSSH,
 )
-from core.email import getEmailSender, myEmail
-
-# Импортируем вспомогательные функции получения отправителей
-from core.phone import Phone, get_logger
-from core.telegram.telega import send_messege_to_boot
-from fastapi import APIRouter, HTTPException, Query
-from fastapi.responses import RedirectResponse
-
-# Импорты моделей и конфига
-# from models import *
-# from models._base import *
-from routes.period_task import *
-from schemas import ResultStatus, SMSRequest,TelegramRequest
-
-# from log.log import get_logger
+from core.email import myEmail
+from core.phone import Phone
+from log.log import get_logger
+from schemas import (
+    EmailRequest,
+    ResultShellCommandSendSMS,
+    SMSRequest,
+    TelegramRequest,
+)
 
 logger = get_logger(__name__)
 
 
 def create_router_others():
     """Создание роутера для остальных страниц"""
-    from enum import Enum
 
     class TypeSMS(str, Enum):
         all = "all"
@@ -55,112 +54,114 @@ def create_router_others():
     def whoami():
         return Config.SENDER
 
-    @others.post("/send-sms", tags=["Phone"])
+    @others.post("/send-sms", tags=["Phone"], response_model=ResultShellCommandSendSMS)
     def send_sms(data: SMSRequest):
-        """
-        Отправляет SMS.
-        """
+        """Отправляет SMS через termux-sms-send."""
         try:
-            sim = Phone.getSim(data)
-
-            # Функция sendSMS должна возвращать Result
-            result = Phone.sendSMS(data, sim)
-            from_phone_number=data.from_phone_number if data.from_phone_number else ""
-            if Config.get("LOG_TELEGRAM"):send_messege_to_boot(F"SMS:{from_phone_number}->{data.to_phone_number}", "5151092623")
-            
-            return result
-
+            return Phone.send_sms(data)
         except ValueError as e:
-            # Валидационная ошибка (422)
+            full_msg = get_full_error_message(
+                e=e,
+                error_message=f"Ошибка валидации SMS: {data.model_dump_json()}",
+                prefix="ROUTE_SMS",
+            )
+            logger.error(full_msg)
+            send_message_to_telegram(full_msg)
             raise HTTPException(
                 status_code=422,
                 detail={
                     "status": "error",
                     "detail": str(e),
-                    "due_date": datetime.now().isoformat()
-                }
+                    "due_date": datetime.now().isoformat(),
+                },
             )
         except Exception as e:
-            logger.error(f"Error in send_sms: {e}")
-            # Внутренняя ошибка сервера (500)
+            full_msg = get_full_error_message(
+                e=e,
+                error_message=f"Сбой отправки SMS: {data.model_dump_json()}",
+                prefix="ROUTE_SMS",
+            )
+            logger.error(full_msg)
+            send_message_to_telegram(full_msg)
             raise HTTPException(
                 status_code=500,
                 detail={
                     "status": "error",
                     "detail": str(e),
-                    "due_date": datetime.now().isoformat()
-                }
+                    "due_date": datetime.now().isoformat(),
+                },
             )
 
     @others.post("/send-email", tags=["Email"])
-    def send_email(data: EmailCreate):
-        """
-        Отправляет Email через SMTP.
-        """
+    def send_email(data: EmailRequest):
+        """Отправляет Email через SMTP."""
         try:
-            email = myEmail()
-            if not data.sender:
-                # Теперь getEmailSender найден, так как импортирован
-                data.sender = getEmailSender()
-            result = email.send(data)
-            from_phone_number=data.from_number_phone if data.from_number_phone else ''
-            if Config.get("LOG_TELEGRAM") :send_messege_to_boot(
-                    f"От {from_phone_number} на адрес {data.toEmail} было отправлено письмо.", "5151092623")
-            return result
+            return myEmail.send(data)
         except ValueError as e:
+            full_msg = get_full_error_message(
+                e=e,
+                error_message=f"Ошибка данных Email к {data.to_email}",
+                prefix="ROUTE_EMAIL",
+            )
+            logger.error(full_msg)
+            send_message_to_telegram(full_msg)
             raise HTTPException(
                 status_code=422,
                 detail={
                     "status": "error",
                     "message": str(e),
-                    "due_date": datetime.now().isoformat()
-                }
+                    "due_date": datetime.now().isoformat(),
+                },
             )
         except Exception as e:
-            logger.error(f"⚠️Error in send_email: {e}")
+            full_msg = get_full_error_message(
+                e=e,
+                error_message=f"Сбой отправки Email к {data.to_email}",
+                prefix="ROUTE_EMAIL",
+            )
+            logger.error(full_msg)
+            send_message_to_telegram(full_msg)
             raise HTTPException(
                 status_code=500,
                 detail={
                     "status": "error",
                     "message": str(e),
-                    "due_date": datetime.now().isoformat()
-                }
+                    "due_date": datetime.now().isoformat(),
+                },
             )
 
     @others.post("/send-telegram-to-msgprobot", tags=["Telegram"])
     def send_telegram_to_msgprobot(data: TelegramRequest):
-        """
-        Отправляет сообщение в Telegram через Bot API.
-        """
-
+        """Отправляет сообщение в Telegram через Bot API."""
         try:
-            if hasattr(Config,"LOG_TELEGRAM") and Config.LOG_TELEGRAM:send_messege_to_boot(data.text, data.chat_id)
-            return Result(
-                status=ResultStatus.OK,
-                due_date=datetime.now(),
-                sender=Config.SENDER,
-                data={"message": "Telegram message sent successfully"}
-            )
+            target_chat = data.chat_id or "5151092623"
+            response = send_message_to_telegram(data.text, chat_id=target_chat)
+            if response is None:
+                raise RuntimeError("Не удалось доставить сообщение в Telegram")
+            return response
         except ValueError as e:
-            # Валидационная ошибка (422)
             raise HTTPException(
                 status_code=422,
                 detail={
                     "status": "error",
                     "detail": str(e),
-                    "due_date": datetime.now().isoformat()
-                }
+                    "due_date": datetime.now().isoformat(),
+                },
             )
         except Exception as e:
-            logger.error(f"Error in send_sms: {e}")
-            # Внутренняя ошибка сервера (500)
+            full_msg = get_full_error_message(
+                e=e,
+                error_message="Ошибка отправки сообщения в Telegram",
+                prefix="ROUTE_TELEGRAM",
+            )
+            logger.error(full_msg)
             raise HTTPException(
                 status_code=500,
                 detail={
                     "status": "error",
                     "detail": str(e),
-                    "due_date": datetime.now().isoformat()
-                }
+                    "due_date": datetime.now().isoformat(),
+                },
             )
 
     @others.get("/battery-status", tags=["System"])
@@ -169,33 +170,33 @@ def create_router_others():
         try:
             return batteryStatus()
         except Exception as e:
-            logger.error(f"⚠️Error in battery_status: {e}")
+            logger.error(f"⚠️ Error in battery_status: {e}")
             raise HTTPException(
                 status_code=500,
                 detail={
                     "status": "error",
                     "message": str(e),
-                    "due_date": datetime.now().isoformat()
-                }
+                    "due_date": datetime.now().isoformat(),
+                },
             )
 
     @others.get("/call-log", tags=["System"])
     def call_log(
         limit: int = Query(default=10),
-        offset: int = Query(default=0)
+        offset: int = Query(default=0),
     ):
         """Список вызовов"""
         try:
             return callLog(limit, offset)
         except Exception as e:
-            logger.error(f"⚠️Error in call_log: {e}")
+            logger.error(f"⚠️ Error in call_log: {e}")
             raise HTTPException(
                 status_code=500,
                 detail={
                     "status": "error",
                     "message": str(e),
-                    "due_date": datetime.now().isoformat()
-                }
+                    "due_date": datetime.now().isoformat(),
+                },
             )
 
     @others.get("/contact-list", tags=["System"])
@@ -204,14 +205,14 @@ def create_router_others():
         try:
             return contactList()
         except Exception as e:
-            logger.error(f"⚠️Error in contact_list: {e}")
+            logger.error(f"⚠️ Error in contact_list: {e}")
             raise HTTPException(
                 status_code=500,
                 detail={
                     "status": "error",
                     "message": str(e),
-                    "due_date": datetime.now().isoformat()
-                }
+                    "due_date": datetime.now().isoformat(),
+                },
             )
 
     @others.get("/sms-list", tags=["System"])
@@ -220,21 +221,20 @@ def create_router_others():
         limit: int = Query(default=10),
         showNumberPhone: bool = Query(default=True),
         offset: int = Query(default=0),
-        typeSMS: TypeSMS = Query(default=TypeSMS.all)
+        typeSMS: TypeSMS = Query(default=TypeSMS.all),
     ):
         """Список СМС"""
         try:
-            # typeSMS - это Enum, передаем его значение (.value)
             return smsList(showDate, limit, showNumberPhone, offset, typeSMS.value)
         except Exception as e:
-            logger.error(f"⚠️Error in sms_list: {e}")
+            logger.error(f"⚠️ Error in sms_list: {e}")
             raise HTTPException(
                 status_code=500,
                 detail={
                     "status": "error",
                     "message": str(e),
-                    "due_date": datetime.now().isoformat()
-                }
+                    "due_date": datetime.now().isoformat(),
+                },
             )
 
     @others.get("/network-info", tags=["System"])
@@ -243,14 +243,14 @@ def create_router_others():
         try:
             return networkInfo()
         except Exception as e:
-            logger.error(f"⚠️Error in network_info: {e}")
+            logger.error(f"⚠️ Error in network_info: {e}")
             raise HTTPException(
                 status_code=500,
                 detail={
                     "status": "error",
                     "message": str(e),
-                    "due_date": datetime.now().isoformat()
-                }
+                    "due_date": datetime.now().isoformat(),
+                },
             )
 
     @others.get("/start-ssh", tags=["System"])
@@ -258,43 +258,37 @@ def create_router_others():
         try:
             return startSSH()
         except Exception as e:
-            logger.error(f"⚠️Error in start_ssh: {e}")
+            logger.error(f"⚠️ Error in start_ssh: {e}")
             raise HTTPException(
                 status_code=500,
                 detail={
                     "status": "error",
                     "message": str(e),
-                    "due_date": datetime.now().isoformat()
-                }
+                    "due_date": datetime.now().isoformat(),
+                },
             )
 
     @others.get("/restart", tags=["Service"])
     def api_restart():
-        """
-        Перезапуск сервиса через внешний скрипт.
-        """
+        """Перезапуск сервиса через внешний скрипт."""
         try:
             restart_script = os.path.join(
-                Config.PATH_APPLICATION_FOLDER,
-                "restart_service.py"
+                Config.PATH_APPLICATION_FOLDER, "restart_service.py"
             )
-
             result_proc = subprocess.run(
                 [sys.executable, restart_script],
                 capture_output=True,
-                text=True
+                text=True,
             )
-
             return {
                 "status": "ok",
                 "message": "Сервис перезапущен",
                 "output": result_proc.stdout,
                 "error": result_proc.stderr,
-                "returncode": result_proc.returncode
+                "returncode": result_proc.returncode,
             }
-
         except Exception as e:
-            logger.error(f"⚠️Ошибка при перезагрузке: {e}")
+            logger.error(f"⚠️ Ошибка при перезагрузке: {e}")
             raise HTTPException(status_code=500, detail=str(e))
 
     @others.get("/restart-termux-am", tags=["System"])
@@ -306,22 +300,19 @@ def create_router_others():
             sleep 1
             am start -n com.termux/.HomeActivity
             """
-
             result = subprocess.run(
                 ["nohup", "bash", "-c", restart_cmd],
                 capture_output=True,
-                text=True
+                text=True,
             )
-
             return {
                 "status": "warning",
                 "message": "Команда отправлена, но Termux может перезапуститься",
                 "output": result.stdout,
-                "error": result.stderr
+                "error": result.stderr,
             }
-
         except Exception as e:
-            logger.error(f"⚠️Ошибка: {e}")
+            logger.error(f"⚠️ Ошибка: {e}")
             raise HTTPException(status_code=500, detail=str(e))
 
     @others.get("/restart-service", tags=["Service"])
@@ -329,52 +320,45 @@ def create_router_others():
         """Перезапускает сервис внутри Termux"""
         try:
             script_path = os.path.join(
-                Config.PATH_APPLICATION_FOLDER,
-                "restart_termux_service.sh"
+                Config.PATH_APPLICATION_FOLDER, "restart_termux_service.sh"
             )
-
             process = subprocess.Popen(
                 ["bash", script_path],
                 stdout=subprocess.PIPE,
                 stderr=subprocess.PIPE,
-                start_new_session=True
+                start_new_session=True,
             )
-
             return {
                 "status": "ok",
                 "message": "Сервис Termux перезапускается...",
-                "pid": process.pid
+                "pid": process.pid,
             }
-
         except Exception as e:
-            logger.error(f"⚠️Ошибка: {e}")
+            logger.error(f"⚠️ Ошибка: {e}")
             raise HTTPException(status_code=500, detail=str(e))
 
     @others.get("/schedule-restart", tags=["System"])
     def schedule_termux_restart():
         """Планирует перезапуск Termux через 5 секунд"""
         try:
-            script_content = """#!/data/data/com.termux/files/usr/bin/bash
+            script_content = f"""#!/data/data/com.termux/files/usr/bin/bash
 sleep 5
-cd {}
+cd {Config.PATH_APPLICATION_FOLDER}
 nohup python run.py > api.log 2>&1 &
-    """.format(Config.PATH_APPLICATION_FOLDER)
-
+"""
             script_path = "/data/data/com.termux/files/home/delayed_restart.sh"
-            with open(script_path, "w") as f:
+            with open(script_path, "w", encoding="utf-8") as f:
                 f.write(script_content)
 
             os.chmod(script_path, 0o755)
-
             subprocess.Popen(["bash", script_path])
 
             return {
                 "status": "ok",
-                "message": "Termux сервис будет перезапущен через 5 секунд"
+                "message": "Termux сервис будет перезапущен через 5 секунд",
             }
-
         except Exception as e:
-            logger.error(f"⚠️Ошибка: {e}")
+            logger.error(f"⚠️ Ошибка: {e}")
             raise HTTPException(status_code=500, detail=str(e))
 
     @others.get("/soft-restart-termux", tags=["System"])
@@ -382,27 +366,21 @@ nohup python run.py > api.log 2>&1 &
         """Мягкий перезапуск - отправляет intent на обновление Termux"""
         try:
             cmd = "am start -a android.intent.action.MAIN -n com.termux/.HomeActivity"
-
-            result = subprocess.run(
-                cmd.split(),
-                capture_output=True,
-                text=True
-            )
-
+            result = subprocess.run(cmd.split(), capture_output=True, text=True)
             return {
                 "status": "ok" if result.returncode == 0 else "error",
                 "message": "Intent отправлен",
                 "output": result.stdout,
-                "error": result.stderr
+                "error": result.stderr,
             }
-
         except Exception as e:
-            logger.error(f"⚠️Ошибка: {e}")
+            logger.error(f"⚠️ Ошибка: {e}")
             raise HTTPException(status_code=500, detail=str(e))
 
     @others.post("/ping-services", tags=["Services"])
     def ping_services():
         from core.ping import ping_services
+
         return ping_services()
 
     return others

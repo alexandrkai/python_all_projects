@@ -1,6 +1,5 @@
 #!/data/data/com.termux/files/usr/bin/python3
 # D:/myprogramms/Python/Phones/PROJECT/PHONE/app/run.py
-# D:/myprogramms/Python/Phones/PROJECT/AUPAD/app/run.py
 import atexit
 import os
 import signal
@@ -21,7 +20,7 @@ def acquire_wakelock():
     """Захватывает wakelock для предотвращения сна CPU"""
     try:
         subprocess.run(["termux-wake-lock"], check=True, capture_output=True)
-        logger.info(f"[{time.ctime()}] INFO: Wakelock acquired via termux-api")
+        logger.info(f"❌[{time.ctime()}] INFO: Wakelock acquired via termux-api")
     except Exception as e:
         logger.error(f"[{time.ctime()}] ERROR: Failed to acquire wakelock: {e}")
 
@@ -29,13 +28,13 @@ def release_wakelock():
     """Освобождает wakelock"""
     try:
         subprocess.run(["termux-wake-unlock"], check=True, capture_output=True)
-        logger.info(f"[{time.ctime()}] INFO: Wakelock released")
+        logger.info(f"❌[{time.ctime()}] INFO: Wakelock released")
     except Exception as e:
         logger.error(f"[{time.ctime()}] ERROR: Failed to release wakelock: {e}")
 
 def handle_exit(signum=None, frame=None):
     """Обработчик выхода"""
-    logger.info(f"[{time.ctime()}] INFO: Shutting down service...")
+    logger.info(f"❌[{time.ctime()}] INFO: Shutting down service...")
     release_wakelock()
     sys.exit(0)
 
@@ -46,7 +45,7 @@ atexit.register(release_wakelock)
 
 # --- Основной блок ---
 if __name__ == "__main__":
-    logger.info(f"[{time.ctime()}] INFO: Starting API Service...")
+    logger.info(f"❌[{time.ctime()}] INFO: Starting API Service...")
     acquire_wakelock()
 
     # Сохраняем PID (опционально, полезно для kill)
@@ -58,8 +57,8 @@ if __name__ == "__main__":
         # Импортируем приложение здесь, чтобы убедиться, что нет ошибок импорта до запуска сервера
         from main import app
 
-        logger.info(f"[{time.ctime()}] INFO: Uvicorn starting on http://0.0.0.0:8000")
-        logger.info(f"[{time.ctime()}] INFO: Logging to standard output (handled by nohup)")
+        logger.info(f"❌[{time.ctime()}] INFO: Uvicorn starting on http://0.0.0.0:8000")
+        logger.info(f"❌[{time.ctime()}] INFO: Logging to standard output (handled by nohup)")
 
         # ЗАПУСК СЕРВЕРА
         # reload=False - обязательно для nohup, чтобы не было проблем с процессами
@@ -73,7 +72,7 @@ if __name__ == "__main__":
         )
 
     except Exception as e:
-        logger.critical(f"[{time.ctime()}] CRITICAL: Uvicorn crashed: {e}")
+        logger.critical(f"💀[{time.ctime()}] CRITICAL: Uvicorn crashed: {e}")
         # Ждем немного, чтобы успеть прочитать ошибку перед выходом (если не в фоне)
         time.sleep(1)
         handle_exit()

@@ -1,40 +1,41 @@
 {
     "emails": [
         {
-            "SMTP_SERVER": "192.168.1.222",
-            "SMTP_PORT": 587,
-            "SMTP_USERNAME": "info@pulsesms.ru",
-            "SMTP_PASSWORD": "291297"
+            "name": "pulsesms.ru",
+            "description": "Локальный email-сервер",
+            "settings": {
+                "SMTP_SERVER": "192.168.1.222",
+                "SMTP_PORT": 587,
+                "SMTP_USERNAME": "info@pulsesms.ru",
+                "SMTP_PASSWORD": "291297"
+            }
         }
     ],
     "phones": [
-        
         {
             "name": "AUPAD",
-            "description":null,
+            "description": null,
             "sims": [
                 {
                     "slot": 0,
                     "number": "+79037104652",
                     "status": "active",
                     "operator": "beeline"
-                },
-                {
-                    "slot": 1,
-                    "number": null,
-                    "status": "inactive",
-                    "operator": "tele2"
                 }
             ],
             "mac": null,
             "ip": null,
             "url": null,
-            "port": null
+            "port": null,
+            "slot_weights":
+            {
+                "0":50,
+                "1":50
+            }
         },
-        
         {
             "name": "HONOR8X",
-            "description":null,
+            "description": null,
             "sims": [
                 {
                     "slot": 0,
@@ -45,18 +46,23 @@
                 {
                     "slot": 1,
                     "number": "+79779988565",
-                    "status": "inactive",
+                    "status": "active",
                     "operator": "tele2"
                 }
             ],
             "mac": null,
             "ip": null,
             "url": null,
-            "port": null
+            "port": null,
+            "slot_weights":
+            {
+                "0":50,
+                "1":50
+            }
         },
         {
             "name": "HONOR20PRO",
-            "description":null,
+            "description": null,
             "sims": [
                 {
                     "slot": 0,
@@ -74,11 +80,16 @@
             "mac": null,
             "ip": null,
             "url": null,
-            "port": null
+            "port": null,
+            "slot_weights":
+            {
+                "0":50,
+                "1":50
+            }
         },
         {
             "name": "POCOX3PRO",
-            "description":null,
+            "description": null,
             "sims": [
                 {
                     "slot": 0,
@@ -93,14 +104,19 @@
                     "operator": "tele2"
                 }
             ],
-           "mac": null,
+            "mac": null,
             "ip": null,
             "url": null,
-            "port": null
+            "port": null,
+            "slot_weights":
+            {
+                "0":50,
+                "1":50
+            }
         },
         {
             "name": "HONOR20PRO2",
-            "description":null,
+            "description": null,
             "sims": [
                 {
                     "slot": 0,
@@ -118,7 +134,30 @@
             "mac": null,
             "ip": null,
             "url": null,
-            "port": null
+            "port": null,
+            "slot_weights":
+            {
+                "0":50,
+                "1":50
+            }
+        }
+    ],
+    "telegram_chat_ids": [
+        {
+            "phone": "+79175729812",
+            "chat_id": "5151092623"
+        },
+        {
+            "phone": "+79629665157",
+            "chat_id": "8761536730"
+        },
+        {
+            "phone": "+79309524050",
+            "chat_id": "8713825111"
+        },
+        {
+            "phone": "+79261975583",
+            "chat_id": "469930034"
         }
     ]
 }

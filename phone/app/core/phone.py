@@ -1,77 +1,101 @@
 # D:/myprogramms/Python/Phones/PROJECT/PHONE/app/core/phone.py
 import random
-import re
 
-from config.config import Config
+from config.config import (
+    Config,
+    get_full_error_message,
+    send_message_to_telegram,
+)
 from log.log import get_logger
-from schemas import SIM, SimStatus, SMSRequest
+from schemas import SIM, ResultShellCommandSendSMS, ResultStatus, SimStatus, SMSRequest
 
 from core.common import runShellCommand
 
 logger = get_logger(__name__)
 
 
-class Phone:
-    # Регулярное выражение (дублируем из модели для надежности или используем импорт)
-    PHONE_PATTERN_RUSSIA = re.compile(
-        r"^\+7\(?\d{3}\)?[ -]?\d{3}[ -]?\d{2}[ -]?\d{2}$")
+class SimNotFoundError(Exception):
+    """Исключение при отсутствии подходящей SIM-карты."""
 
-    @staticmethod
-    def getSim(data: SMSRequest) -> SIM:
-        if not data.simSlot is None:
-            active_sims = [sim for sim in Config.SENDER.sims if sim.status ==
-                           SimStatus.ACTIVE and sim.slot == data.simSlot]
-        else:
-            active_sims = [
-                sim for sim in Config.SENDER.sims if sim.status == SimStatus.ACTIVE]
-        if not active_sims:
-            error_msg = "⚠️Нет активных SIM-карт в конфигурации"
-            logger.critical(error_msg)
-            raise Exception(error_msg)
-        sim = random.choice(active_sims)
-        logger.debug(
-            f"Для отправки была выбрана симка {sim.model_dump_json()}")
+
+class SmsSendError(Exception):
+    """Исключение при ошибке отправки SMS."""
+
+
+def select_sim(data: SMSRequest) -> SIM:
+    all_sims = getattr(Config.SENDER, "sims", []) or []
+    active_sims = [sim for sim in all_sims if sim.status == SimStatus.ACTIVE]
+
+    if not active_sims:
+        err = SimNotFoundError("Нет активных SIM-карт в конфигурации")
+        full_msg = get_full_error_message(e=err, error_message="Ошибка выбора сим-карты", prefix="SELECT_SIM")
+        logger.critical(full_msg)
+        send_message_to_telegram(full_msg)
+        raise err
+
+    # 1. Если слот явно передан клиентом — ищем его среди активных
+    if data.sim_slot is not None:
+        matched_sims = [sim for sim in active_sims if sim.slot == data.sim_slot]
+        if not matched_sims:
+            err = SimNotFoundError(f"Активная сим-карта в слоте {data.sim_slot} не найдена")
+            full_msg = get_full_error_message(e=err, error_message="Слот недоступен", prefix="SELECT_SIM")
+            logger.critical(full_msg)
+            send_message_to_telegram(full_msg)
+            raise err
+        return matched_sims[0]
+
+    # 2. Если доступна всего одна симка
+    if len(active_sims) == 1:
+        sim = active_sims[0]
+        data.sim_slot = sim.slot
         return sim
 
+    # 3. Балансировка по весам
+    slot_weights = getattr(Config.SENDER, "slot_weights", None) or {0: 50, 1: 50}
+    weights = [slot_weights.get(sim.slot, 50) for sim in active_sims]
+    sim = random.choices(active_sims, weights=weights, k=1)[0]
+
+    data.sim_slot = sim.slot
+    return sim
+
+
+class Phone:
     @staticmethod
-    def sendSMS(data: SMSRequest, sim: SIM | None = None) -> dict:
+    def send_sms(data: SMSRequest) -> ResultShellCommandSendSMS:
         """
         Отправляет SMS через termux-sms-send.
-        Возвращает объект dict.
         """
-        from schemas.enums import ResultStatus
-        # Проверка валидности номера (доп. проверка на уровне выполнения)
-        if not Phone.PHONE_PATTERN_RUSSIA.match(data.to_phone_number):
-            error_message = f"⚠️Неправильный номер телефона {data.to_phone_number}. Он должен соответствовать формату +71234567890"
-            logger.error(error_message)
-            raise ValueError(error_message)
+        sim = select_sim(data)
 
-        # Проверка, что отправитель найден
-        if not sim:
-            # Если слот был указан, но симка не найдена
-            if data.simSlot is not None:
-                error_message = f"⚠️Сим-карта в слоте {data.simSlot} не найдена или неактивна"
-                logger.error(error_message)
-                raise Exception(error_message)
-            else:
-                error_message = f"⚠️Не удалось выбрать случайную сим-карту (нет активных)"
-                logger.error(error_message)
-                raise Exception(error_message)
+        # Синтаксис: termux-sms-send -s  -n  
+        command = [
+            "termux-sms-send",
+            "-s", str(sim.slot),
+            "-n", str(data.number),
+            str(data.message),
+        ]
 
-        # Получаем номер слота
-        simSlot = sim.slot
-
-        # Формируем команду
-        # termux-sms-send -s slotnumber number message
-        command = ["termux-sms-send"]
-        command.extend(["-s", str(simSlot)])
-        command.extend(["-n", data.to_phone_number, data.message])
-
-        # Выполняем команду через runShellCommand, который вернет Result
         result = runShellCommand(command)
+
         if result.status == ResultStatus.OK:
-            result = result.model_dump()
-            result["sender"] = {
-                "sender": Config.SENDER.name, "sim": sim.number}
-            return result
-        raise Exception(result.detail)
+            sms_result = ResultShellCommandSendSMS.from_command_result(
+                base=result,
+                sim_sender=sim,
+                sender=Config.SENDER.to_ShortPhoneSender(),
+            )
+            # Уведомление об успешной отправке
+            send_message_to_telegram(
+                f"✅ SMS отправлено: [{sim.slot}] {sim.number} -> {data.number}\nТекст: {data.message}"
+            )
+            return sms_result
+
+        # Обработка ошибки выполнения команды
+        err = SmsSendError(result.error or "Команда termux-sms-send вернула статус ERROR")
+        full_msg = get_full_error_message(
+            e=err,
+            error_message=f"Слот {sim.slot} ({sim.number}) -> {data.number}",
+            prefix="SMS_SEND",
+        )
+        logger.error(full_msg)
+        send_message_to_telegram(full_msg)
+        raise err

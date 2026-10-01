@@ -1,14 +1,14 @@
 #!/data/data/com.termux/files/usr/bin/sh
 
 # 1. Проверяем, передан ли аргумент имени телефона
-if [ -z "$1" ]; then
-    echo "⚠️ Ошибка: укажите имя телефона!"
-    echo "Использование: sh run.sh "
-    exit 1
-fi
+# if [ -z "$1" ]; then
+#     echo "⚠️ Ошибка: укажите имя телефона!"
+#     echo "Использование: sh run.sh "
+#     exit 1
+# fi
 
 # 2. Экспортируем имя телефона в переменную окружения
-export PHONE_NAME="$1"
+export PHONE_NAME="HONOR8X"
 
 echo "🚀 Запуск приложения для телефона: $PHONE_NAME"
 

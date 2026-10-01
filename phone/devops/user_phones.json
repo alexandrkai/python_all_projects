@@ -1,0 +1,12 @@
+[
+    {
+        "name":"HONOR8X",
+        "user":"u0_a108",
+        "command":"ssh -p 8022 u0_a108@192.168.1.50"
+    },
+    {
+        "name":"HONOR20PRO",
+        "user":"u0_a199",
+        "command":"ssh -p 8022 u0_a199@192.168.1.70"
+    }
+]

@@ -68,7 +68,7 @@ class TaskScheduler:
             return
             
         self.running = True
-        logger.info("Task scheduler started")
+        logger.info("ℹ️Планирощик задач стартовал")
         self._task = asyncio.create_task(self._run_scheduler())
         
     async def stop(self):
@@ -81,7 +81,7 @@ class TaskScheduler:
             except asyncio.CancelledError:
                 pass
         self.executor.shutdown(wait=False)
-        logger.info("Task scheduler stopped")
+        logger.info("ℹ️Планирощик задач остановлен")
         
     def schedule_task(
         self,
@@ -112,7 +112,7 @@ class TaskScheduler:
         )
         
         self.tasks[task_id] = task
-        logger.info(f"Task '{name}' scheduled with id: {task_id}")
+        logger.info(f"❌Task '{name}' scheduled with id: {task_id}")
         
         return task_id
     
@@ -181,7 +181,7 @@ class TaskScheduler:
         """Отменяет задачу"""
         if task_id in self.tasks:
             self.tasks[task_id].status = "cancelled"
-            logger.info(f"Task {task_id} cancelled")
+            logger.info(f"❌Task {task_id} cancelled")
             return True
         return False
     
@@ -232,7 +232,7 @@ class TaskScheduler:
                 )
             
             task.status = "completed"
-            logger.info(f"Task '{task.name}' completed successfully")
+            logger.info(f"❌Task '{task.name}' completed successfully")
             
             # Планируем следующий запуск для периодических задач
             if task.cron_expression or task.interval_seconds:
