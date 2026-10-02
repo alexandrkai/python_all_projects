@@ -6,7 +6,7 @@ from config.config import (
     get_full_error_message,
     send_message_to_telegram,
 )
-from log.log import get_logger
+from app.core.log.log import get_logger
 from schemas import SIM, ResultShellCommandSendSMS, ResultStatus, SimStatus, SMSRequest
 
 from core.common import runShellCommand
@@ -85,7 +85,7 @@ class Phone:
             )
             # Уведомление об успешной отправке
             send_message_to_telegram(
-                f"✅ SMS отправлено: [{sim.slot}] {sim.number} -> {data.number}\nТекст: {data.message}"
+                f"✅ SMS отправлено: {Config.SENDER.name}|{sim.slot}|{sim.number} -> {data.number}\n"
             )
             return sms_result
 

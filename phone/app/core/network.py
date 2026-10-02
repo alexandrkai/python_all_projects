@@ -1,12 +1,34 @@
 import json
+import logging
 import os
 import socket
 import subprocess
 import time
+from logging.handlers import RotatingFileHandler
 
-from log.log import get_logger
-
+from app.config.project_folders import PATH_LOG_FOLDER
+from app.core.log.log import get_logger
 logger = get_logger(__name__)
+
+# # сделаем свой config_logger
+# def get_logger(PATH_LOG_FOLDER, name):
+#     # Логгер для событий в конфигурации
+#     logger = logging.getLogger(name)
+#     logger.setLevel(logging.DEBUG)
+#     logger.propagate = False
+
+#     fh_phone = RotatingFileHandler(os.path.join(
+#         PATH_LOG_FOLDER, "network.log"), maxBytes=5*1024*1024, backupCount=5)
+#     fmt_phone = logging.Formatter(
+#         "%(asctime)s [%(levelname)s] %(name)s (%(filename)s:%(lineno)d): %(message)s")
+#     fh_phone.setFormatter(fmt_phone)
+#     logger.addHandler(fh_phone)
+
+#     # return logger, phone_logger
+#     return logger
+
+
+# logger = get_logger(PATH_LOG_FOLDER, __name__)
 
 
 def is_termux() -> bool:

@@ -1,0 +1,5 @@
+2026-10-02 16:17:11,889 [ERROR] critical_error_events (period_task.py:108): Не удалось отправить SMS-канарейку:Ошибка: [Errno 2] No such file or directory: 'termux-sms-send'
+2026-10-02 17:00:31,308 [ERROR] critical_error_events (period_task.py:108): Не удалось отправить SMS-канарейку:Ошибка: [Errno 2] No such file or directory: 'termux-sms-send'
+2026-10-02 17:19:51,161 [ERROR] critical_error_events (period_task.py:108): Не удалось отправить SMS-канарейку:Ошибка: [Errno 2] No such file or directory: 'termux-sms-send'
+2026-10-02 17:38:28,917 [ERROR] critical_error_events (period_task.py:108): Не удалось отправить SMS-канарейку:Ошибка: [Errno 2] No such file or directory: 'termux-sms-send'
+2026-10-02 17:40:29,232 [ERROR] critical_error_events (period_task.py:108): Не удалось отправить SMS-канарейку:Ошибка: [Errno 2] No such file or directory: 'termux-sms-send'

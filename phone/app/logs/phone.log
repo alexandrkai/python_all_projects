@@ -1,0 +1,605 @@
+ℹ️ 2026-10-02 13:46:24,433 [INFO] Лог-сессия начата: 2026-10-02 13:46:24.433109
+ℹ️ 2026-10-02 13:46:24,434 [INFO] Окружение: development
+ℹ️ 2026-10-02 13:46:36,136 [INFO] Лог-сессия начата: 2026-10-02 13:46:36.136652
+ℹ️ 2026-10-02 13:46:36,137 [INFO] Окружение: development
+ℹ️ 2026-10-02 14:02:50,144 [INFO] Лог-сессия начата: 2026-10-02 14:02:50.144602
+ℹ️ 2026-10-02 14:02:50,145 [INFO] Окружение: development
+ℹ️ 2026-10-02 14:02:51,160 [INFO] 🔁 EMAIL_SENDERS прочитан из Redis (переопределяет .env)
+ℹ️ 2026-10-02 14:02:51,163 [INFO] 🔁 REDIS_URL прочитан из Redis (переопределяет .env)
+ℹ️ 2026-10-02 14:02:51,203 [INFO] Получены номера телефонов: ['+79998855693', '+79779988565']
+ℹ️ 2026-10-02 14:02:51,514 [INFO] Запуск сервера на порту 5555
+ℹ️ 2026-10-02 14:02:51,515 [INFO] Период обновления сети: 200 минут
+ℹ️ 2026-10-02 14:02:51,515 [INFO] Период обновления конфигурации: 30 минут
+🐛2026-10-02 14:02:51,546 [DEBUG] asyncio:selector_events.py:64 - Using selector: EpollSelector
+ℹ️ 2026-10-02 14:02:51,727 [INFO] ============================================================
+ℹ️ 2026-10-02 14:02:51,727 [INFO] ЗАПУСК ПРИЛОЖЕНИЯ
+ℹ️ 2026-10-02 14:02:51,728 [INFO] ============================================================
+ℹ️ 2026-10-02 14:02:51,728 [INFO] Python version: 3.14.4 (main, Aug 20 2026, 10:41:58) [GCC 15.2.0]
+ℹ️ 2026-10-02 14:02:51,728 [INFO] FastAPI version: 0.142.2
+ℹ️ 2026-10-02 14:02:51,729 [INFO] Запуск фоновых задач...
+ℹ️ 2026-10-02 14:02:51,729 [INFO] Фоновые задачи успешно запущены
+ℹ️ 2026-10-02 14:02:51,730 [INFO] ============================================================
+ℹ️ 2026-10-02 14:02:51,733 [INFO] ℹ️ Запуск фоновой задачи - обновления конфигурации каждые 30 минут
+ℹ️ 2026-10-02 14:02:51,753 [INFO] 🔁 EMAIL_SENDERS прочитан из Redis (переопределяет .env)
+ℹ️ 2026-10-02 14:02:51,756 [INFO] 🔁 REDIS_URL прочитан из Redis (переопределяет .env)
+ℹ️ 2026-10-02 14:02:51,779 [INFO] Получены номера телефонов: ['+79998855693', '+79779988565']
+🐛2026-10-02 14:02:51,781 [DEBUG] phone.routes.period_task:period_task.py:43 - ✅ Выполнили фоновую задачу обновления конфигурации. Ждем 30 минут
+ℹ️ 2026-10-02 14:02:51,792 [INFO] ℹ️ Запуск фоновой задачи - отправка канареек каждые 60 минут
+ℹ️ 2026-10-02 14:02:57,374 [INFO] ✅ Email успешно отправлен на kaiby@yandex.ru
+ℹ️ 2026-10-02 14:02:57,384 [INFO] ✅ EMAIL Канарейка успешно отработала: {'status': <ResultStatus.OK: 'ok'>, 'due_date': datetime.datetime(2026, 10, 2, 14, 2, 57, 384748), 'sender': 'HONOR8X', 'data': {'message': 'Email успешно отправлен', 'to': 'kaiby@yandex.ru', 'title': '02.10.2026 14:02:51. HONOR8X. Канарейка', 'sender_email': 'info@pulsesms.ru'}}
+🐛2026-10-02 14:02:57,385 [DEBUG] phone.core.common:common.py:69 - Выполняем команду ['termux-sms-send', '-s', '0', '-n', '+79175729812', '02.10.2026 14:02:57. HONOR8X. +79998855693. SMS.Канарейка']
+❌ 2026-10-02 14:02:57,411 [ERROR] phone.core.common:common.py:95 - ⚠️[Errno 2] No such file or directory: 'termux-sms-send'
+(<class 'FileNotFoundError'>, FileNotFoundError(2, 'No such file or directory'), <traceback object at 0x7b05ca8329c0>)
+Traceback (most recent call last):
+  File "/mnt/d/myprogramms/Python/phone/app/core/common.py", line 71, in runShellCommand
+    process = subprocess.run(
+        command, capture_output=True, text=False, timeout=timeout)
+  File "/usr/lib/python3.14/subprocess.py", line 555, in run
+    with Popen(*popenargs, **kwargs) as process:
+         ~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.14/subprocess.py", line 1039, in __init__
+    self._execute_child(args, executable, preexec_fn, close_fds,
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                        pass_fds, cwd, env,
+                        ^^^^^^^^^^^^^^^^^^^
+    ...<5 lines>...
+                        gid, gids, uid, umask,
+                        ^^^^^^^^^^^^^^^^^^^^^^
+                        start_new_session, process_group)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.14/subprocess.py", line 1990, in _execute_child
+    raise child_exception_type(errno_num, err_msg, err_filename)
+FileNotFoundError: [Errno 2] No such file or directory: 'termux-sms-send'
+❌ 2026-10-02 14:02:57,419 [ERROR] phone.core.phone:phone.py:99 - ❌02.10.2026 14:02:57.HONOR8X(172.28.39.199).SMS_SEND: Слот 0 (+79998855693) -> +79175729812
+Детали: Ошибка: [Errno 2] No such file or directory: 'termux-sms-send'
+None
+❌ 2026-10-02 14:02:57,425 [ERROR] phone.routes.period_task:period_task.py:111 - ❌02.10.2026 14:02:57.HONOR8X(172.28.39.199).CANARY_SMS: Ошибка при отправке канареечного SMS
+Детали: Ошибка: [Errno 2] No such file or directory: 'termux-sms-send'
+None
+🐛2026-10-02 14:02:57,428 [DEBUG] phone.routes.period_task:period_task.py:113 - ✅ Выполнили фоновую задачу отправок канареек. Ждем 60 минут
+ℹ️ 2026-10-02 14:02:57,432 [INFO] ℹ️ Запуск фоновой задачи - проверка autossh каждые 180 минут
+ℹ️ 2026-10-02 14:02:57,460 [INFO] 🔍 Туннель не найден, запускаем (ssh-порт 443)...
+ℹ️ 2026-10-02 14:02:57,497 [INFO] 🛠️ Используется autossh для поддержания туннеля.
+ℹ️ 2026-10-02 14:02:57,499 [INFO] 🚀 Туннель запущен (локальный порт 8111, ssh-порт 443, kai@159.200.241.127)
+ℹ️ 2026-10-02 14:02:59,506 [INFO] ✅ Туннель успешно запущен.
+ℹ️ 2026-10-02 15:42:57,454 [INFO] Лог-сессия начата: 2026-10-02 15:42:57.454756
+ℹ️ 2026-10-02 15:42:57,455 [INFO] Окружение: development
+ℹ️ 2026-10-02 15:42:58,923 [INFO] 🔁 EMAIL_SENDERS прочитан из Redis (переопределяет .env)
+ℹ️ 2026-10-02 15:42:58,925 [INFO] 🔁 REDIS_URL прочитан из Redis (переопределяет .env)
+ℹ️ 2026-10-02 15:42:58,973 [INFO] Получены номера телефонов: ['+79998855693', '+79779988565']
+ℹ️ 2026-10-02 15:42:59,379 [INFO] Запуск сервера на порту 5555
+ℹ️ 2026-10-02 15:42:59,380 [INFO] Период обновления сети: 200 минут
+ℹ️ 2026-10-02 15:42:59,380 [INFO] Период обновления конфигурации: 30 минут
+🐛2026-10-02 15:42:59,425 [DEBUG] asyncio:selector_events.py:64 - Using selector: EpollSelector
+ℹ️ 2026-10-02 15:42:59,673 [INFO] ============================================================
+ℹ️ 2026-10-02 15:42:59,674 [INFO] ЗАПУСК ПРИЛОЖЕНИЯ
+ℹ️ 2026-10-02 15:42:59,674 [INFO] ============================================================
+ℹ️ 2026-10-02 15:42:59,675 [INFO] Python version: 3.14.4 (main, Aug 20 2026, 10:41:58) [GCC 15.2.0]
+ℹ️ 2026-10-02 15:42:59,675 [INFO] FastAPI version: 0.142.2
+ℹ️ 2026-10-02 15:42:59,675 [INFO] Запуск фоновых задач...
+ℹ️ 2026-10-02 15:42:59,676 [INFO] Фоновые задачи успешно запущены
+ℹ️ 2026-10-02 15:42:59,677 [INFO] ============================================================
+ℹ️ 2026-10-02 15:42:59,681 [INFO] ℹ️ Запуск фоновой задачи - обновления конфигурации каждые 30 минут
+ℹ️ 2026-10-02 15:42:59,702 [INFO] 🔁 EMAIL_SENDERS прочитан из Redis (переопределяет .env)
+ℹ️ 2026-10-02 15:42:59,705 [INFO] 🔁 REDIS_URL прочитан из Redis (переопределяет .env)
+ℹ️ 2026-10-02 15:42:59,728 [INFO] Получены номера телефонов: ['+79998855693', '+79779988565']
+🐛2026-10-02 15:42:59,730 [DEBUG] phone.routes.period_task:period_task.py:43 - ✅ Выполнили фоновую задачу обновления конфигурации. Ждем 30 минут
+ℹ️ 2026-10-02 15:42:59,740 [INFO] ℹ️ Запуск фоновой задачи - отправка канареек каждые 60 минут
+ℹ️ 2026-10-02 15:43:00,732 [INFO] ✅ Email успешно отправлен на kaiby@yandex.ru
+ℹ️ 2026-10-02 15:43:00,736 [INFO] ✅ EMAIL Канарейка: {'status': <ResultStatus.OK: 'ok'>, 'due_date': datetime.datetime(2026, 10, 2, 15, 43, 0, 736361), 'sender': 'HONOR8X', 'data': {'message': 'Email успешно отправлен', 'to': 'kaiby@yandex.ru', 'title': '02.10.2026 15:42:59. HONOR8X. Канарейка', 'sender_email': 'info@pulsesms.ru'}}
+❌ 2026-10-02 15:43:00,736 [ERROR] phone.routes.period_task:period_task.py:88 - ❌02.10.2026 15:43:00.HONOR8X(172.28.39.199).CANARY_EMAIL: Ошибка при отправке канареечного email
+Детали: cannot access local variable 'sim' where it is not associated with a value
+None
+🐛2026-10-02 15:43:00,739 [DEBUG] phone.core.common:common.py:69 - Выполняем команду ['termux-sms-send', '-s', '0', '-n', '+79175729812', '02.10.2026 15:43:00. HONOR8X. +79998855693. SMS.Канарейка']
+❌ 2026-10-02 15:43:00,757 [ERROR] phone.core.common:common.py:95 - ⚠️[Errno 2] No such file or directory: 'termux-sms-send'
+(<class 'FileNotFoundError'>, FileNotFoundError(2, 'No such file or directory'), <traceback object at 0x79e6bc3f2e40>)
+Traceback (most recent call last):
+  File "/mnt/d/myprogramms/Python/phone/app/core/common.py", line 71, in runShellCommand
+    process = subprocess.run(
+        command, capture_output=True, text=False, timeout=timeout)
+  File "/usr/lib/python3.14/subprocess.py", line 555, in run
+    with Popen(*popenargs, **kwargs) as process:
+         ~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.14/subprocess.py", line 1039, in __init__
+    self._execute_child(args, executable, preexec_fn, close_fds,
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                        pass_fds, cwd, env,
+                        ^^^^^^^^^^^^^^^^^^^
+    ...<5 lines>...
+                        gid, gids, uid, umask,
+                        ^^^^^^^^^^^^^^^^^^^^^^
+                        start_new_session, process_group)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.14/subprocess.py", line 1990, in _execute_child
+    raise child_exception_type(errno_num, err_msg, err_filename)
+FileNotFoundError: [Errno 2] No such file or directory: 'termux-sms-send'
+❌ 2026-10-02 15:43:00,771 [ERROR] phone.core.phone:phone.py:99 - ❌02.10.2026 15:43:00.HONOR8X(172.28.39.199).SMS_SEND: Слот 0 (+79998855693) -> +79175729812
+Детали: Ошибка: [Errno 2] No such file or directory: 'termux-sms-send'
+None
+❌ 2026-10-02 15:43:00,775 [ERROR] phone.routes.period_task:period_task.py:113 - ❌02.10.2026 15:43:00.HONOR8X(172.28.39.199).CANARY_SMS: Ошибка при отправке канареечного SMS
+Детали: Ошибка: [Errno 2] No such file or directory: 'termux-sms-send'
+None
+🐛2026-10-02 15:43:00,779 [DEBUG] phone.routes.period_task:period_task.py:115 - ✅ Выполнили фоновую задачу отправок канареек. Ждем 60 минут
+ℹ️ 2026-10-02 15:43:00,783 [INFO] ℹ️ Запуск фоновой задачи - проверка autossh каждые 180 минут
+ℹ️ 2026-10-02 15:43:00,803 [INFO] ✅ Туннель уже работает.
+ℹ️ 2026-10-02 16:10:38,698 [INFO] Лог-сессия начата: 2026-10-02 16:10:38.698641
+ℹ️ 2026-10-02 16:10:38,699 [INFO] Окружение: development
+ℹ️ 2026-10-02 16:11:00,779 [INFO] Лог-сессия начата: 2026-10-02 16:11:00.778826
+ℹ️ 2026-10-02 16:11:00,780 [INFO] Окружение: development
+ℹ️ 2026-10-02 16:11:02,237 [INFO] 🔁 EMAIL_SENDERS прочитан из Redis (переопределяет .env)
+ℹ️ 2026-10-02 16:11:02,240 [INFO] 🔁 REDIS_URL прочитан из Redis (переопределяет .env)
+ℹ️ 2026-10-02 16:11:02,306 [INFO] Получены номера телефонов: ['+79998855693', '+79779988565']
+ℹ️ 2026-10-02 16:11:39,421 [INFO] Лог-сессия начата: 2026-10-02 16:11:39.421136
+ℹ️ 2026-10-02 16:11:39,422 [INFO] Окружение: development
+ℹ️ 2026-10-02 16:11:40,906 [INFO] 🔁 EMAIL_SENDERS прочитан из Redis (переопределяет .env)
+ℹ️ 2026-10-02 16:11:40,908 [INFO] 🔁 REDIS_URL прочитан из Redis (переопределяет .env)
+ℹ️ 2026-10-02 16:11:40,944 [INFO] Получены номера телефонов: ['+79998855693', '+79779988565']
+ℹ️ 2026-10-02 16:11:41,035 [INFO] 🔁 EMAIL_SENDERS прочитан из Redis (переопределяет .env)
+ℹ️ 2026-10-02 16:11:41,038 [INFO] 🔁 REDIS_URL прочитан из Redis (переопределяет .env)
+ℹ️ 2026-10-02 16:11:41,061 [INFO] Получены номера телефонов: ['+79998855693', '+79779988565']
+ℹ️ 2026-10-02 16:13:17,488 [INFO] Лог-сессия начата: 2026-10-02 16:13:17.487973
+ℹ️ 2026-10-02 16:13:17,489 [INFO] Окружение: development
+ℹ️ 2026-10-02 16:13:18,967 [INFO] 🔁 EMAIL_SENDERS прочитан из Redis (переопределяет .env)
+ℹ️ 2026-10-02 16:13:18,970 [INFO] 🔁 REDIS_URL прочитан из Redis (переопределяет .env)
+ℹ️ 2026-10-02 16:13:19,010 [INFO] Получены номера телефонов: ['+79998855693', '+79779988565']
+ℹ️ 2026-10-02 16:13:19,064 [INFO] 🔁 EMAIL_SENDERS прочитан из Redis (переопределяет .env)
+ℹ️ 2026-10-02 16:13:19,067 [INFO] 🔁 REDIS_URL прочитан из Redis (переопределяет .env)
+ℹ️ 2026-10-02 16:13:19,090 [INFO] Получены номера телефонов: ['+79998855693', '+79779988565']
+ℹ️ 2026-10-02 16:13:19,413 [INFO] Запуск сервера на порту 5555
+ℹ️ 2026-10-02 16:13:19,414 [INFO] Период обновления сети: 200 минут
+ℹ️ 2026-10-02 16:13:19,414 [INFO] Период обновления конфигурации: 30 минут
+🐛2026-10-02 16:13:19,452 [DEBUG] asyncio:selector_events.py:64 - Using selector: EpollSelector
+ℹ️ 2026-10-02 16:13:19,685 [INFO] ============================================================
+ℹ️ 2026-10-02 16:13:19,686 [INFO] ЗАПУСК ПРИЛОЖЕНИЯ
+ℹ️ 2026-10-02 16:13:19,686 [INFO] ============================================================
+ℹ️ 2026-10-02 16:13:19,687 [INFO] Python version: 3.14.4 (main, Aug 20 2026, 10:41:58) [GCC 15.2.0]
+ℹ️ 2026-10-02 16:13:19,687 [INFO] FastAPI version: 0.142.2
+ℹ️ 2026-10-02 16:13:19,687 [INFO] Запуск фоновых задач...
+ℹ️ 2026-10-02 16:13:19,688 [INFO] Фоновые задачи успешно запущены
+ℹ️ 2026-10-02 16:13:19,688 [INFO] ============================================================
+ℹ️ 2026-10-02 16:13:19,704 [INFO] ℹ️ Запуск фоновой задачи - обновления конфигурации каждые 30 минут
+ℹ️ 2026-10-02 16:13:19,723 [INFO] 🔁 EMAIL_SENDERS прочитан из Redis (переопределяет .env)
+ℹ️ 2026-10-02 16:13:19,727 [INFO] 🔁 REDIS_URL прочитан из Redis (переопределяет .env)
+ℹ️ 2026-10-02 16:13:19,750 [INFO] Получены номера телефонов: ['+79998855693', '+79779988565']
+🐛2026-10-02 16:13:19,751 [DEBUG] phone.app.routes.period_task:period_task.py:40 - ✅ Выполнили фоновую задачу обновления конфигурации. Ждем 30 минут
+ℹ️ 2026-10-02 16:13:19,764 [INFO] ℹ️ Запуск фоновой задачи - отправка канареек каждые 60 минут
+ℹ️ 2026-10-02 16:13:20,889 [INFO] ✅ Email успешно отправлен на kaiby@yandex.ru
+ℹ️ 2026-10-02 16:13:20,893 [INFO] ✅ EMAIL Канарейка: {'status': <ResultStatus.OK: 'ok'>, 'due_date': datetime.datetime(2026, 10, 2, 16, 13, 20, 893567), 'sender': 'HONOR8X', 'data': {'message': 'Email успешно отправлен', 'to': 'kaiby@yandex.ru', 'title': '02.10.2026 16:13:19. HONOR8X. EMAIL-Канарейка', 'sender_email': 'info@pulsesms.ru'}}
+ℹ️ 2026-10-02 16:16:31,649 [INFO] Лог-сессия начата: 2026-10-02 16:16:31.649216
+ℹ️ 2026-10-02 16:16:31,650 [INFO] Окружение: development
+ℹ️ 2026-10-02 16:16:33,117 [INFO] 🔁 EMAIL_SENDERS прочитан из Redis (переопределяет .env)
+ℹ️ 2026-10-02 16:16:33,119 [INFO] 🔁 REDIS_URL прочитан из Redis (переопределяет .env)
+ℹ️ 2026-10-02 16:16:33,155 [INFO] Получены номера телефонов: ['+79998855693', '+79779988565']
+ℹ️ 2026-10-02 16:16:33,207 [INFO] 🔁 EMAIL_SENDERS прочитан из Redis (переопределяет .env)
+ℹ️ 2026-10-02 16:16:33,211 [INFO] 🔁 REDIS_URL прочитан из Redis (переопределяет .env)
+ℹ️ 2026-10-02 16:16:33,235 [INFO] Получены номера телефонов: ['+79998855693', '+79779988565']
+ℹ️ 2026-10-02 16:16:33,571 [INFO] Запуск сервера на порту 5555
+ℹ️ 2026-10-02 16:16:33,571 [INFO] Период обновления сети: 200 минут
+ℹ️ 2026-10-02 16:16:33,572 [INFO] Период обновления конфигурации: 30 минут
+🐛2026-10-02 16:16:33,612 [DEBUG] asyncio:selector_events.py:64 - Using selector: EpollSelector
+ℹ️ 2026-10-02 16:16:33,849 [INFO] ============================================================
+ℹ️ 2026-10-02 16:16:33,849 [INFO] ЗАПУСК ПРИЛОЖЕНИЯ
+ℹ️ 2026-10-02 16:16:33,850 [INFO] ============================================================
+ℹ️ 2026-10-02 16:16:33,850 [INFO] Python version: 3.14.4 (main, Aug 20 2026, 10:41:58) [GCC 15.2.0]
+ℹ️ 2026-10-02 16:16:33,850 [INFO] FastAPI version: 0.142.2
+ℹ️ 2026-10-02 16:16:33,851 [INFO] Запуск фоновых задач...
+ℹ️ 2026-10-02 16:16:33,851 [INFO] Фоновые задачи успешно запущены
+ℹ️ 2026-10-02 16:16:33,852 [INFO] ============================================================
+ℹ️ 2026-10-02 16:16:33,861 [INFO] ℹ️ Запуск фоновой задачи - обновления конфигурации каждые 30 минут
+ℹ️ 2026-10-02 16:16:33,880 [INFO] 🔁 EMAIL_SENDERS прочитан из Redis (переопределяет .env)
+ℹ️ 2026-10-02 16:16:33,883 [INFO] 🔁 REDIS_URL прочитан из Redis (переопределяет .env)
+ℹ️ 2026-10-02 16:16:33,907 [INFO] Получены номера телефонов: ['+79998855693', '+79779988565']
+🐛2026-10-02 16:16:33,909 [DEBUG] phone.app.routes.period_task:period_task.py:40 - ✅ Выполнили фоновую задачу обновления конфигурации. Ждем 30 минут
+ℹ️ 2026-10-02 16:16:33,920 [INFO] ℹ️ Запуск фоновой задачи - отправка канареек каждые 60 минут
+ℹ️ 2026-10-02 16:16:34,679 [INFO] ✅ Email успешно отправлен на kaiby@yandex.ru
+ℹ️ 2026-10-02 16:16:34,684 [INFO] ✅ EMAIL Канарейка отправлена: HONOR8X|info@pulsesms.ru->kaiby@yandex.ru
+🐛2026-10-02 16:17:11,851 [DEBUG] phone.core.common:common.py:69 - Выполняем команду ['termux-sms-send', '-s', '0', '-n', '+79175729812', '02.10.2026 16:17:11. HONOR8X. +79998855693. SMS.Канарейка']
+❌ 2026-10-02 16:17:11,868 [ERROR] phone.core.common:common.py:95 - ⚠️[Errno 2] No such file or directory: 'termux-sms-send'
+(<class 'FileNotFoundError'>, FileNotFoundError(2, 'No such file or directory'), <traceback object at 0x7cf4a98ddec0>)
+Traceback (most recent call last):
+  File "/mnt/d/myprogramms/Python/phone/app/core/common.py", line 71, in runShellCommand
+    process = subprocess.run(
+        command, capture_output=True, text=False, timeout=timeout)
+  File "/usr/lib/python3.14/subprocess.py", line 555, in run
+    with Popen(*popenargs, **kwargs) as process:
+         ~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.14/subprocess.py", line 1039, in __init__
+    self._execute_child(args, executable, preexec_fn, close_fds,
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                        pass_fds, cwd, env,
+                        ^^^^^^^^^^^^^^^^^^^
+    ...<5 lines>...
+                        gid, gids, uid, umask,
+                        ^^^^^^^^^^^^^^^^^^^^^^
+                        start_new_session, process_group)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.14/subprocess.py", line 1990, in _execute_child
+    raise child_exception_type(errno_num, err_msg, err_filename)
+FileNotFoundError: [Errno 2] No such file or directory: 'termux-sms-send'
+❌ 2026-10-02 16:17:11,877 [ERROR] phone.core.phone:phone.py:99 - ❌02.10.2026 16:17:11.HONOR8X(172.28.39.199).SMS_SEND: Слот 0 (+79998855693) -> +79175729812
+Детали: Ошибка: [Errno 2] No such file or directory: 'termux-sms-send'
+None
+❌ 2026-10-02 16:17:11,891 [ERROR] phone.app.routes.period_task:period_task.py:114 - ❌02.10.2026 16:17:11.HONOR8X(172.28.39.199).CANARY_SMS: Ошибка при отправке канареечного SMS
+Детали: Ошибка: [Errno 2] No such file or directory: 'termux-sms-send'
+None
+🐛2026-10-02 16:17:11,894 [DEBUG] phone.app.routes.period_task:period_task.py:116 - ✅ Выполнили фоновую задачу отправок канареек. Ждем 60 минут
+ℹ️ 2026-10-02 16:17:11,897 [INFO] ℹ️ Запуск фоновой задачи - проверка autossh каждые 180 минут
+ℹ️ 2026-10-02 16:17:11,918 [INFO] ✅ Туннель уже работает.
+ℹ️ 2026-10-02 16:56:38,051 [INFO] Лог-сессия начата: 2026-10-02 16:56:38.051480
+ℹ️ 2026-10-02 16:56:38,052 [INFO] Окружение: development
+ℹ️ 2026-10-02 16:57:23,979 [INFO] Лог-сессия начата: 2026-10-02 16:57:23.979004
+ℹ️ 2026-10-02 16:57:23,980 [INFO] Окружение: development
+ℹ️ 2026-10-02 16:59:24,997 [INFO] Лог-сессия начата: 2026-10-02 16:59:24.996824
+ℹ️ 2026-10-02 16:59:24,997 [INFO] Окружение: development
+ℹ️ 2026-10-02 17:00:23,136 [INFO] Лог-сессия начата: 2026-10-02 17:00:23.136134
+ℹ️ 2026-10-02 17:00:23,137 [INFO] Окружение: development
+ℹ️ 2026-10-02 17:00:24,969 [INFO] Запуск сервера на порту 5555
+ℹ️ 2026-10-02 17:00:24,970 [INFO] Период обновления сети: 200 минут
+ℹ️ 2026-10-02 17:00:24,970 [INFO] Период обновления конфигурации: 30 минут
+🐛2026-10-02 17:00:25,015 [DEBUG] asyncio:selector_events.py:64 - Using selector: EpollSelector
+ℹ️ 2026-10-02 17:00:25,268 [INFO] ============================================================
+ℹ️ 2026-10-02 17:00:25,269 [INFO] ЗАПУСК ПРИЛОЖЕНИЯ
+ℹ️ 2026-10-02 17:00:25,270 [INFO] ============================================================
+ℹ️ 2026-10-02 17:00:25,270 [INFO] Python version: 3.14.4 (main, Aug 20 2026, 10:41:58) [GCC 15.2.0]
+ℹ️ 2026-10-02 17:00:25,272 [INFO] FastAPI version: 0.142.2
+ℹ️ 2026-10-02 17:00:25,273 [INFO] Запуск фоновых задач...
+ℹ️ 2026-10-02 17:00:25,273 [INFO] Фоновые задачи успешно запущены
+ℹ️ 2026-10-02 17:00:25,274 [INFO] ============================================================
+ℹ️ 2026-10-02 17:00:25,286 [INFO] ℹ️ Запуск фоновой задачи - обновления конфигурации каждые 30 минут
+🐛2026-10-02 17:00:25,331 [DEBUG] phone.app.routes.period_task:period_task.py:40 - ✅ Выполнили фоновую задачу обновления конфигурации. Ждем 30 минут
+ℹ️ 2026-10-02 17:00:25,344 [INFO] Запуск фоновой задачи - отправка канареек каждые 60 минут
+ℹ️ 2026-10-02 17:00:26,522 [INFO] ✅ Email успешно отправлен на kaiby@yandex.ru
+ℹ️ 2026-10-02 17:00:26,526 [INFO] ✅ EMAIL Канарейка отправлена: HONOR8X|info@pulsesms.ru->kaiby@yandex.ru
+🐛2026-10-02 17:00:31,272 [DEBUG] phone.core.common:common.py:69 - Выполняем команду ['termux-sms-send', '-s', '0', '-n', '+79175729812', '02.10.2026 17:00:31. HONOR8X. +79998855693. SMS.Канарейка']
+❌ 2026-10-02 17:00:31,289 [ERROR] phone.core.common:common.py:95 - ⚠️[Errno 2] No such file or directory: 'termux-sms-send'
+(<class 'FileNotFoundError'>, FileNotFoundError(2, 'No such file or directory'), <traceback object at 0x71f8a3022c00>)
+Traceback (most recent call last):
+  File "/mnt/d/myprogramms/Python/phone/app/core/common.py", line 71, in runShellCommand
+    process = subprocess.run(
+        command, capture_output=True, text=False, timeout=timeout)
+  File "/usr/lib/python3.14/subprocess.py", line 555, in run
+    with Popen(*popenargs, **kwargs) as process:
+         ~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.14/subprocess.py", line 1039, in __init__
+    self._execute_child(args, executable, preexec_fn, close_fds,
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                        pass_fds, cwd, env,
+                        ^^^^^^^^^^^^^^^^^^^
+    ...<5 lines>...
+                        gid, gids, uid, umask,
+                        ^^^^^^^^^^^^^^^^^^^^^^
+                        start_new_session, process_group)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.14/subprocess.py", line 1990, in _execute_child
+    raise child_exception_type(errno_num, err_msg, err_filename)
+FileNotFoundError: [Errno 2] No such file or directory: 'termux-sms-send'
+❌ 2026-10-02 17:00:31,304 [ERROR] phone.core.phone:phone.py:99 - ❌02.10.2026 17:00:31.HONOR8X(172.28.39.199).SMS_SEND: Слот 0 (+79998855693) -> +79175729812
+Детали: Ошибка: [Errno 2] No such file or directory: 'termux-sms-send'
+None
+❌ 2026-10-02 17:00:31,310 [ERROR] phone.app.routes.period_task:period_task.py:114 - ❌02.10.2026 17:00:31.HONOR8X(172.28.39.199).CANARY_SMS: Ошибка при отправке канареечного SMS
+Детали: Ошибка: [Errno 2] No such file or directory: 'termux-sms-send'
+None
+🐛2026-10-02 17:00:31,314 [DEBUG] phone.app.routes.period_task:period_task.py:116 - ✅ Выполнили фоновую задачу отправок канареек. Ждем 60 минут
+ℹ️ 2026-10-02 17:00:31,318 [INFO] ℹ️ Запуск фоновой задачи - проверка autossh каждые 180 минут
+ℹ️ 2026-10-02 17:00:31,339 [INFO] ✅ Туннель уже работает.
+ℹ️ 2026-10-02 17:15:18,238 [INFO] Лог-сессия начата: 2026-10-02 17:15:18.237895
+ℹ️ 2026-10-02 17:15:18,238 [INFO] Окружение: development
+ℹ️ 2026-10-02 17:15:33,226 [INFO] Лог-сессия начата: 2026-10-02 17:15:33.225955
+ℹ️ 2026-10-02 17:15:33,227 [INFO] Окружение: development
+ℹ️ 2026-10-02 17:16:58,398 [INFO] Лог-сессия начата: 2026-10-02 17:16:58.397727
+ℹ️ 2026-10-02 17:16:58,399 [INFO] Окружение: development
+ℹ️ 2026-10-02 17:17:30,635 [INFO] Лог-сессия начата: 2026-10-02 17:17:30.635014
+ℹ️ 2026-10-02 17:17:30,636 [INFO] Окружение: development
+ℹ️ 2026-10-02 17:17:55,900 [INFO] Лог-сессия начата: 2026-10-02 17:17:55.900613
+ℹ️ 2026-10-02 17:17:55,902 [INFO] Окружение: development
+ℹ️ 2026-10-02 17:18:47,546 [INFO] Лог-сессия начата: 2026-10-02 17:18:47.546049
+ℹ️ 2026-10-02 17:18:47,547 [INFO] Окружение: development
+ℹ️ 2026-10-02 17:19:14,496 [INFO] Лог-сессия начата: 2026-10-02 17:19:14.496531
+ℹ️ 2026-10-02 17:19:14,497 [INFO] Окружение: development
+ℹ️ 2026-10-02 17:19:40,889 [INFO] Запуск сервера на порту 5555
+ℹ️ 2026-10-02 17:19:40,892 [INFO] Период обновления сети: 200 минут
+ℹ️ 2026-10-02 17:19:40,892 [INFO] Период обновления конфигурации: 30 минут
+🐛2026-10-02 17:19:40,937 [DEBUG] asyncio:selector_events.py:64 - Using selector: EpollSelector
+ℹ️ 2026-10-02 17:19:41,232 [INFO] ============================================================
+ℹ️ 2026-10-02 17:19:41,233 [INFO] ЗАПУСК ПРИЛОЖЕНИЯ
+ℹ️ 2026-10-02 17:19:41,234 [INFO] ============================================================
+ℹ️ 2026-10-02 17:19:41,235 [INFO] Python version: 3.14.4 (main, Aug 20 2026, 10:41:58) [GCC 15.2.0]
+ℹ️ 2026-10-02 17:19:41,235 [INFO] FastAPI version: 0.142.2
+ℹ️ 2026-10-02 17:19:41,236 [INFO] Запуск фоновых задач...
+ℹ️ 2026-10-02 17:19:41,236 [INFO] Фоновые задачи успешно запущены
+ℹ️ 2026-10-02 17:19:41,237 [INFO] ============================================================
+ℹ️ 2026-10-02 17:19:41,249 [INFO] ℹ️ Запуск фоновой задачи - обновления конфигурации каждые 30 минут
+🐛2026-10-02 17:19:41,304 [DEBUG] phone.app.routes.period_task:period_task.py:40 - ✅ Выполнили фоновую задачу обновления конфигурации. Ждем 30 минут
+ℹ️ 2026-10-02 17:19:41,315 [INFO] Запуск фоновой задачи - отправка канареек каждые 60 минут
+ℹ️ 2026-10-02 17:19:42,149 [INFO] ✅ Email успешно отправлен на kaiby@yandex.ru
+ℹ️ 2026-10-02 17:19:42,154 [INFO] ✅ EMAIL Канарейка отправлена: HONOR8X|info@pulsesms.ru->kaiby@yandex.ru
+🐛2026-10-02 17:19:51,131 [DEBUG] phone.core.common:common.py:71 - Выполняем команду ['termux-sms-send', '-s', '0', '-n', '+79175729812', '02.10.2026 17:19:51. HONOR8X. +79998855693. SMS.Канарейка']
+❌ 2026-10-02 17:19:51,148 [ERROR] phone.core.common:common.py:97 - ⚠️[Errno 2] No such file or directory: 'termux-sms-send'
+(<class 'FileNotFoundError'>, FileNotFoundError(2, 'No such file or directory'), <traceback object at 0x7063ea10a800>)
+Traceback (most recent call last):
+  File "/mnt/d/myprogramms/Python/phone/app/core/common.py", line 73, in runShellCommand
+    process = subprocess.run(
+        command, capture_output=True, text=False, timeout=timeout)
+  File "/usr/lib/python3.14/subprocess.py", line 555, in run
+    with Popen(*popenargs, **kwargs) as process:
+         ~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.14/subprocess.py", line 1039, in __init__
+    self._execute_child(args, executable, preexec_fn, close_fds,
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                        pass_fds, cwd, env,
+                        ^^^^^^^^^^^^^^^^^^^
+    ...<5 lines>...
+                        gid, gids, uid, umask,
+                        ^^^^^^^^^^^^^^^^^^^^^^
+                        start_new_session, process_group)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.14/subprocess.py", line 1990, in _execute_child
+    raise child_exception_type(errno_num, err_msg, err_filename)
+FileNotFoundError: [Errno 2] No such file or directory: 'termux-sms-send'
+❌ 2026-10-02 17:19:51,158 [ERROR] phone.core.phone:phone.py:99 - ❌02.10.2026 17:19:51.HONOR8X(172.28.39.199).SMS_SEND: Слот 0 (+79998855693) -> +79175729812
+Детали: Ошибка: [Errno 2] No such file or directory: 'termux-sms-send'
+None
+❌ 2026-10-02 17:19:51,162 [ERROR] phone.app.routes.period_task:period_task.py:114 - ❌02.10.2026 17:19:51.HONOR8X(172.28.39.199).CANARY_SMS: Ошибка при отправке канареечного SMS
+Детали: Ошибка: [Errno 2] No such file or directory: 'termux-sms-send'
+None
+🐛2026-10-02 17:19:51,166 [DEBUG] phone.app.routes.period_task:period_task.py:116 - ✅ Выполнили фоновую задачу отправок канареек. Ждем 60 минут
+ℹ️ 2026-10-02 17:19:51,173 [INFO] ℹ️ Запуск фоновой задачи - проверка autossh каждые 180 минут
+ℹ️ 2026-10-02 17:19:51,194 [INFO] ✅ Туннель уже работает.
+ℹ️ 2026-10-02 17:38:24,469 [INFO] Лог-сессия начата: 2026-10-02 17:38:24.468892
+ℹ️ 2026-10-02 17:38:24,470 [INFO] Окружение: development
+ℹ️ 2026-10-02 17:38:27,262 [INFO] Запуск сервера на порту 5555
+ℹ️ 2026-10-02 17:38:27,263 [INFO] Период обновления сети: 200 минут
+ℹ️ 2026-10-02 17:38:27,264 [INFO] Период обновления конфигурации: 30 минут
+🐛2026-10-02 17:38:27,311 [DEBUG] asyncio:selector_events.py:64 - Using selector: EpollSelector
+ℹ️ 2026-10-02 17:38:27,649 [INFO] ============================================================
+ℹ️ 2026-10-02 17:38:27,650 [INFO] ЗАПУСК ПРИЛОЖЕНИЯ
+ℹ️ 2026-10-02 17:38:27,651 [INFO] ============================================================
+ℹ️ 2026-10-02 17:38:27,651 [INFO] Python version: 3.14.4 (main, Aug 20 2026, 10:41:58) [GCC 15.2.0]
+ℹ️ 2026-10-02 17:38:27,652 [INFO] FastAPI version: 0.142.2
+ℹ️ 2026-10-02 17:38:27,653 [INFO] Запуск фоновых задач...
+ℹ️ 2026-10-02 17:38:27,654 [INFO] Фоновые задачи успешно запущены
+ℹ️ 2026-10-02 17:38:27,655 [INFO] ============================================================
+ℹ️ 2026-10-02 17:38:27,708 [INFO] ℹ️ Запуск фоновой задачи - обновления конфигурации каждые 30 минут
+🐛2026-10-02 17:38:27,789 [DEBUG] phone.app.routes.period_task:period_task.py:40 - ✅ Выполнили фоновую задачу обновления конфигурации. Ждем 30 минут
+ℹ️ 2026-10-02 17:38:27,805 [INFO] Запуск фоновой задачи - отправка канареек каждые 60 минут
+ℹ️ 2026-10-02 17:38:28,861 [INFO] ✅ Email успешно отправлен на kaiby@yandex.ru
+ℹ️ 2026-10-02 17:38:28,867 [INFO] ✅ EMAIL Канарейка отправлена: HONOR8X|info@pulsesms.ru->kaiby@yandex.ru
+🐛2026-10-02 17:38:28,875 [DEBUG] phone.core.common:common.py:71 - Выполняем команду ['termux-sms-send', '-s', '0', '-n', '+79175729812', '02.10.2026 17:38:28. HONOR8X. +79998855693. SMS.Канарейка']
+❌ 2026-10-02 17:38:28,899 [ERROR] phone.core.common:common.py:97 - ⚠️[Errno 2] No such file or directory: 'termux-sms-send'
+(<class 'FileNotFoundError'>, FileNotFoundError(2, 'No such file or directory'), <traceback object at 0x7c4f73210c00>)
+Traceback (most recent call last):
+  File "/mnt/d/myprogramms/Python/phone/app/core/common.py", line 73, in runShellCommand
+    process = subprocess.run(
+        command, capture_output=True, text=False, timeout=timeout)
+  File "/usr/lib/python3.14/subprocess.py", line 555, in run
+    with Popen(*popenargs, **kwargs) as process:
+         ~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.14/subprocess.py", line 1039, in __init__
+    self._execute_child(args, executable, preexec_fn, close_fds,
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                        pass_fds, cwd, env,
+                        ^^^^^^^^^^^^^^^^^^^
+    ...<5 lines>...
+                        gid, gids, uid, umask,
+                        ^^^^^^^^^^^^^^^^^^^^^^
+                        start_new_session, process_group)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.14/subprocess.py", line 1990, in _execute_child
+    raise child_exception_type(errno_num, err_msg, err_filename)
+FileNotFoundError: [Errno 2] No such file or directory: 'termux-sms-send'
+❌ 2026-10-02 17:38:28,911 [ERROR] phone.core.phone:phone.py:99 - ❌02.10.2026 17:38:28.HONOR8X(172.28.39.199).SMS_SEND: Слот 0 (+79998855693) -> +79175729812
+Детали: Ошибка: [Errno 2] No such file or directory: 'termux-sms-send'
+None
+❌ 2026-10-02 17:38:28,940 [ERROR] phone.app.routes.period_task:period_task.py:114 - ❌02.10.2026 17:38:28.HONOR8X(172.28.39.199).CANARY_SMS: Ошибка при отправке канареечного SMS
+Детали: Ошибка: [Errno 2] No such file or directory: 'termux-sms-send'
+None
+🐛2026-10-02 17:38:28,946 [DEBUG] phone.app.routes.period_task:period_task.py:116 - ✅ Выполнили фоновую задачу отправок канареек. Ждем 60 минут
+ℹ️ 2026-10-02 17:38:28,953 [INFO] ℹ️ Запуск фоновой задачи - проверка autossh каждые 180 минут
+ℹ️ 2026-10-02 17:38:28,980 [INFO] ✅ Туннель уже работает.
+ℹ️ 2026-10-02 17:40:25,893 [INFO] Лог-сессия начата: 2026-10-02 17:40:25.893293
+ℹ️ 2026-10-02 17:40:25,893 [INFO] Окружение: development
+ℹ️ 2026-10-02 17:40:27,605 [INFO] Запуск сервера на порту 5555
+ℹ️ 2026-10-02 17:40:27,606 [INFO] Период обновления сети: 200 минут
+ℹ️ 2026-10-02 17:40:27,607 [INFO] Период обновления конфигурации: 30 минут
+🐛2026-10-02 17:40:27,646 [DEBUG] asyncio:selector_events.py:64 - Using selector: EpollSelector
+ℹ️ 2026-10-02 17:40:27,873 [INFO] ============================================================
+ℹ️ 2026-10-02 17:40:27,874 [INFO] ЗАПУСК ПРИЛОЖЕНИЯ
+ℹ️ 2026-10-02 17:40:27,875 [INFO] ============================================================
+ℹ️ 2026-10-02 17:40:27,875 [INFO] Python version: 3.14.4 (main, Aug 20 2026, 10:41:58) [GCC 15.2.0]
+ℹ️ 2026-10-02 17:40:27,876 [INFO] FastAPI version: 0.142.2
+ℹ️ 2026-10-02 17:40:27,877 [INFO] Запуск фоновых задач...
+ℹ️ 2026-10-02 17:40:27,877 [INFO] Фоновые задачи успешно запущены
+ℹ️ 2026-10-02 17:40:27,879 [INFO] ============================================================
+ℹ️ 2026-10-02 17:40:27,908 [INFO] ℹ️ Запуск фоновой задачи - обновления конфигурации каждые 30 минут
+🐛2026-10-02 17:40:27,984 [DEBUG] phone.app.routes.period_task:period_task.py:40 - ✅ Выполнили фоновую задачу обновления конфигурации. Ждем 30 минут
+ℹ️ 2026-10-02 17:40:28,001 [INFO] Запуск фоновой задачи - отправка канареек каждые 60 минут
+ℹ️ 2026-10-02 17:40:29,175 [INFO] ✅ Email успешно отправлен на kaiby@yandex.ru
+ℹ️ 2026-10-02 17:40:29,182 [INFO] ✅ EMAIL Канарейка отправлена: HONOR8X|info@pulsesms.ru->kaiby@yandex.ru
+🐛2026-10-02 17:40:29,187 [DEBUG] phone.core.common:common.py:71 - Выполняем команду ['termux-sms-send', '-s', '0', '-n', '+79175729812', '02.10.2026 17:40:29. HONOR8X. +79998855693. SMS.Канарейка']
+❌ 2026-10-02 17:40:29,213 [ERROR] phone.core.common:common.py:97 - ⚠️[Errno 2] No such file or directory: 'termux-sms-send'
+(<class 'FileNotFoundError'>, FileNotFoundError(2, 'No such file or directory'), <traceback object at 0x756769cc14c0>)
+Traceback (most recent call last):
+  File "/mnt/d/myprogramms/Python/phone/app/core/common.py", line 73, in runShellCommand
+    process = subprocess.run(
+        command, capture_output=True, text=False, timeout=timeout)
+  File "/usr/lib/python3.14/subprocess.py", line 555, in run
+    with Popen(*popenargs, **kwargs) as process:
+         ~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.14/subprocess.py", line 1039, in __init__
+    self._execute_child(args, executable, preexec_fn, close_fds,
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                        pass_fds, cwd, env,
+                        ^^^^^^^^^^^^^^^^^^^
+    ...<5 lines>...
+                        gid, gids, uid, umask,
+                        ^^^^^^^^^^^^^^^^^^^^^^
+                        start_new_session, process_group)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.14/subprocess.py", line 1990, in _execute_child
+    raise child_exception_type(errno_num, err_msg, err_filename)
+FileNotFoundError: [Errno 2] No such file or directory: 'termux-sms-send'
+❌ 2026-10-02 17:40:29,223 [ERROR] phone.core.phone:phone.py:99 - ❌02.10.2026 17:40:29.HONOR8X(172.28.39.199).SMS_SEND: Слот 0 (+79998855693) -> +79175729812
+Детали: Ошибка: [Errno 2] No such file or directory: 'termux-sms-send'
+None
+❌ 2026-10-02 17:40:29,235 [ERROR] phone.app.routes.period_task:period_task.py:114 - ❌02.10.2026 17:40:29.HONOR8X(172.28.39.199).CANARY_SMS: Ошибка при отправке канареечного SMS
+Детали: Ошибка: [Errno 2] No such file or directory: 'termux-sms-send'
+None
+🐛2026-10-02 17:40:29,241 [DEBUG] phone.app.routes.period_task:period_task.py:116 - ✅ Выполнили фоновую задачу отправок канареек. Ждем 60 минут
+ℹ️ 2026-10-02 17:40:29,247 [INFO] ℹ️ Запуск фоновой задачи - проверка autossh каждые 180 минут
+ℹ️ 2026-10-02 17:40:29,273 [INFO] ✅ Туннель уже работает.
+ℹ️ 2026-10-02 17:50:19,290 [INFO] Лог-сессия начата: 2026-10-02 17:50:19.290523
+ℹ️ 2026-10-02 17:50:19,291 [INFO] Окружение: development
+ℹ️ 2026-10-02 17:50:20,829 [INFO] Запуск сервера на порту 5555
+ℹ️ 2026-10-02 17:50:20,830 [INFO] Период обновления сети: 200 минут
+ℹ️ 2026-10-02 17:50:20,831 [INFO] Период обновления конфигурации: 30 минут
+🐛2026-10-02 17:50:20,866 [DEBUG] asyncio:selector_events.py:64 - Using selector: EpollSelector
+ℹ️ 2026-10-02 17:50:21,082 [INFO] ============================================================
+ℹ️ 2026-10-02 17:50:21,083 [INFO] ЗАПУСК ПРИЛОЖЕНИЯ
+ℹ️ 2026-10-02 17:50:21,083 [INFO] ============================================================
+ℹ️ 2026-10-02 17:50:21,084 [INFO] Python version: 3.14.4 (main, Aug 20 2026, 10:41:58) [GCC 15.2.0]
+ℹ️ 2026-10-02 17:50:21,084 [INFO] FastAPI version: 0.142.2
+ℹ️ 2026-10-02 17:50:21,085 [INFO] Запуск фоновых задач...
+ℹ️ 2026-10-02 17:50:21,085 [INFO] Фоновые задачи успешно запущены
+ℹ️ 2026-10-02 17:50:21,086 [INFO] ============================================================
+ℹ️ 2026-10-02 17:50:22,078 [INFO] ✅ Email успешно отправлен на kaiby@yandex.ru
+🐛2026-10-02 17:50:22,110 [DEBUG] phone.core.common:common.py:71 - Выполняем команду ['termux-sms-send', '-s', '0', '-n', '+79175729812', '02.10.2026 17:50:22. HONOR8X. +79998855693. SMS.Канарейка']
+❌ 2026-10-02 17:50:22,130 [ERROR] phone.core.common:common.py:97 - ⚠️[Errno 2] No such file or directory: 'termux-sms-send'
+(<class 'FileNotFoundError'>, FileNotFoundError(2, 'No such file or directory'), <traceback object at 0x7a057505f7c0>)
+Traceback (most recent call last):
+  File "/mnt/d/myprogramms/Python/phone/app/core/common.py", line 73, in runShellCommand
+    process = subprocess.run(
+        command, capture_output=True, text=False, timeout=timeout)
+  File "/usr/lib/python3.14/subprocess.py", line 555, in run
+    with Popen(*popenargs, **kwargs) as process:
+         ~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.14/subprocess.py", line 1039, in __init__
+    self._execute_child(args, executable, preexec_fn, close_fds,
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                        pass_fds, cwd, env,
+                        ^^^^^^^^^^^^^^^^^^^
+    ...<5 lines>...
+                        gid, gids, uid, umask,
+                        ^^^^^^^^^^^^^^^^^^^^^^
+                        start_new_session, process_group)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.14/subprocess.py", line 1990, in _execute_child
+    raise child_exception_type(errno_num, err_msg, err_filename)
+FileNotFoundError: [Errno 2] No such file or directory: 'termux-sms-send'
+❌ 2026-10-02 17:50:22,139 [ERROR] phone.core.phone:phone.py:99 - ❌02.10.2026 17:50:22.HONOR8X(172.28.39.199).SMS_SEND: Слот 0 (+79998855693) -> +79175729812
+Детали: Ошибка: [Errno 2] No such file or directory: 'termux-sms-send'
+None
+ℹ️ 2026-10-02 17:50:22,181 [INFO] ✅ Туннель уже работает.
+ℹ️ 2026-10-02 17:53:36,008 [INFO] Лог-сессия начата: 2026-10-02 17:53:36.008029
+ℹ️ 2026-10-02 17:53:36,009 [INFO] Окружение: development
+ℹ️ 2026-10-02 17:53:37,726 [INFO] Запуск сервера на порту 5555
+ℹ️ 2026-10-02 17:53:37,727 [INFO] Период обновления сети: 200 минут
+ℹ️ 2026-10-02 17:53:37,728 [INFO] Период обновления конфигурации: 30 минут
+🐛2026-10-02 17:53:37,760 [DEBUG] asyncio:selector_events.py:64 - Using selector: EpollSelector
+ℹ️ 2026-10-02 17:53:37,978 [INFO] ============================================================
+ℹ️ 2026-10-02 17:53:37,979 [INFO] ЗАПУСК ПРИЛОЖЕНИЯ
+ℹ️ 2026-10-02 17:53:37,980 [INFO] ============================================================
+ℹ️ 2026-10-02 17:53:37,980 [INFO] Python version: 3.14.4 (main, Aug 20 2026, 10:41:58) [GCC 15.2.0]
+ℹ️ 2026-10-02 17:53:37,981 [INFO] FastAPI version: 0.142.2
+ℹ️ 2026-10-02 17:53:37,981 [INFO] Запуск фоновых задач...
+ℹ️ 2026-10-02 17:53:37,982 [INFO] Фоновые задачи успешно запущены
+ℹ️ 2026-10-02 17:53:37,982 [INFO] ============================================================
+ℹ️ 2026-10-02 17:53:39,297 [INFO] ✅ Email успешно отправлен на kaiby@yandex.ru
+🐛2026-10-02 17:53:39,307 [DEBUG] phone.core.common:common.py:71 - Выполняем команду ['termux-sms-send', '-s', '0', '-n', '+79175729812', '02.10.2026 17:53:39. HONOR8X. +79998855693. SMS.Канарейка']
+❌ 2026-10-02 17:53:39,328 [ERROR] phone.core.common:common.py:97 - ⚠️[Errno 2] No such file or directory: 'termux-sms-send'
+(<class 'FileNotFoundError'>, FileNotFoundError(2, 'No such file or directory'), <traceback object at 0x7972572ebf80>)
+Traceback (most recent call last):
+  File "/mnt/d/myprogramms/Python/phone/app/core/common.py", line 73, in runShellCommand
+    process = subprocess.run(
+        command, capture_output=True, text=False, timeout=timeout)
+  File "/usr/lib/python3.14/subprocess.py", line 555, in run
+    with Popen(*popenargs, **kwargs) as process:
+         ~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.14/subprocess.py", line 1039, in __init__
+    self._execute_child(args, executable, preexec_fn, close_fds,
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                        pass_fds, cwd, env,
+                        ^^^^^^^^^^^^^^^^^^^
+    ...<5 lines>...
+                        gid, gids, uid, umask,
+                        ^^^^^^^^^^^^^^^^^^^^^^
+                        start_new_session, process_group)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.14/subprocess.py", line 1990, in _execute_child
+    raise child_exception_type(errno_num, err_msg, err_filename)
+FileNotFoundError: [Errno 2] No such file or directory: 'termux-sms-send'
+❌ 2026-10-02 17:53:39,336 [ERROR] phone.core.phone:phone.py:99 - ❌02.10.2026 17:53:39.HONOR8X(172.28.39.199).SMS_SEND: Слот 0 (+79998855693) -> +79175729812
+Детали: Ошибка: [Errno 2] No such file or directory: 'termux-sms-send'
+None
+ℹ️ 2026-10-02 17:53:39,370 [INFO] ✅ Туннель уже работает.
+ℹ️ 2026-10-02 17:58:30,706 [INFO] Лог-сессия начата: 2026-10-02 17:58:30.706157
+ℹ️ 2026-10-02 17:58:30,706 [INFO] Окружение: development
+ℹ️ 2026-10-02 17:58:32,348 [INFO] Запуск сервера на порту 5555
+ℹ️ 2026-10-02 17:58:32,349 [INFO] Период обновления сети: 200 минут
+ℹ️ 2026-10-02 17:58:32,350 [INFO] Период обновления конфигурации: 30 минут
+🐛2026-10-02 17:58:32,383 [DEBUG] asyncio:selector_events.py:64 - Using selector: EpollSelector
+ℹ️ 2026-10-02 17:58:32,592 [INFO] ============================================================
+ℹ️ 2026-10-02 17:58:32,593 [INFO] ЗАПУСК ПРИЛОЖЕНИЯ
+ℹ️ 2026-10-02 17:58:32,594 [INFO] ============================================================
+ℹ️ 2026-10-02 17:58:32,594 [INFO] Python version: 3.14.4 (main, Aug 20 2026, 10:41:58) [GCC 15.2.0]
+ℹ️ 2026-10-02 17:58:32,595 [INFO] FastAPI version: 0.142.2
+ℹ️ 2026-10-02 17:58:32,596 [INFO] Запуск фоновых задач...
+ℹ️ 2026-10-02 17:58:32,597 [INFO] Фоновые задачи успешно запущены
+ℹ️ 2026-10-02 17:58:32,597 [INFO] ============================================================
+ℹ️ 2026-10-02 17:58:33,910 [INFO] Email успешно отправлен на kaiby@yandex.ru
+🐛2026-10-02 17:58:33,930 [DEBUG] phone.core.common:common.py:71 - Выполняем команду ['termux-sms-send', '-s', '0', '-n', '+79175729812', '02.10.2026 17:58:33. HONOR8X. +79998855693. SMS.Канарейка']
+❌ 2026-10-02 17:58:33,955 [ERROR] phone.core.common:common.py:97 - ⚠️[Errno 2] No such file or directory: 'termux-sms-send'
+(<class 'FileNotFoundError'>, FileNotFoundError(2, 'No such file or directory'), <traceback object at 0x7780c1757940>)
+Traceback (most recent call last):
+  File "/mnt/d/myprogramms/Python/phone/app/core/common.py", line 73, in runShellCommand
+    process = subprocess.run(
+        command, capture_output=True, text=False, timeout=timeout)
+  File "/usr/lib/python3.14/subprocess.py", line 555, in run
+    with Popen(*popenargs, **kwargs) as process:
+         ~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.14/subprocess.py", line 1039, in __init__
+    self._execute_child(args, executable, preexec_fn, close_fds,
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                        pass_fds, cwd, env,
+                        ^^^^^^^^^^^^^^^^^^^
+    ...<5 lines>...
+                        gid, gids, uid, umask,
+                        ^^^^^^^^^^^^^^^^^^^^^^
+                        start_new_session, process_group)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.14/subprocess.py", line 1990, in _execute_child
+    raise child_exception_type(errno_num, err_msg, err_filename)
+FileNotFoundError: [Errno 2] No such file or directory: 'termux-sms-send'
+❌ 2026-10-02 17:58:33,965 [ERROR] phone.core.phone:phone.py:99 - ❌02.10.2026 17:58:33.HONOR8X(172.28.39.199).SMS_SEND: Слот 0 (+79998855693) -> +79175729812
+Детали: Ошибка: [Errno 2] No such file or directory: 'termux-sms-send'
+None
+ℹ️ 2026-10-02 17:58:34,002 [INFO] Туннель уже работает.
+🐛2026-10-02 17:58:59,318 [DEBUG] phone.core.common:common.py:71 - Выполняем команду ['termux-sms-send', '-s', '1', '-n', '+79175729812', 'string']
+❌ 2026-10-02 17:58:59,367 [ERROR] phone.core.common:common.py:97 - ⚠️[Errno 2] No such file or directory: 'termux-sms-send'
+(<class 'FileNotFoundError'>, FileNotFoundError(2, 'No such file or directory'), <traceback object at 0x7780c16b2540>)
+Traceback (most recent call last):
+  File "/mnt/d/myprogramms/Python/phone/app/core/common.py", line 73, in runShellCommand
+    process = subprocess.run(
+        command, capture_output=True, text=False, timeout=timeout)
+  File "/usr/lib/python3.14/subprocess.py", line 555, in run
+    with Popen(*popenargs, **kwargs) as process:
+         ~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.14/subprocess.py", line 1039, in __init__
+    self._execute_child(args, executable, preexec_fn, close_fds,
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                        pass_fds, cwd, env,
+                        ^^^^^^^^^^^^^^^^^^^
+    ...<5 lines>...
+                        gid, gids, uid, umask,
+                        ^^^^^^^^^^^^^^^^^^^^^^
+                        start_new_session, process_group)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.14/subprocess.py", line 1990, in _execute_child
+    raise child_exception_type(errno_num, err_msg, err_filename)
+FileNotFoundError: [Errno 2] No such file or directory: 'termux-sms-send'
+❌ 2026-10-02 17:58:59,374 [ERROR] phone.core.phone:phone.py:99 - ❌02.10.2026 17:58:59.HONOR8X(172.28.39.199).SMS_SEND: Слот 1 (+79779988565) -> +79175729812
+Детали: Ошибка: [Errno 2] No such file or directory: 'termux-sms-send'
+None
+❌ 2026-10-02 17:58:59,415 [ERROR] phone.app.routes.routes:routes.py:84 - ❌02.10.2026 17:58:59.HONOR8X(172.28.39.199).ROUTE_SMS: Сбой отправки SMS: {"number":"+79175729812","message":"string","sim_slot":1}
+Детали: Ошибка: [Errno 2] No such file or directory: 'termux-sms-send'
+None
+ℹ️ 2026-10-02 17:59:50,182 [INFO] Email успешно отправлен на kaiby@yandex.ru

@@ -7,7 +7,7 @@ from models.task import TaskRequest, TaskResponse, TaskType, TaskStatus
 from core import common, email, phone,scheduler
 from core.email import myEmail
 from routes.routes import actualeNetworkInfo
-from log.log import get_logger
+from app.core.log.log import get_logger
 
 logger=get_logger(__name__)
 router = APIRouter(prefix="/tasks", tags=["Tasks"])

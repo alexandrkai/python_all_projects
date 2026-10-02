@@ -3,7 +3,8 @@ import subprocess
 import time
 
 from config.config import Config
-from log.log import get_logger
+
+from app.core.log.log import get_logger,critical_error_logger
 
 logger = get_logger(__name__)
 
@@ -22,8 +23,10 @@ def check_autossh_available() -> bool:
             text=True
         )
         # У autossh вывод версии может возвращать 0 или писать в stderr
+        print((res.stdout + res.stderr).lower())
         return res.returncode == 0 or "autossh" in (res.stdout + res.stderr).lower()
     except Exception:
+        critical_error_logger.error("Ошибка определения наличия autossh")
         return False
 
 def is_tunnel_running(port, remote, ssh_port):
@@ -90,7 +93,7 @@ def start_tunnel(port, remote, user, ssh_port):
         use_autossh = check_autossh_available()
 
         if not use_autossh:
-            logger.warning("⚠️ autossh не найден, используется обычный ssh (без автоматического перезапуска).")
+            logger.warning("⚠️autossh не найден, используется обычный ssh (без автоматического перезапуска).")
         else:
             logger.info("🛠️ Используется autossh для поддержания туннеля.")
     except (subprocess.CalledProcessError, FileNotFoundError):
@@ -149,7 +152,7 @@ def ensure_tunnel(port:int, remote:str, user:str, ssh_port:int):
         time.sleep(2)  # Даём время на установку соединения
 
         if is_tunnel_running(port, remote, ssh_port):
-            logger.info("✅ Туннель успешно запущен.")
+            logger.info("Туннель успешно запущен.")
             setattr(Config, "StartSSHTunnel", True)
         else:
             setattr(Config, "StartSSHTunnel", False)
@@ -158,7 +161,7 @@ def ensure_tunnel(port:int, remote:str, user:str, ssh_port:int):
                 "Проверьте доступность сервера, порт и ключи/пароль."
             )
     else:
-        logger.info("✅ Туннель уже работает.")
+        logger.info("Туннель уже работает.")
 
 
 # Пример использования (можно вызвать при старте бота)

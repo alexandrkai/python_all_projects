@@ -1,46 +1,26 @@
 # D:/myprogramms/Python/Phones/PROJECT/PHONE/app/config/config.py
 import json
 import os
-import sys
 from datetime import datetime, timedelta
-from pathlib import Path
 
 from core.network import actualeNetworkInfo
 from core.redis import MyRedis, check_exists, read_value, write_value
 from core.telegram.telega import DEFAULT_CHAT_ID, __send_message_to_telegram
 from dotenv import dotenv_values, load_dotenv
-from log.log import get_logger
 from schemas import PhoneSender, Senders, SimStatus
 
-logger = get_logger(__name__)
+from app.core.log.config_logger import config_logger
 
-current_file = Path(__file__).resolve()
-PATH_APPLICATION_FOLDER = current_file.parent.parent
-PATH_CONFIG_FOLDER = os.path.join(PATH_APPLICATION_FOLDER, "config")
-PATH_DATA_FOLDER = os.path.join(PATH_APPLICATION_FOLDER, "data")
+from .project_folders import (
+    PATH_APPLICATION_FOLDER,
+    PATH_CONFIG_FOLDER,
+    PATH_LOG_FOLDER,
+)
+
 PHONE_NAME = os.getenv("PHONE_NAME")
 
 
-def getApplicationRootFolderFromNameApplicationFolder(
-    nameRootApplicationFolder: str, file: str = __file__
-) -> str:
-    current_dir = os.path.dirname(file)
-    parts = current_dir.split(os.sep)
-    try:
-        index = next(
-            i for i, part in enumerate(parts)
-            if part.lower() == nameRootApplicationFolder.lower()
-        ) + 1
-    except StopIteration:
-        error_msg = f"⚠️ Не найдена директория '{nameRootApplicationFolder}' в пути {current_dir}"
-        logger.error(error_msg)
-        raise Exception(error_msg)
-
-    application_folder = os.sep.join(parts[:index])
-    if application_folder not in sys.path:
-        sys.path.insert(0, application_folder)
-    return application_folder
-
+logger = config_logger(PATH_LOG_FOLDER,__file__)
 
 class ReloadableConfig(dict):
     """Конфигурация с возможностью перезагрузки через MyRedis (Singleton)."""
@@ -77,8 +57,7 @@ class ReloadableConfig(dict):
                 self.reload()
             return
 
-        current_file = Path(__file__).resolve()
-        self.PATH_APPLICATION_FOLDER = current_file.parent.parent
+        self.PATH_APPLICATION_FOLDER = PATH_APPLICATION_FOLDER
         self._env_file = env_file or os.path.join(
             PATH_CONFIG_FOLDER, "envs", f"{PHONE_NAME}.env")
         if not os.path.exists(self._env_file):
@@ -103,6 +82,7 @@ class ReloadableConfig(dict):
 
         self.StartSSHTunnel = False
         self._load_config()
+        
         ReloadableConfig._initialized = True
 
     # ------------------------------------------------------------------ #

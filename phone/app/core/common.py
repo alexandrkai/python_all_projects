@@ -3,10 +3,12 @@ import json
 import os
 import platform
 import subprocess
+import sys
 from datetime import datetime
 
-from log.log import get_logger
 from schemas import ResultShellCommand, ResultStatus
+
+from app.core.log.log import get_logger
 
 logger = get_logger(__name__)
 
@@ -333,3 +335,24 @@ class Comments:
             print(f"\nНеожиданная ошибка: {e}")
             import traceback
             traceback.print_exc()
+            
+def getApplicationRootFolderFromNameApplicationFolder(
+    nameRootApplicationFolder: str, file: str = __file__
+) -> str:
+    current_dir = os.path.dirname(file)
+    parts = current_dir.split(os.sep)
+    try:
+        index = next(
+            i for i, part in enumerate(parts)
+            if part.lower() == nameRootApplicationFolder.lower()
+        ) + 1
+    except StopIteration:
+        error_msg = f"⚠️ Не найдена директория '{nameRootApplicationFolder}' в пути {current_dir}"
+        logger.error(error_msg)
+        raise Exception(error_msg)
+
+    application_folder = os.sep.join(parts[:index])
+    if application_folder not in sys.path:
+        sys.path.insert(0, application_folder)
+    return application_folder
+

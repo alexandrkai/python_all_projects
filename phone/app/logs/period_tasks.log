@@ -1,0 +1,15 @@
+2026-10-02 17:50:21,137 [INFO] /mnt/d/myprogramms/Python/phone/app/routes/period_task.py (period_task.py:36): ℹ️ Запуск фоновой задачи - обновления конфигурации каждые 30 минут
+2026-10-02 17:50:21,225 [DEBUG] /mnt/d/myprogramms/Python/phone/app/routes/period_task.py (period_task.py:40): ✅ Выполнили фоновую задачу обновления конфигурации. Ждем 30 минут
+2026-10-02 17:50:21,243 [INFO] /mnt/d/myprogramms/Python/phone/app/routes/period_task.py (period_task.py:62): Запуск фоновой задачи - отправка канареек каждые 60 минут
+2026-10-02 17:50:22,085 [INFO] /mnt/d/myprogramms/Python/phone/app/routes/period_task.py (period_task.py:79): ✅ EMAIL Канарейка отправлена: HONOR8X|info@pulsesms.ru->kaiby@yandex.ru
+2026-10-02 17:50:22,159 [INFO] /mnt/d/myprogramms/Python/phone/app/routes/period_task.py (period_task.py:128): ℹ️ Запуск фоновой задачи - проверка autossh каждые 180 минут
+2026-10-02 17:53:38,019 [INFO] /mnt/d/myprogramms/Python/phone/app/routes/period_task.py (period_task.py:30): ℹ️ Запуск фоновой задачи - обновления конфигурации каждые 30 минут
+2026-10-02 17:53:38,086 [DEBUG] /mnt/d/myprogramms/Python/phone/app/routes/period_task.py (period_task.py:35): ✅ Выполнили фоновую задачу обновления конфигурации. Ждем 30 минут
+2026-10-02 17:53:38,102 [INFO] /mnt/d/myprogramms/Python/phone/app/routes/period_task.py (period_task.py:59): Запуск фоновой задачи - отправка канареек каждые 60 минут
+2026-10-02 17:53:39,303 [INFO] /mnt/d/myprogramms/Python/phone/app/routes/period_task.py (period_task.py:77): ✅ EMAIL Канарейка отправлена: HONOR8X|info@pulsesms.ru->kaiby@yandex.ru
+2026-10-02 17:53:39,350 [INFO] /mnt/d/myprogramms/Python/phone/app/routes/period_task.py (period_task.py:132): ℹ️ Запуск фоновой задачи - проверка autossh каждые 180 минут
+2026-10-02 17:58:32,639 [INFO] /mnt/d/myprogramms/Python/phone/app/routes/period_task.py (period_task.py:30): ℹ️ Запуск фоновой задачи - обновления конфигурации каждые 30 минут
+2026-10-02 17:58:32,730 [DEBUG] /mnt/d/myprogramms/Python/phone/app/routes/period_task.py (period_task.py:35): ✅ Выполнили фоновую задачу обновления конфигурации. Ждем 30 минут
+2026-10-02 17:58:32,750 [INFO] /mnt/d/myprogramms/Python/phone/app/routes/period_task.py (period_task.py:59): Запуск фоновой задачи - отправка канареек каждые 60 минут
+2026-10-02 17:58:33,920 [INFO] /mnt/d/myprogramms/Python/phone/app/routes/period_task.py (period_task.py:77): ✅ EMAIL Канарейка отправлена: HONOR8X|info@pulsesms.ru->kaiby@yandex.ru
+2026-10-02 17:58:33,980 [INFO] /mnt/d/myprogramms/Python/phone/app/routes/period_task.py (period_task.py:132): ℹ️ Запуск фоновой задачи - проверка autossh каждые 180 минут

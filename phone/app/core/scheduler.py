@@ -7,7 +7,7 @@ from dataclasses import dataclass, field
 from enum import Enum
 import croniter
 import inspect
-from log.log import logger
+from app.core.log.log import logger
 from concurrent.futures import ThreadPoolExecutor
 
 @dataclass

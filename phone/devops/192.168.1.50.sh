@@ -8,18 +8,22 @@ mkdir -p /data/data/com.termux/files/home/storage/shared/myfolder/projects/rest-
 cd  /data/data/com.termux/files/home/storage/shared/myfolder/projects/rest-api/app
 sh run.sh HONOR8X
 
-rsync -av -i -e 'ssh -p 8022' \
+rsync -aviz -e 'ssh -p 8022' \
   --exclude=".venv" \
-  --exclude="node_modules" \
+  --exclude=".vscode" \
   --exclude="__pycache__" \
   --exclude="*.pyc" \
   --exclude=".git" \
   --exclude="logs/" \
-  ./ u0_a108@192.168.1.50:/data/data/com.termux/files/home/storage/shared/myfolder/projects/rest-api
-
-
-
+  --exclude="*.log" \
+  /mnt/d/myprogramms/Python/phone/ u0_a108@192.168.1.50:/data/data/com.termux/files/home/storage/shared/myfolder/projects/rest-api
 
   pkg install rust binutils build-essential
   pip install maturin
   pip install fastapi --no-build-isolation
+
+  ssh -p 8022 kai@192.168.1.50 "rm -rf /data/data/com.termux/files/home/storage/shared/myfolder/projects/rest-api/app; ls -la /data/data/com.termux/files/home/storage/shared/myfolder/projects/rest-api/"
+
+ssh -p 8022 kai@192.168.1.50 "rm -rf /data/data/com.termux/files/home/storage/shared/myfolder/projects/rest-api/app; ls -la /data/data/com.termux/files/home/storage/shared/myfolder/projects/rest-api/"
+
+ssh -t -p 8022 kai@192.168.1.70 "cd /data/data/com.termux/files/home/storage/shared/myfolder/projects/rest-api/app && exec bash"

@@ -4,19 +4,24 @@ import logging.handlers
 import os
 import sys
 from datetime import datetime
-from pathlib import Path
+
+from app.config.project_folders import (
+    PATH_APPLICATION_FOLDER,
+    PATH_CONFIG_FOLDER,
+    PATH_LOG_FOLDER,
+)
+# from app.config.config import Config, PATH_APPLICATION_FOL
+# DER,    PATH_CONFIG_FOLDER,    PATH_LOG_FOLDER
+from .critical_error_logger import setup_logger
 
 # Определяем пути
 
-PATH_APPLICATION_FOLDER = Path(__file__).resolve().parent.parent
-PATH_LOG_FOLDER = os.path.join(PATH_APPLICATION_FOLDER, "logs")
-PATH_CONFIG_FOLDER = os.path.join(PATH_APPLICATION_FOLDER, "config")
 
 # Создаем директории (без выбрасывания исключений)
 print(f"=== LOGGING CONFIGURATION ===")
-print(f"PROJECT_ROOT: {PATH_APPLICATION_FOLDER}")
-print(f"PATH_LOG_FOLDER: {PATH_LOG_FOLDER}")
-print(f"PATH_CONFIG_FOLDER: {PATH_CONFIG_FOLDER}")
+print(f"✅PROJECT_ROOT: {PATH_APPLICATION_FOLDER}")
+print(f"✅PATH_LOG_FOLDER: {PATH_LOG_FOLDER}")
+print(f"✅PATH_CONFIG_FOLDER: {PATH_CONFIG_FOLDER}")
 
 try:
     os.makedirs(PATH_LOG_FOLDER, exist_ok=True)
@@ -34,12 +39,14 @@ try:
 except Exception as e:
     print(f"❌ Ошибка при создании директории конфигов: {e}")
     print(f"⚠️ Приложение может работать некорректно без конфигурации")
-
+PHONE_NAME = os.getenv("PHONE_NAME")
 # Проверяем наличие .env файла (только предупреждение, не исключение)
-env_file = os.path.join(PATH_CONFIG_FOLDER, "envs",'.env')
+env_file = os.path.join(PATH_CONFIG_FOLDER, "envs", f'{PHONE_NAME}.env')
 if not os.path.exists(env_file):
     print(f"⚠️ ВНИМАНИЕ: Файл .env не найден в {env_file}")
     print(f"⚠️ Используются значения по умолчанию")
+
+critical_error_logger = setup_logger(PATH_LOG_FOLDER)
 
 
 class LevelFormatter(logging.Formatter):
@@ -79,7 +86,7 @@ class SmartLogger:
             cls._instance = super().__new__(cls)
         return cls._instance
 
-    def __init__(self, app_name='Message_Service', log_dir=None, environment='development'):
+    def __init__(self, app_name='Phone_Service', log_dir=None, environment='development'):
         # Проверяем, был ли уже инициализирован
         if hasattr(self, 'initialized') and self.initialized:
             return
@@ -96,7 +103,8 @@ class SmartLogger:
         self._setup_logging()
 
         print(f"✅ Логгер {app_name} инициализирован в {environment} режиме")
-        print(f"✅ Логи пишутся в: {os.path.join(self.log_dir, f'{self.app_name.lower()}.log')}")
+        print(
+            f"✅ Логи пишутся в: {os.path.join(self.log_dir, f'{self.app_name.lower()}.log')}")
 
     def _ensure_log_directory(self):
         """Создание и проверка директории для логов"""
@@ -126,7 +134,7 @@ class SmartLogger:
 
         # Основной файловый обработчик
         log_file = os.path.join(self.log_dir, f'{self.app_name.lower()}.log')
-        print(f"Лог-файл: {os.path.abspath(log_file)}")
+        print(f"✅Основной лог-файл: {os.path.abspath(log_file)}")
 
         try:
             file_handler = logging.handlers.RotatingFileHandler(
@@ -166,7 +174,7 @@ class SmartLogger:
 _log_manager = None
 
 
-def init_logging(app_name='service_messages', log_dir=None, environment='development'):
+def init_logging(app_name='phone', log_dir=None, environment='development'):
     """Инициализация логирования (вызовите это первой в main)"""
     global _log_manager
     _log_manager = SmartLogger(app_name, log_dir, environment)

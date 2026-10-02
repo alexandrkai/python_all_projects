@@ -23,7 +23,7 @@ from core.common import (
 )
 from core.email import myEmail
 from core.phone import Phone
-from log.log import get_logger
+from app.core.log.log import get_logger
 from schemas import (
     EmailRequest,
     ResultShellCommandSendSMS,
@@ -54,7 +54,7 @@ def create_router_others():
     def whoami():
         return Config.SENDER
 
-    @others.post("/send-sms", tags=["Phone"], response_model=ResultShellCommandSendSMS)
+    @others.post("/send-sms-message", tags=["Телефон"], response_model=ResultShellCommandSendSMS)
     def send_sms(data: SMSRequest):
         """Отправляет SMS через termux-sms-send."""
         try:
@@ -92,7 +92,7 @@ def create_router_others():
                 },
             )
 
-    @others.post("/send-email", tags=["Email"])
+    @others.post("/send-email-message", tags=["Электронная почта"])
     def send_email(data: EmailRequest):
         """Отправляет Email через SMTP."""
         try:
@@ -130,7 +130,7 @@ def create_router_others():
                 },
             )
 
-    @others.post("/send-telegram-to-msgprobot", tags=["Telegram"])
+    @others.post("/send-telegram--message", tags=["Telegram"])
     def send_telegram_to_msgprobot(data: TelegramRequest):
         """Отправляет сообщение в Telegram через Bot API."""
         try:
@@ -377,10 +377,44 @@ nohup python run.py > api.log 2>&1 &
             logger.error(f"⚠️ Ошибка: {e}")
             raise HTTPException(status_code=500, detail=str(e))
 
-    @others.post("/ping-services", tags=["Services"])
-    def ping_services():
-        from core.ping import ping_services
+    # @others.post("/ping-services", tags=["Services"])
+    # def ping_services():
+    #     from core.ping import ping_services
 
-        return ping_services()
+    #     return ping_services()
 
     return others
+
+def create_router_for_management():
+    """Создает роутер для управления конфигурацией."""
+    from fastapi import APIRouter
+
+    router = APIRouter(prefix="/config", tags=["Конфигурация"])
+
+    @router.post("/reload-config")
+    async def reload_config():
+        """Принудительная перезагрузка конфигурации из файлов и Redis."""
+        logger.info("Принудительная перезагрузка конфигурации через API")
+        Config.reload()
+        config_data = Config.getItems().copy()
+        config_data.update({
+            "config_file": Config._env_file,
+            "last_load_time": Config._last_load_time.isoformat() if Config._last_load_time else None,
+        })
+        return {
+            "message": "Конфигурация перезагружена",
+            "config": config_data,
+        }
+
+    @router.get("/current")
+    async def get_current_config():
+        """Получить текущие параметры конфигурации."""
+        config_data = Config.getItems().copy()
+        config_data.update({
+            "config_file": Config._env_file,
+            "last_load_time": Config._last_load_time.isoformat() if Config._last_load_time else None,
+        })
+        return config_data
+
+    return router
+

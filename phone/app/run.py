@@ -8,7 +8,7 @@ import sys
 import time
 
 from config.config import Config
-from log.log import get_logger
+from app.core.log.log import get_logger
 
 logger=get_logger(__name__)
 
@@ -45,7 +45,7 @@ atexit.register(release_wakelock)
 
 # --- Основной блок ---
 if __name__ == "__main__":
-    logger.info(f"❌[{time.ctime()}] INFO: Starting API Service...")
+    logger.info(f"[{time.ctime()}] INFO: Starting API Service...")
     acquire_wakelock()
 
     # Сохраняем PID (опционально, полезно для kill)
@@ -57,8 +57,8 @@ if __name__ == "__main__":
         # Импортируем приложение здесь, чтобы убедиться, что нет ошибок импорта до запуска сервера
         from main import app
 
-        logger.info(f"❌[{time.ctime()}] INFO: Uvicorn starting on http://0.0.0.0:8000")
-        logger.info(f"❌[{time.ctime()}] INFO: Logging to standard output (handled by nohup)")
+        logger.info(f"[{time.ctime()}] INFO: Uvicorn starting on http://0.0.0.0:8000")
+        logger.info(f"[{time.ctime()}] INFO: Logging to standard output (handled by nohup)")
 
         # ЗАПУСК СЕРВЕРА
         # reload=False - обязательно для nohup, чтобы не было проблем с процессами

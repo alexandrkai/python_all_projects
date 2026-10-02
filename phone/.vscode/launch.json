@@ -21,6 +21,19 @@
             "env": {
                 "PYTHONPATH": "${workspaceFolder}"
             }
+        },
+        {
+            "name": "HONOR8X",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/app/main.py",
+            "console": "integratedTerminal",
+            "cwd": "/mnt/d/myprogramms/Python/phone",
+            "env": {
+                "PHONE_NAME": "HONOR8X",
+                "PYTHONPATH": "/mnt/d/myprogramms/Python/phone"
+            },
+            "justMyCode": true
         }
     ]
 }

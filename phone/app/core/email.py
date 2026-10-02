@@ -10,8 +10,9 @@ from config.config import (
     get_full_error_message,
     send_message_to_telegram,
 )
-from log.log import get_logger
 from schemas import EmailRequest, EmailSender, ResultStatus
+
+from app.core.log.log import get_logger
 
 logger = get_logger(__name__)
 
@@ -32,6 +33,7 @@ def getEmailSender() -> EmailSender | None:
         )
         logger.critical(full_msg)
         send_message_to_telegram(full_msg)
+        # основная функция телефона - отправка СМС, поэтому возврат None
         return None
 
     chosen = random.choice(email_senders)
@@ -49,6 +51,7 @@ def getEmailSender() -> EmailSender | None:
         )
         logger.critical(full_msg, exc_info=True)
         send_message_to_telegram(full_msg)
+        # основная функция телефона - отправка СМС, поэтому возврат None
         return None
 
 class myEmail:
@@ -95,8 +98,8 @@ class myEmail:
                 )
                 server.send_message(msg)
 
-            logger.info(f"✅ Email успешно отправлен на {email.to_email}")
-            send_message_to_telegram(f"✅ EMAIL: {from_email} -> {email.to_email}")
+            logger.info(f"Email успешно отправлен на {email.to_email}")
+            send_message_to_telegram(f"✅ EMAIL: {Config.SENDER.name}|{from_email} -> {email.to_email}")
 
             sender_name = getattr(Config.SENDER, "name", "SYSTEM")
             return {
