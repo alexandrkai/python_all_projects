@@ -175,3 +175,36 @@
 2026-10-02 19:02:02,603 [INFO] /mnt/d/myprogramms/Python/phone/app/config/config.py (config.py:126): 🔁 EMAIL_SENDERS прочитан из Redis (переопределяет .env)
 2026-10-02 19:02:02,612 [INFO] /mnt/d/myprogramms/Python/phone/app/config/config.py (config.py:126): 🔁 REDIS_URL прочитан из Redis (переопределяет .env)
 2026-10-02 19:02:02,656 [INFO] /mnt/d/myprogramms/Python/phone/app/config/config.py (config.py:336): Получены номера телефонов: ['+79998855693', '+79779988565']
+2026-10-02 19:32:02,659 [INFO] /mnt/d/myprogramms/Python/phone/app/config/config.py (config.py:174): 🔄 Обновление кэша конфигурации (env + Redis)
+2026-10-02 19:32:02,699 [INFO] /mnt/d/myprogramms/Python/phone/app/config/config.py (config.py:126): 🔁 EMAIL_SENDERS прочитан из Redis (переопределяет .env)
+2026-10-02 19:32:02,706 [INFO] /mnt/d/myprogramms/Python/phone/app/config/config.py (config.py:126): 🔁 REDIS_URL прочитан из Redis (переопределяет .env)
+2026-10-02 19:32:02,764 [INFO] /mnt/d/myprogramms/Python/phone/app/config/config.py (config.py:336): Получены номера телефонов: ['+79998855693', '+79779988565']
+2026-10-02 19:32:02,825 [INFO] /mnt/d/myprogramms/Python/phone/app/config/config.py (config.py:126): 🔁 EMAIL_SENDERS прочитан из Redis (переопределяет .env)
+2026-10-02 19:32:02,831 [INFO] /mnt/d/myprogramms/Python/phone/app/config/config.py (config.py:126): 🔁 REDIS_URL прочитан из Redis (переопределяет .env)
+2026-10-02 19:32:02,885 [INFO] /mnt/d/myprogramms/Python/phone/app/config/config.py (config.py:336): Получены номера телефонов: ['+79998855693', '+79779988565']
+2026-10-02 20:02:02,890 [INFO] /mnt/d/myprogramms/Python/phone/app/config/config.py (config.py:174): 🔄 Обновление кэша конфигурации (env + Redis)
+2026-10-02 20:02:02,915 [INFO] /mnt/d/myprogramms/Python/phone/app/config/config.py (config.py:126): 🔁 EMAIL_SENDERS прочитан из Redis (переопределяет .env)
+2026-10-02 20:02:02,921 [INFO] /mnt/d/myprogramms/Python/phone/app/config/config.py (config.py:126): 🔁 REDIS_URL прочитан из Redis (переопределяет .env)
+2026-10-02 20:02:02,965 [INFO] /mnt/d/myprogramms/Python/phone/app/config/config.py (config.py:336): Получены номера телефонов: ['+79998855693', '+79779988565']
+2026-10-02 20:02:03,005 [INFO] /mnt/d/myprogramms/Python/phone/app/config/config.py (config.py:126): 🔁 EMAIL_SENDERS прочитан из Redis (переопределяет .env)
+2026-10-02 20:02:03,008 [INFO] /mnt/d/myprogramms/Python/phone/app/config/config.py (config.py:126): 🔁 REDIS_URL прочитан из Redis (переопределяет .env)
+2026-10-02 20:02:03,045 [INFO] /mnt/d/myprogramms/Python/phone/app/config/config.py (config.py:336): Получены номера телефонов: ['+79998855693', '+79779988565']
+2026-10-02 20:20:17,307 [INFO] /mnt/d/myprogramms/Python/phone/app/config/config.py (config.py:126): 🔁 EMAIL_SENDERS прочитан из Redis (переопределяет .env)
+2026-10-02 20:20:17,312 [INFO] /mnt/d/myprogramms/Python/phone/app/config/config.py (config.py:126): 🔁 REDIS_URL прочитан из Redis (переопределяет .env)
+2026-10-02 20:20:17,397 [INFO] /mnt/d/myprogramms/Python/phone/app/config/config.py (config.py:336): Получены номера телефонов: ['+79998855693', '+79779988565']
+2026-10-02 20:20:18,010 [INFO] /mnt/d/myprogramms/Python/phone/app/config/config.py (config.py:126): 🔁 EMAIL_SENDERS прочитан из Redis (переопределяет .env)
+2026-10-02 20:20:18,037 [INFO] /mnt/d/myprogramms/Python/phone/app/config/config.py (config.py:126): 🔁 REDIS_URL прочитан из Redis (переопределяет .env)
+2026-10-02 20:20:18,084 [INFO] /mnt/d/myprogramms/Python/phone/app/config/config.py (config.py:336): Получены номера телефонов: ['+79998855693', '+79779988565']
+2026-10-02 20:20:53,081 [INFO] /mnt/d/myprogramms/Python/phone/app/config/config.py (config.py:126): 🔁 EMAIL_SENDERS прочитан из Redis (переопределяет .env)
+2026-10-02 20:20:53,085 [INFO] /mnt/d/myprogramms/Python/phone/app/config/config.py (config.py:126): 🔁 REDIS_URL прочитан из Redis (переопределяет .env)
+2026-10-02 20:20:53,133 [INFO] /mnt/d/myprogramms/Python/phone/app/config/config.py (config.py:336): Получены номера телефонов: ['+79998855693', '+79779988565']
+2026-10-02 20:20:53,690 [INFO] /mnt/d/myprogramms/Python/phone/app/config/config.py (config.py:126): 🔁 EMAIL_SENDERS прочитан из Redis (переопределяет .env)
+2026-10-02 20:20:53,698 [INFO] /mnt/d/myprogramms/Python/phone/app/config/config.py (config.py:126): 🔁 REDIS_URL прочитан из Redis (переопределяет .env)
+2026-10-02 20:20:53,736 [INFO] /mnt/d/myprogramms/Python/phone/app/config/config.py (config.py:336): Получены номера телефонов: ['+79998855693', '+79779988565']
+2026-10-02 20:32:03,049 [INFO] /mnt/d/myprogramms/Python/phone/app/config/config.py (config.py:174): 🔄 Обновление кэша конфигурации (env + Redis)
+2026-10-02 20:32:03,124 [INFO] /mnt/d/myprogramms/Python/phone/app/config/config.py (config.py:126): 🔁 EMAIL_SENDERS прочитан из Redis (переопределяет .env)
+2026-10-02 20:32:03,130 [INFO] /mnt/d/myprogramms/Python/phone/app/config/config.py (config.py:126): 🔁 REDIS_URL прочитан из Redis (переопределяет .env)
+2026-10-02 20:32:03,187 [INFO] /mnt/d/myprogramms/Python/phone/app/config/config.py (config.py:336): Получены номера телефонов: ['+79998855693', '+79779988565']
+2026-10-02 20:32:03,241 [INFO] /mnt/d/myprogramms/Python/phone/app/config/config.py (config.py:126): 🔁 EMAIL_SENDERS прочитан из Redis (переопределяет .env)
+2026-10-02 20:32:03,245 [INFO] /mnt/d/myprogramms/Python/phone/app/config/config.py (config.py:126): 🔁 REDIS_URL прочитан из Redis (переопределяет .env)
+2026-10-02 20:32:03,293 [INFO] /mnt/d/myprogramms/Python/phone/app/config/config.py (config.py:336): Получены номера телефонов: ['+79998855693', '+79779988565']

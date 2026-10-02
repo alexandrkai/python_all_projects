@@ -1,0 +1,1090 @@
+ℹ️ 2026-10-02 19:05:32,073 [INFO] Лог-сессия начата: 2026-10-02 19:05:32.072780
+ℹ️ 2026-10-02 19:05:32,074 [INFO] Окружение: development
+ℹ️ 2026-10-02 19:05:39,923 [INFO] [Fri Oct  2 19:05:39 2026] INFO: Starting API Service...
+ℹ️ 2026-10-02 19:05:43,351 [INFO] ❌[Fri Oct  2 19:05:43 2026] INFO: Wakelock acquired via termux-api
+ℹ️ 2026-10-02 19:05:44,751 [INFO] [Fri Oct  2 19:05:44 2026] INFO: Uvicorn starting on http://0.0.0.0:8000
+ℹ️ 2026-10-02 19:05:44,752 [INFO] [Fri Oct  2 19:05:44 2026] INFO: Logging to standard output (handled by nohup)
+🐛2026-10-02 19:05:44,783 [DEBUG] asyncio:selector_events.py:64 - Using selector: EpollSelector
+ℹ️ 2026-10-02 19:05:45,128 [INFO] ============================================================
+ℹ️ 2026-10-02 19:05:45,130 [INFO] ЗАПУСК ПРИЛОЖЕНИЯ
+ℹ️ 2026-10-02 19:05:45,131 [INFO] ============================================================
+ℹ️ 2026-10-02 19:05:45,131 [INFO] Python version: 3.14.6 (main, Jul  5 2026, 10:35:55) [Clang 21.0.0 (https://android.googlesource.com/toolchain/llvm-project 5e96669f0
+ℹ️ 2026-10-02 19:05:45,132 [INFO] FastAPI version: 0.142.2
+ℹ️ 2026-10-02 19:05:45,133 [INFO] Запуск фоновых задач...
+ℹ️ 2026-10-02 19:05:45,134 [INFO] Фоновые задачи успешно запущены
+ℹ️ 2026-10-02 19:05:45,135 [INFO] ============================================================
+ℹ️ 2026-10-02 19:05:46,237 [INFO] Email успешно отправлен на kaiby@yandex.ru
+🐛2026-10-02 19:05:46,244 [DEBUG] phone.core.common:common.py:71 - Выполняем команду ['termux-sms-send', '-s', '0', '-n', '+79175729812', '02.10.2026 19:05:46. HONOR8X. +79998855693. SMS.Канарейка']
+🐛2026-10-02 19:05:46,421 [DEBUG] phone.core.common:common.py:79 - process.stdout: 
+🐛2026-10-02 19:05:46,422 [DEBUG] phone.core.common:common.py:80 - process.stderr: 
+🐛2026-10-02 19:05:46,426 [DEBUG] phone.core.common:common.py:71 - Выполняем команду ['termux-sms-send', '-s', '1', '-n', '+79175729812', '02.10.2026 19:05:46. HONOR8X. +79779988565. SMS.Канарейка']
+🐛2026-10-02 19:05:46,554 [DEBUG] phone.core.common:common.py:79 - process.stdout: 
+🐛2026-10-02 19:05:46,555 [DEBUG] phone.core.common:common.py:80 - process.stderr: 
+ℹ️ 2026-10-02 19:05:46,658 [INFO] 🔍 Туннель не найден, запускаем (ssh-порт 443)...
+ℹ️ 2026-10-02 19:05:46,680 [INFO] 🛠️ Используется autossh для поддержания туннеля.
+ℹ️ 2026-10-02 19:05:46,683 [INFO] 🚀 Туннель запущен (локальный порт 8111, ssh-порт 443, kai@159.200.241.127)
+ℹ️ 2026-10-02 19:05:48,783 [INFO] Туннель успешно запущен.
+🐛2026-10-02 19:21:21,795 [DEBUG] phone.core.common:common.py:71 - Выполняем команду ['termux-sms-send', '-s', '1', '-n', '+79175729812', 'string']
+🐛2026-10-02 19:21:21,971 [DEBUG] phone.core.common:common.py:79 - process.stdout: 
+🐛2026-10-02 19:21:21,972 [DEBUG] phone.core.common:common.py:80 - process.stderr: 
+🐛2026-10-02 19:21:22,175 [DEBUG] urllib3.connectionpool:connectionpool.py:1081 - Starting new HTTPS connection (1): api.telegram.org:443
+🐛2026-10-02 19:21:22,601 [DEBUG] urllib3.connectionpool:connectionpool.py:550 - https://api.telegram.org:443 "POST /bot8524403686:AAEjbYgXaHP70PHTifQDxA9em4nJkPPHfcU/sendMessage HTTP/1.1" 200 453
+🐛2026-10-02 19:21:38,567 [DEBUG] phone.core.common:common.py:71 - Выполняем команду ['termux-sms-send', '-s', '0', '-n', '+79175729812', 'string']
+🐛2026-10-02 19:21:38,686 [DEBUG] phone.core.common:common.py:79 - process.stdout: 
+🐛2026-10-02 19:21:38,687 [DEBUG] phone.core.common:common.py:80 - process.stderr: 
+🐛2026-10-02 19:21:38,722 [DEBUG] urllib3.connectionpool:connectionpool.py:1081 - Starting new HTTPS connection (1): api.telegram.org:443
+🐛2026-10-02 19:21:39,096 [DEBUG] urllib3.connectionpool:connectionpool.py:550 - https://api.telegram.org:443 "POST /bot8524403686:AAEjbYgXaHP70PHTifQDxA9em4nJkPPHfcU/sendMessage HTTP/1.1" 200 453
+🐛2026-10-02 19:22:03,556 [DEBUG] phone.core.common:common.py:71 - Выполняем команду ['termux-sms-send', '-s', '1', '-n', '+79175729812', 'string']
+🐛2026-10-02 19:22:03,701 [DEBUG] phone.core.common:common.py:79 - process.stdout: 
+🐛2026-10-02 19:22:03,703 [DEBUG] phone.core.common:common.py:80 - process.stderr: 
+🐛2026-10-02 19:22:03,751 [DEBUG] urllib3.connectionpool:connectionpool.py:1081 - Starting new HTTPS connection (1): api.telegram.org:443
+🐛2026-10-02 19:22:04,127 [DEBUG] urllib3.connectionpool:connectionpool.py:550 - https://api.telegram.org:443 "POST /bot8524403686:AAEjbYgXaHP70PHTifQDxA9em4nJkPPHfcU/sendMessage HTTP/1.1" 200 453
+ℹ️ 2026-10-02 19:22:40,317 [INFO] Email успешно отправлен на kaiby@yandex.ru
+🐛2026-10-02 19:22:40,332 [DEBUG] urllib3.connectionpool:connectionpool.py:1081 - Starting new HTTPS connection (1): api.telegram.org:443
+🐛2026-10-02 19:22:40,754 [DEBUG] urllib3.connectionpool:connectionpool.py:550 - https://api.telegram.org:443 "POST /bot8524403686:AAEjbYgXaHP70PHTifQDxA9em4nJkPPHfcU/sendMessage HTTP/1.1" 200 382
+🐛2026-10-02 19:23:26,255 [DEBUG] urllib3.connectionpool:connectionpool.py:1081 - Starting new HTTPS connection (1): api.telegram.org:443
+🐛2026-10-02 19:23:26,682 [DEBUG] urllib3.connectionpool:connectionpool.py:550 - https://api.telegram.org:443 "POST /bot8524403686:AAEjbYgXaHP70PHTifQDxA9em4nJkPPHfcU/sendMessage HTTP/1.1" 200 239
+🐛2026-10-02 19:24:34,201 [DEBUG] phone.core.common:common.py:71 - Выполняем команду ['termux-sms-list', '-d', '-n', '-l', '10', '-o', '0', '-t', 'all']
+🐛2026-10-02 19:24:34,593 [DEBUG] phone.core.common:common.py:79 - process.stdout: [
+  {
+    "threadid": 328,
+    "type": "inbox",
+    "read": true,
+    "address": "t2.ru",
+    "number": "t2.ru",
+    "received": "2026-09-30 18:16:56",
+    "body": "Теперь вам доступен выбор категорий в \"Гигабэке\" для получения дополнительных ГБ за потраченный интернет. Выберите их сейчас: https://u.t2.ru/gigaback",
+    "_id": 4968
+  },
+  {
+    "threadid": 328,
+    "type": "inbox",
+    "read": true,
+    "address": "t2.ru",
+    "number": "t2.ru",
+    "received": "2026-09-30 18:17:38",
+    "body": "Плата за тариф внесена, скидка восстановлена. Подробнее: https://u.t2.ru/together",
+    "_id": 4969
+  },
+  {
+    "threadid": 329,
+    "type": "inbox",
+    "read": true,
+    "address": "t2.ru",
+    "number": "t2.ru",
+    "received": "2026-09-30 18:19:39",
+    "body": "Плата за тариф внесена, скидка восстановлена. Подробнее: https://u.t2.ru/together",
+    "_id": 4970
+  },
+  {
+    "threadid": 329,
+    "type": "inbox",
+    "read": true,
+    "address": "t2.ru",
+    "number": "t2.ru",
+    "received": "2026-09-30 18:20:12",
+    "body": "Доступ подтвержден. Интернет, SMS и USSD-запросы восстановятся в полном объеме в течение 15 минут, для корректной работы требуется перезагрузить устройство.",
+    "_id": 4971
+  },
+  {
+    "threadid": 330,
+    "type": "inbox",
+    "read": true,
+    "address": "t2.ru",
+    "number": "t2.ru",
+    "received": "2026-09-30 18:21:20",
+    "body": "Доступ подтвержден. Интернет, SMS и USSD-запросы восстановятся в полном объеме в течение 15 минут, для корректной работы требуется перезагрузить устройство.",
+    "_id": 4972
+  },
+  {
+    "threadid": 330,
+    "type": "inbox",
+    "read": true,
+    "address": "t2.ru",
+    "number": "t2.ru",
+    "received": "2026-10-01 09:07:21",
+    "body": "⚠️ На 01.10.2026 03:09 (МСК) ваш баланс: 5 руб. Пакеты по тарифу действуют, но средств может не хватить для оплаты услуг вне пакета. Пополнить счет: https://u.t2.ru/balance",
+    "_id": 4973
+  },
+  {
+    "threadid": 331,
+    "type": "inbox",
+    "read": true,
+    "address": "t2.ru",
+    "number": "t2.ru",
+    "received": "2026-10-01 09:15:27",
+    "body": "⚠️ На 01.10.2026 03:09 (МСК) ваш баланс: 5 руб. Пакеты по тарифу действуют, но средств может не хватить для оплаты услуг вне пакета. Пополнить счет: https://u.t2.ru/balance",
+    "_id": 4974
+  },
+  {
+    "threadid": 331,
+    "type": "inbox",
+    "read": false,
+    "address": "t2.ru",
+    "number": "t2.ru",
+    "received": "2026-10-01 20:02:37",
+    "body": "Цветы → кино → шопинг. Это идеальное свидание? Нет, это подписка MiXX 😉 Попробуйте и узнайте сами. Подключите от 449 руб./мес.: u.t2.ru/11fbkD",
+    "_id": 4975
+  },
+  {
+    "threadid": 332,
+    "type": "inbox",
+    "read": false,
+    "address": "t2.ru",
+    "number": "t2.ru",
+    "received": "2026-10-02 17:58:28",
+    "body": "Вы можете получать гигабайты за потраченный интернет. Для этого нужно выбрать категории в \"Гигабэке\": https://u.t2.ru/gigaback",
+    "_id": 4976
+  },
+  {
+    "threadid": 332,
+    "type": "inbox",
+    "read": false,
+    "address": "t2.ru",
+    "number": "t2.ru",
+    "received": "2026-10-02 17:59:03",
+    "body": "Вы можете получать гигабайты за потраченный интернет. Для этого нужно выбрать категории в \"Гигабэке\": https://u.t2.ru/gigaback",
+    "_id": 4977
+  }
+]
+
+🐛2026-10-02 19:24:34,594 [DEBUG] phone.core.common:common.py:80 - process.stderr: 
+🐛2026-10-02 19:24:34,595 [DEBUG] phone.core.common:common.py:109 - Пытаемся распарсить data: [
+  {
+    "threadid": 328,
+    "type": "inbox",
+    "read": true,
+    "address": "t2.ru",
+    "number": "t2.ru",
+    "received": "2026-09-30 18:16:56",
+    "body": "Теперь вам доступен выбор категорий в \"Гигабэке\" для получения дополнительных ГБ за потраченный интернет. Выберите их сейчас: https://u.t2.ru/gigaback",
+    "_id": 4968
+  },
+  {
+    "threadid": 328,
+    "type": "inbox",
+    "read": true,
+    "address": "t2.ru",
+    "number": "t2.ru",
+    "received": "2026-09-30 18:17:38",
+    "body": "Плата за тариф внесена, скидка восстановлена. Подробнее: https://u.t2.ru/together",
+    "_id": 4969
+  },
+  {
+    "threadid": 329,
+    "type": "inbox",
+    "read": true,
+    "address": "t2.ru",
+    "number": "t2.ru",
+    "received": "2026-09-30 18:19:39",
+    "body": "Плата за тариф внесена, скидка восстановлена. Подробнее: https://u.t2.ru/together",
+    "_id": 4970
+  },
+  {
+    "threadid": 329,
+    "type": "inbox",
+    "read": true,
+    "address": "t2.ru",
+    "number": "t2.ru",
+    "received": "2026-09-30 18:20:12",
+    "body": "Доступ подтвержден. Интернет, SMS и USSD-запросы восстановятся в полном объеме в течение 15 минут, для корректной работы требуется перезагрузить устройство.",
+    "_id": 4971
+  },
+  {
+    "threadid": 330,
+    "type": "inbox",
+    "read": true,
+    "address": "t2.ru",
+    "number": "t2.ru",
+    "received": "2026-09-30 18:21:20",
+    "body": "Доступ подтвержден. Интернет, SMS и USSD-запросы восстановятся в полном объеме в течение 15 минут, для корректной работы требуется перезагрузить устройство.",
+    "_id": 4972
+  },
+  {
+    "threadid": 330,
+    "type": "inbox",
+    "read": true,
+    "address": "t2.ru",
+    "number": "t2.ru",
+    "received": "2026-10-01 09:07:21",
+    "body": "⚠️ На 01.10.2026 03:09 (МСК) ваш баланс: 5 руб. Пакеты по тарифу действуют, но средств может не хватить для оплаты услуг вне пакета. Пополнить счет: https://u.t2.ru/balance",
+    "_id": 4973
+  },
+  {
+    "threadid": 331,
+    "type": "inbox",
+    "read": true,
+    "address": "t2.ru",
+    "number": "t2.ru",
+    "received": "2026-10-01 09:15:27",
+    "body": "⚠️ На 01.10.2026 03:09 (МСК) ваш баланс: 5 руб. Пакеты по тарифу действуют, но средств может не хватить для оплаты услуг вне пакета. Пополнить счет: https://u.t2.ru/balance",
+    "_id": 4974
+  },
+  {
+    "threadid": 331,
+    "type": "inbox",
+    "read": false,
+    "address": "t2.ru",
+    "number": "t2.ru",
+    "received": "2026-10-01 20:02:37",
+    "body": "Цветы → кино → шопинг. Это идеальное свидание? Нет, это подписка MiXX 😉 Попробуйте и узнайте сами. Подключите от 449 руб./мес.: u.t2.ru/11fbkD",
+    "_id": 4975
+  },
+  {
+    "threadid": 332,
+    "type": "inbox",
+    "read": false,
+    "address": "t2.ru",
+    "number": "t2.ru",
+    "received": "2026-10-02 17:58:28",
+    "body": "Вы можете получать гигабайты за потраченный интернет. Для этого нужно выбрать категории в \"Гигабэке\": https://u.t2.ru/gigaback",
+    "_id": 4976
+  },
+  {
+    "threadid": 332,
+    "type": "inbox",
+    "read": false,
+    "address": "t2.ru",
+    "number": "t2.ru",
+    "received": "2026-10-02 17:59:03",
+    "body": "Вы можете получать гигабайты за потраченный интернет. Для этого нужно выбрать категории в \"Гигабэке\": https://u.t2.ru/gigaback",
+    "_id": 4977
+  }
+]
+
+🐛2026-10-02 19:25:00,820 [DEBUG] phone.core.common:common.py:71 - Выполняем команду ['termux-sms-list', '-d', '-n', '-l', '10', '-o', '0', '-t', 'sent']
+🐛2026-10-02 19:25:01,289 [DEBUG] phone.core.common:common.py:79 - process.stdout: [
+  {
+    "threadid": 185,
+    "type": "sent",
+    "read": true,
+    "address": "+79035233802",
+    "number": "+79035233802",
+    "received": "2021-06-24 11:19:50",
+    "body": "Привет. Ватсапп на этом телефоне 89161837595",
+    "_id": 3098
+  },
+  {
+    "threadid": 203,
+    "type": "sent",
+    "read": true,
+    "address": "+79774949891",
+    "number": "+79774949891",
+    "received": "2021-08-19 17:50:54",
+    "body": "9175729812 Александр",
+    "_id": 3405
+  },
+  {
+    "threadid": 205,
+    "type": "sent",
+    "read": true,
+    "address": "7375",
+    "number": "7375",
+    "received": "2021-09-02 09:45:44",
+    "body": "100",
+    "_id": 3493
+  },
+  {
+    "threadid": 209,
+    "type": "sent",
+    "read": true,
+    "address": "+79096504054",
+    "number": "+79096504054",
+    "received": "2021-09-17 10:53:50",
+    "body": "Хорошо",
+    "_id": 3555
+  },
+  {
+    "threadid": 210,
+    "type": "sent",
+    "read": true,
+    "address": "+79261781630",
+    "number": "+79261781630",
+    "received": "2021-09-20 17:17:41",
+    "body": "Хорошо. ",
+    "_id": 3567
+  },
+  {
+    "threadid": 202,
+    "type": "sent",
+    "read": true,
+    "address": "+79808902168",
+    "number": "+79808902168",
+    "received": "2021-10-15 11:44:37",
+    "body": "Пересылается от AptekaRigla:\nЗаказ № 002024433 готов к выдаче по адресу ул. Академика Каргина, д. 23А, пом. 003. Сумма заказа: 2104 руб. ",
+    "_id": 3715
+  },
+  {
+    "threadid": 13,
+    "type": "sent",
+    "read": true,
+    "sender": "You",
+    "address": "+79851109886",
+    "number": "+79851109886",
+    "received": "2022-05-01 18:43:58",
+    "body": "Как съездили к врачу?",
+    "_id": 4482
+  },
+  {
+    "threadid": 13,
+    "type": "sent",
+    "read": true,
+    "sender": "You",
+    "address": "+79851109886",
+    "number": "+79851109886",
+    "received": "2022-05-01 18:48:01",
+    "body": "Лежим, бока отлеживаем. Что врач сказал? Назначение какое нибудь следили?",
+    "_id": 4484
+  },
+  {
+    "threadid": 13,
+    "type": "sent",
+    "read": true,
+    "sender": "You",
+    "address": "+79851109886",
+    "number": "+79851109886",
+    "received": "2022-05-01 18:51:44",
+    "body": "Хорошо. Надеюсь на такси ездили?  Старайся меньше по улице ходить, особенно по транспорту ",
+    "_id": 4486
+  },
+  {
+    "threadid": 286,
+    "type": "sent",
+    "read": true,
+    "address": "+79780444595",
+    "number": "+79780444595",
+    "received": "2024-12-30 10:32:28",
+    "body": "Я делал Вам дозвон, чтобы Вы мой телефон записали. Александр ",
+    "_id": 4817
+  }
+]
+
+🐛2026-10-02 19:25:01,293 [DEBUG] phone.core.common:common.py:80 - process.stderr: 
+🐛2026-10-02 19:25:01,295 [DEBUG] phone.core.common:common.py:109 - Пытаемся распарсить data: [
+  {
+    "threadid": 185,
+    "type": "sent",
+    "read": true,
+    "address": "+79035233802",
+    "number": "+79035233802",
+    "received": "2021-06-24 11:19:50",
+    "body": "Привет. Ватсапп на этом телефоне 89161837595",
+    "_id": 3098
+  },
+  {
+    "threadid": 203,
+    "type": "sent",
+    "read": true,
+    "address": "+79774949891",
+    "number": "+79774949891",
+    "received": "2021-08-19 17:50:54",
+    "body": "9175729812 Александр",
+    "_id": 3405
+  },
+  {
+    "threadid": 205,
+    "type": "sent",
+    "read": true,
+    "address": "7375",
+    "number": "7375",
+    "received": "2021-09-02 09:45:44",
+    "body": "100",
+    "_id": 3493
+  },
+  {
+    "threadid": 209,
+    "type": "sent",
+    "read": true,
+    "address": "+79096504054",
+    "number": "+79096504054",
+    "received": "2021-09-17 10:53:50",
+    "body": "Хорошо",
+    "_id": 3555
+  },
+  {
+    "threadid": 210,
+    "type": "sent",
+    "read": true,
+    "address": "+79261781630",
+    "number": "+79261781630",
+    "received": "2021-09-20 17:17:41",
+    "body": "Хорошо. ",
+    "_id": 3567
+  },
+  {
+    "threadid": 202,
+    "type": "sent",
+    "read": true,
+    "address": "+79808902168",
+    "number": "+79808902168",
+    "received": "2021-10-15 11:44:37",
+    "body": "Пересылается от AptekaRigla:\nЗаказ № 002024433 готов к выдаче по адресу ул. Академика Каргина, д. 23А, пом. 003. Сумма заказа: 2104 руб. ",
+    "_id": 3715
+  },
+  {
+    "threadid": 13,
+    "type": "sent",
+    "read": true,
+    "sender": "You",
+    "address": "+79851109886",
+    "number": "+79851109886",
+    "received": "2022-05-01 18:43:58",
+    "body": "Как съездили к врачу?",
+    "_id": 4482
+  },
+  {
+    "threadid": 13,
+    "type": "sent",
+    "read": true,
+    "sender": "You",
+    "address": "+79851109886",
+    "number": "+79851109886",
+    "received": "2022-05-01 18:48:01",
+    "body": "Лежим, бока отлеживаем. Что врач сказал? Назначение какое нибудь следили?",
+    "_id": 4484
+  },
+  {
+    "threadid": 13,
+    "type": "sent",
+    "read": true,
+    "sender": "You",
+    "address": "+79851109886",
+    "number": "+79851109886",
+    "received": "2022-05-01 18:51:44",
+    "body": "Хорошо. Надеюсь на такси ездили?  Старайся меньше по улице ходить, особенно по транспорту ",
+    "_id": 4486
+  },
+  {
+    "threadid": 286,
+    "type": "sent",
+    "read": true,
+    "address": "+79780444595",
+    "number": "+79780444595",
+    "received": "2024-12-30 10:32:28",
+    "body": "Я делал Вам дозвон, чтобы Вы мой телефон записали. Александр ",
+    "_id": 4817
+  }
+]
+
+🐛2026-10-02 19:25:38,915 [DEBUG] phone.core.common:common.py:71 - Выполняем команду ['termux-sms-list', '-d', '-n', '-l', '10', '-o', '0', '-t', 'inbox']
+🐛2026-10-02 19:25:39,197 [DEBUG] phone.core.common:common.py:79 - process.stdout: [
+  {
+    "threadid": 328,
+    "type": "inbox",
+    "read": true,
+    "address": "t2.ru",
+    "number": "t2.ru",
+    "received": "2026-09-30 18:16:56",
+    "body": "Теперь вам доступен выбор категорий в \"Гигабэке\" для получения дополнительных ГБ за потраченный интернет. Выберите их сейчас: https://u.t2.ru/gigaback",
+    "_id": 4968
+  },
+  {
+    "threadid": 328,
+    "type": "inbox",
+    "read": true,
+    "address": "t2.ru",
+    "number": "t2.ru",
+    "received": "2026-09-30 18:17:38",
+    "body": "Плата за тариф внесена, скидка восстановлена. Подробнее: https://u.t2.ru/together",
+    "_id": 4969
+  },
+  {
+    "threadid": 329,
+    "type": "inbox",
+    "read": true,
+    "address": "t2.ru",
+    "number": "t2.ru",
+    "received": "2026-09-30 18:19:39",
+    "body": "Плата за тариф внесена, скидка восстановлена. Подробнее: https://u.t2.ru/together",
+    "_id": 4970
+  },
+  {
+    "threadid": 329,
+    "type": "inbox",
+    "read": true,
+    "address": "t2.ru",
+    "number": "t2.ru",
+    "received": "2026-09-30 18:20:12",
+    "body": "Доступ подтвержден. Интернет, SMS и USSD-запросы восстановятся в полном объеме в течение 15 минут, для корректной работы требуется перезагрузить устройство.",
+    "_id": 4971
+  },
+  {
+    "threadid": 330,
+    "type": "inbox",
+    "read": true,
+    "address": "t2.ru",
+    "number": "t2.ru",
+    "received": "2026-09-30 18:21:20",
+    "body": "Доступ подтвержден. Интернет, SMS и USSD-запросы восстановятся в полном объеме в течение 15 минут, для корректной работы требуется перезагрузить устройство.",
+    "_id": 4972
+  },
+  {
+    "threadid": 330,
+    "type": "inbox",
+    "read": true,
+    "address": "t2.ru",
+    "number": "t2.ru",
+    "received": "2026-10-01 09:07:21",
+    "body": "⚠️ На 01.10.2026 03:09 (МСК) ваш баланс: 5 руб. Пакеты по тарифу действуют, но средств может не хватить для оплаты услуг вне пакета. Пополнить счет: https://u.t2.ru/balance",
+    "_id": 4973
+  },
+  {
+    "threadid": 331,
+    "type": "inbox",
+    "read": true,
+    "address": "t2.ru",
+    "number": "t2.ru",
+    "received": "2026-10-01 09:15:27",
+    "body": "⚠️ На 01.10.2026 03:09 (МСК) ваш баланс: 5 руб. Пакеты по тарифу действуют, но средств может не хватить для оплаты услуг вне пакета. Пополнить счет: https://u.t2.ru/balance",
+    "_id": 4974
+  },
+  {
+    "threadid": 331,
+    "type": "inbox",
+    "read": false,
+    "address": "t2.ru",
+    "number": "t2.ru",
+    "received": "2026-10-01 20:02:37",
+    "body": "Цветы → кино → шопинг. Это идеальное свидание? Нет, это подписка MiXX 😉 Попробуйте и узнайте сами. Подключите от 449 руб./мес.: u.t2.ru/11fbkD",
+    "_id": 4975
+  },
+  {
+    "threadid": 332,
+    "type": "inbox",
+    "read": false,
+    "address": "t2.ru",
+    "number": "t2.ru",
+    "received": "2026-10-02 17:58:28",
+    "body": "Вы можете получать гигабайты за потраченный интернет. Для этого нужно выбрать категории в \"Гигабэке\": https://u.t2.ru/gigaback",
+    "_id": 4976
+  },
+  {
+    "threadid": 332,
+    "type": "inbox",
+    "read": false,
+    "address": "t2.ru",
+    "number": "t2.ru",
+    "received": "2026-10-02 17:59:03",
+    "body": "Вы можете получать гигабайты за потраченный интернет. Для этого нужно выбрать категории в \"Гигабэке\": https://u.t2.ru/gigaback",
+    "_id": 4977
+  }
+]
+
+🐛2026-10-02 19:25:39,200 [DEBUG] phone.core.common:common.py:80 - process.stderr: 
+🐛2026-10-02 19:25:39,202 [DEBUG] phone.core.common:common.py:109 - Пытаемся распарсить data: [
+  {
+    "threadid": 328,
+    "type": "inbox",
+    "read": true,
+    "address": "t2.ru",
+    "number": "t2.ru",
+    "received": "2026-09-30 18:16:56",
+    "body": "Теперь вам доступен выбор категорий в \"Гигабэке\" для получения дополнительных ГБ за потраченный интернет. Выберите их сейчас: https://u.t2.ru/gigaback",
+    "_id": 4968
+  },
+  {
+    "threadid": 328,
+    "type": "inbox",
+    "read": true,
+    "address": "t2.ru",
+    "number": "t2.ru",
+    "received": "2026-09-30 18:17:38",
+    "body": "Плата за тариф внесена, скидка восстановлена. Подробнее: https://u.t2.ru/together",
+    "_id": 4969
+  },
+  {
+    "threadid": 329,
+    "type": "inbox",
+    "read": true,
+    "address": "t2.ru",
+    "number": "t2.ru",
+    "received": "2026-09-30 18:19:39",
+    "body": "Плата за тариф внесена, скидка восстановлена. Подробнее: https://u.t2.ru/together",
+    "_id": 4970
+  },
+  {
+    "threadid": 329,
+    "type": "inbox",
+    "read": true,
+    "address": "t2.ru",
+    "number": "t2.ru",
+    "received": "2026-09-30 18:20:12",
+    "body": "Доступ подтвержден. Интернет, SMS и USSD-запросы восстановятся в полном объеме в течение 15 минут, для корректной работы требуется перезагрузить устройство.",
+    "_id": 4971
+  },
+  {
+    "threadid": 330,
+    "type": "inbox",
+    "read": true,
+    "address": "t2.ru",
+    "number": "t2.ru",
+    "received": "2026-09-30 18:21:20",
+    "body": "Доступ подтвержден. Интернет, SMS и USSD-запросы восстановятся в полном объеме в течение 15 минут, для корректной работы требуется перезагрузить устройство.",
+    "_id": 4972
+  },
+  {
+    "threadid": 330,
+    "type": "inbox",
+    "read": true,
+    "address": "t2.ru",
+    "number": "t2.ru",
+    "received": "2026-10-01 09:07:21",
+    "body": "⚠️ На 01.10.2026 03:09 (МСК) ваш баланс: 5 руб. Пакеты по тарифу действуют, но средств может не хватить для оплаты услуг вне пакета. Пополнить счет: https://u.t2.ru/balance",
+    "_id": 4973
+  },
+  {
+    "threadid": 331,
+    "type": "inbox",
+    "read": true,
+    "address": "t2.ru",
+    "number": "t2.ru",
+    "received": "2026-10-01 09:15:27",
+    "body": "⚠️ На 01.10.2026 03:09 (МСК) ваш баланс: 5 руб. Пакеты по тарифу действуют, но средств может не хватить для оплаты услуг вне пакета. Пополнить счет: https://u.t2.ru/balance",
+    "_id": 4974
+  },
+  {
+    "threadid": 331,
+    "type": "inbox",
+    "read": false,
+    "address": "t2.ru",
+    "number": "t2.ru",
+    "received": "2026-10-01 20:02:37",
+    "body": "Цветы → кино → шопинг. Это идеальное свидание? Нет, это подписка MiXX 😉 Попробуйте и узнайте сами. Подключите от 449 руб./мес.: u.t2.ru/11fbkD",
+    "_id": 4975
+  },
+  {
+    "threadid": 332,
+    "type": "inbox",
+    "read": false,
+    "address": "t2.ru",
+    "number": "t2.ru",
+    "received": "2026-10-02 17:58:28",
+    "body": "Вы можете получать гигабайты за потраченный интернет. Для этого нужно выбрать категории в \"Гигабэке\": https://u.t2.ru/gigaback",
+    "_id": 4976
+  },
+  {
+    "threadid": 332,
+    "type": "inbox",
+    "read": false,
+    "address": "t2.ru",
+    "number": "t2.ru",
+    "received": "2026-10-02 17:59:03",
+    "body": "Вы можете получать гигабайты за потраченный интернет. Для этого нужно выбрать категории в \"Гигабэке\": https://u.t2.ru/gigaback",
+    "_id": 4977
+  }
+]
+
+🐛2026-10-02 19:25:51,821 [DEBUG] phone.core.common:common.py:71 - Выполняем команду ['termux-sms-list', '-d', '-n', '-l', '10', '-o', '0', '-t', 'outbox']
+🐛2026-10-02 19:25:52,067 [DEBUG] phone.core.common:common.py:79 - process.stdout: []
+
+🐛2026-10-02 19:25:52,070 [DEBUG] phone.core.common:common.py:80 - process.stderr: 
+🐛2026-10-02 19:25:52,071 [DEBUG] phone.core.common:common.py:109 - Пытаемся распарсить data: []
+
+🐛2026-10-02 19:26:18,540 [DEBUG] phone.core.common:common.py:71 - Выполняем команду ['termux-sms-list', '-d', '-n', '-l', '20', '-o', '0', '-t', 'all']
+🐛2026-10-02 19:26:18,884 [DEBUG] phone.core.common:common.py:79 - process.stdout: [
+  {
+    "threadid": 323,
+    "type": "inbox",
+    "read": false,
+    "address": "t2.ru",
+    "number": "t2.ru",
+    "received": "2026-03-06 19:52:54",
+    "body": "Интернет, SMS и USSD-запросы восстановятся в полном объеме в течение 15 минут, для корректной работы требуется перезагрузить устройство.",
+    "_id": 4958
+  },
+  {
+    "threadid": 323,
+    "type": "inbox",
+    "read": false,
+    "address": "t2.ru",
+    "number": "t2.ru",
+    "received": "2026-09-30 18:15:49",
+    "body": "Check 400.00p 30.09.26 18:15:33 FPD:554442796 KKT:7310847053863 https://consumer.1-ofd.ru/v1?t=20260930T181500&s=400.00&fn=7380440902623630&i=118351&fp=554442796&n=1",
+    "_id": 4959
+  },
+  {
+    "threadid": 324,
+    "type": "inbox",
+    "read": false,
+    "address": "t2.ru",
+    "number": "t2.ru",
+    "received": "2026-09-30 18:15:52",
+    "body": "Внесена сумма 400 руб.",
+    "_id": 4960
+  },
+  {
+    "threadid": 324,
+    "type": "inbox",
+    "read": false,
+    "address": "t2.ru",
+    "number": "t2.ru",
+    "received": "2026-09-30 18:15:53",
+    "body": "Ваш номер не был в сети T2 более 72 часов. Для соблюдения мер безопасности интернет и SMS ограничены на 24 часа. Звонки работают без изменений. Чтобы получить доступ ко всем услугам связи сейчас, позвоните на бесплатный номер 620 или перейдите по ссылке: https://t2.ru/dostup",
+    "_id": 4961
+  },
+  {
+    "threadid": 325,
+    "type": "inbox",
+    "read": true,
+    "address": "t2.ru",
+    "number": "t2.ru",
+    "received": "2026-09-30 18:16:03",
+    "body": "Теперь вам доступен выбор категорий в \"Гигабэке\" для получения дополнительных ГБ за потраченный интернет. Выберите их сейчас: https://u.t2.ru/gigaback",
+    "_id": 4962
+  },
+  {
+    "threadid": 325,
+    "type": "inbox",
+    "read": true,
+    "address": "t2.ru",
+    "number": "t2.ru",
+    "received": "2026-09-30 18:16:17",
+    "body": "Ваш тариф разблокирован: вам снова доступны безлимитный интернет, безлимитные звонки внутри сети t2, безлимитные SMS и MMS, а также пакеты минут, ГБ и другие опции по вашему тарифу. Оплачивайте тариф вовремя — подключите автоплатеж: https://u.t2.ru/balance-management",
+    "_id": 4963
+  },
+  {
+    "threadid": 326,
+    "type": "inbox",
+    "read": true,
+    "address": "t2.ru",
+    "number": "t2.ru",
+    "received": "2026-09-30 18:16:25",
+    "body": "Check 400.00p 30.09.26 18:16:23 FPD:1263170550 KKT:7325548035115 https://consumer.1-ofd.ru/v1?t=20260930T181600&s=400.00&fn=7380440902623842&i=121304&fp=1263170550&n=1",
+    "_id": 4964
+  },
+  {
+    "threadid": 326,
+    "type": "inbox",
+    "read": true,
+    "address": "t2.ru",
+    "number": "t2.ru",
+    "received": "2026-09-30 18:16:33",
+    "body": "Ваш тариф разблокирован: вам снова доступны безлимитный интернет, безлимитные звонки внутри сети t2, безлимитные SMS и MMS, а также пакеты минут, ГБ и другие опции по вашему тарифу. Оплачивайте тариф вовремя — подключите автоплатеж: https://u.t2.ru/balance-management",
+    "_id": 4965
+  },
+  {
+    "threadid": 327,
+    "type": "inbox",
+    "read": true,
+    "address": "t2.ru",
+    "number": "t2.ru",
+    "received": "2026-09-30 18:16:38",
+    "body": "Внесена сумма 400 руб.",
+    "_id": 4966
+  },
+  {
+    "threadid": 327,
+    "type": "inbox",
+    "read": true,
+    "address": "t2.ru",
+    "number": "t2.ru",
+    "received": "2026-09-30 18:16:54",
+    "body": "Ваш номер не был в сети T2 более 72 часов. Для соблюдения мер безопасности интернет и SMS ограничены на 24 часа. Звонки работают без изменений. Чтобы получить доступ ко всем услугам связи сейчас, позвоните на бесплатный номер 620 или перейдите по ссылке: https://t2.ru/dostup",
+    "_id": 4967
+  },
+  {
+    "threadid": 328,
+    "type": "inbox",
+    "read": true,
+    "address": "t2.ru",
+    "number": "t2.ru",
+    "received": "2026-09-30 18:16:56",
+    "body": "Теперь вам доступен выбор категорий в \"Гигабэке\" для получения дополнительных ГБ за потраченный интернет. Выберите их сейчас: https://u.t2.ru/gigaback",
+    "_id": 4968
+  },
+  {
+    "threadid": 328,
+    "type": "inbox",
+    "read": true,
+    "address": "t2.ru",
+    "number": "t2.ru",
+    "received": "2026-09-30 18:17:38",
+    "body": "Плата за тариф внесена, скидка восстановлена. Подробнее: https://u.t2.ru/together",
+    "_id": 4969
+  },
+  {
+    "threadid": 329,
+    "type": "inbox",
+    "read": true,
+    "address": "t2.ru",
+    "number": "t2.ru",
+    "received": "2026-09-30 18:19:39",
+    "body": "Плата за тариф внесена, скидка восстановлена. Подробнее: https://u.t2.ru/together",
+    "_id": 4970
+  },
+  {
+    "threadid": 329,
+    "type": "inbox",
+    "read": true,
+    "address": "t2.ru",
+    "number": "t2.ru",
+    "received": "2026-09-30 18:20:12",
+    "body": "Доступ подтвержден. Интернет, SMS и USSD-запросы восстановятся в полном объеме в течение 15 минут, для корректной работы требуется перезагрузить устройство.",
+    "_id": 4971
+  },
+  {
+    "threadid": 330,
+    "type": "inbox",
+    "read": true,
+    "address": "t2.ru",
+    "number": "t2.ru",
+    "received": "2026-09-30 18:21:20",
+    "body": "Доступ подтвержден. Интернет, SMS и USSD-запросы восстановятся в полном объеме в течение 15 минут, для корректной работы требуется перезагрузить устройство.",
+    "_id": 4972
+  },
+  {
+    "threadid": 330,
+    "type": "inbox",
+    "read": true,
+    "address": "t2.ru",
+    "number": "t2.ru",
+    "received": "2026-10-01 09:07:21",
+    "body": "⚠️ На 01.10.2026 03:09 (МСК) ваш баланс: 5 руб. Пакеты по тарифу действуют, но средств может не хватить для оплаты услуг вне пакета. Пополнить счет: https://u.t2.ru/balance",
+    "_id": 4973
+  },
+  {
+    "threadid": 331,
+    "type": "inbox",
+    "read": true,
+    "address": "t2.ru",
+    "number": "t2.ru",
+    "received": "2026-10-01 09:15:27",
+    "body": "⚠️ На 01.10.2026 03:09 (МСК) ваш баланс: 5 руб. Пакеты по тарифу действуют, но средств может не хватить для оплаты услуг вне пакета. Пополнить счет: https://u.t2.ru/balance",
+    "_id": 4974
+  },
+  {
+    "threadid": 331,
+    "type": "inbox",
+    "read": false,
+    "address": "t2.ru",
+    "number": "t2.ru",
+    "received": "2026-10-01 20:02:37",
+    "body": "Цветы → кино → шопинг. Это идеальное свидание? Нет, это подписка MiXX 😉 Попробуйте и узнайте сами. Подключите от 449 руб./мес.: u.t2.ru/11fbkD",
+    "_id": 4975
+  },
+  {
+    "threadid": 332,
+    "type": "inbox",
+    "read": false,
+    "address": "t2.ru",
+    "number": "t2.ru",
+    "received": "2026-10-02 17:58:28",
+    "body": "Вы можете получать гигабайты за потраченный интернет. Для этого нужно выбрать категории в \"Гигабэке\": https://u.t2.ru/gigaback",
+    "_id": 4976
+  },
+  {
+    "threadid": 332,
+    "type": "inbox",
+    "read": false,
+    "address": "t2.ru",
+    "number": "t2.ru",
+    "received": "2026-10-02 17:59:03",
+    "body": "Вы можете получать гигабайты за потраченный интернет. Для этого нужно выбрать категории в \"Гигабэке\": https://u.t2.ru/gigaback",
+    "_id": 4977
+  }
+]
+
+🐛2026-10-02 19:26:18,886 [DEBUG] phone.core.common:common.py:80 - process.stderr: 
+🐛2026-10-02 19:26:18,887 [DEBUG] phone.core.common:common.py:109 - Пытаемся распарсить data: [
+  {
+    "threadid": 323,
+    "type": "inbox",
+    "read": false,
+    "address": "t2.ru",
+    "number": "t2.ru",
+    "received": "2026-03-06 19:52:54",
+    "body": "Интернет, SMS и USSD-запросы восстановятся в полном объеме в течение 15 минут, для корректной работы требуется перезагрузить устройство.",
+    "_id": 4958
+  },
+  {
+    "threadid": 323,
+    "type": "inbox",
+    "read": false,
+    "address": "t2.ru",
+    "number": "t2.ru",
+    "received": "2026-09-30 18:15:49",
+    "body": "Check 400.00p 30.09.26 18:15:33 FPD:554442796 KKT:7310847053863 https://consumer.1-ofd.ru/v1?t=20260930T181500&s=400.00&fn=7380440902623630&i=118351&fp=554442796&n=1",
+    "_id": 4959
+  },
+  {
+    "threadid": 324,
+    "type": "inbox",
+    "read": false,
+    "address": "t2.ru",
+    "number": "t2.ru",
+    "received": "2026-09-30 18:15:52",
+    "body": "Внесена сумма 400 руб.",
+    "_id": 4960
+  },
+  {
+    "threadid": 324,
+    "type": "inbox",
+    "read": false,
+    "address": "t2.ru",
+    "number": "t2.ru",
+    "received": "2026-09-30 18:15:53",
+    "body": "Ваш номер не был в сети T2 более 72 часов. Для соблюдения мер безопасности интернет и SMS ограничены на 24 часа. Звонки работают без изменений. Чтобы получить доступ ко всем услугам связи сейчас, позвоните на бесплатный номер 620 или перейдите по ссылке: https://t2.ru/dostup",
+    "_id": 4961
+  },
+  {
+    "threadid": 325,
+    "type": "inbox",
+    "read": true,
+    "address": "t2.ru",
+    "number": "t2.ru",
+    "received": "2026-09-30 18:16:03",
+    "body": "Теперь вам доступен выбор категорий в \"Гигабэке\" для получения дополнительных ГБ за потраченный интернет. Выберите их сейчас: https://u.t2.ru/gigaback",
+    "_id": 4962
+  },
+  {
+    "threadid": 325,
+    "type": "inbox",
+    "read": true,
+    "address": "t2.ru",
+    "number": "t2.ru",
+    "received": "2026-09-30 18:16:17",
+    "body": "Ваш тариф разблокирован: вам снова доступны безлимитный интернет, безлимитные звонки внутри сети t2, безлимитные SMS и MMS, а также пакеты минут, ГБ и другие опции по вашему тарифу. Оплачивайте тариф вовремя — подключите автоплатеж: https://u.t2.ru/balance-management",
+    "_id": 4963
+  },
+  {
+    "threadid": 326,
+    "type": "inbox",
+    "read": true,
+    "address": "t2.ru",
+    "number": "t2.ru",
+    "received": "2026-09-30 18:16:25",
+    "body": "Check 400.00p 30.09.26 18:16:23 FPD:1263170550 KKT:7325548035115 https://consumer.1-ofd.ru/v1?t=20260930T181600&s=400.00&fn=7380440902623842&i=121304&fp=1263170550&n=1",
+    "_id": 4964
+  },
+  {
+    "threadid": 326,
+    "type": "inbox",
+    "read": true,
+    "address": "t2.ru",
+    "number": "t2.ru",
+    "received": "2026-09-30 18:16:33",
+    "body": "Ваш тариф разблокирован: вам снова доступны безлимитный интернет, безлимитные звонки внутри сети t2, безлимитные SMS и MMS, а также пакеты минут, ГБ и другие опции по вашему тарифу. Оплачивайте тариф вовремя — подключите автоплатеж: https://u.t2.ru/balance-management",
+    "_id": 4965
+  },
+  {
+    "threadid": 327,
+    "type": "inbox",
+    "read": true,
+    "address": "t2.ru",
+    "number": "t2.ru",
+    "received": "2026-09-30 18:16:38",
+    "body": "Внесена сумма 400 руб.",
+    "_id": 4966
+  },
+  {
+    "threadid": 327,
+    "type": "inbox",
+    "read": true,
+    "address": "t2.ru",
+    "number": "t2.ru",
+    "received": "2026-09-30 18:16:54",
+    "body": "Ваш номер не был в сети T2 более 72 часов. Для соблюдения мер безопасности интернет и SMS ограничены на 24 часа. Звонки работают без изменений. Чтобы получить доступ ко всем услугам связи сейчас, позвоните на бесплатный номер 620 или перейдите по ссылке: https://t2.ru/dostup",
+    "_id": 4967
+  },
+  {
+    "threadid": 328,
+    "type": "inbox",
+    "read": true,
+    "address": "t2.ru",
+    "number": "t2.ru",
+    "received": "2026-09-30 18:16:56",
+    "body": "Теперь вам доступен выбор категорий в \"Гигабэке\" для получения дополнительных ГБ за потраченный интернет. Выберите их сейчас: https://u.t2.ru/gigaback",
+    "_id": 4968
+  },
+  {
+    "threadid": 328,
+    "type": "inbox",
+    "read": true,
+    "address": "t2.ru",
+    "number": "t2.ru",
+    "received": "2026-09-30 18:17:38",
+    "body": "Плата за тариф внесена, скидка восстановлена. Подробнее: https://u.t2.ru/together",
+    "_id": 4969
+  },
+  {
+    "threadid": 329,
+    "type": "inbox",
+    "read": true,
+    "address": "t2.ru",
+    "number": "t2.ru",
+    "received": "2026-09-30 18:19:39",
+    "body": "Плата за тариф внесена, скидка восстановлена. Подробнее: https://u.t2.ru/together",
+    "_id": 4970
+  },
+  {
+    "threadid": 329,
+    "type": "inbox",
+    "read": true,
+    "address": "t2.ru",
+    "number": "t2.ru",
+    "received": "2026-09-30 18:20:12",
+    "body": "Доступ подтвержден. Интернет, SMS и USSD-запросы восстановятся в полном объеме в течение 15 минут, для корректной работы требуется перезагрузить устройство.",
+    "_id": 4971
+  },
+  {
+    "threadid": 330,
+    "type": "inbox",
+    "read": true,
+    "address": "t2.ru",
+    "number": "t2.ru",
+    "received": "2026-09-30 18:21:20",
+    "body": "Доступ подтвержден. Интернет, SMS и USSD-запросы восстановятся в полном объеме в течение 15 минут, для корректной работы требуется перезагрузить устройство.",
+    "_id": 4972
+  },
+  {
+    "threadid": 330,
+    "type": "inbox",
+    "read": true,
+    "address": "t2.ru",
+    "number": "t2.ru",
+    "received": "2026-10-01 09:07:21",
+    "body": "⚠️ На 01.10.2026 03:09 (МСК) ваш баланс: 5 руб. Пакеты по тарифу действуют, но средств может не хватить для оплаты услуг вне пакета. Пополнить счет: https://u.t2.ru/balance",
+    "_id": 4973
+  },
+  {
+    "threadid": 331,
+    "type": "inbox",
+    "read": true,
+    "address": "t2.ru",
+    "number": "t2.ru",
+    "received": "2026-10-01 09:15:27",
+    "body": "⚠️ На 01.10.2026 03:09 (МСК) ваш баланс: 5 руб. Пакеты по тарифу действуют, но средств может не хватить для оплаты услуг вне пакета. Пополнить счет: https://u.t2.ru/balance",
+    "_id": 4974
+  },
+  {
+    "threadid": 331,
+    "type": "inbox",
+    "read": false,
+    "address": "t2.ru",
+    "number": "t2.ru",
+    "received": "2026-10-01 20:02:37",
+    "body": "Цветы → кино → шопинг. Это идеальное свидание? Нет, это подписка MiXX 😉 Попробуйте и узнайте сами. Подключите от 449 руб./мес.: u.t2.ru/11fbkD",
+    "_id": 4975
+  },
+  {
+    "threadid": 332,
+    "type": "inbox",
+    "read": false,
+    "address": "t2.ru",
+    "number": "t2.ru",
+    "received": "2026-10-02 17:58:28",
+    "body": "Вы можете получать гигабайты за потраченный интернет. Для этого нужно выбрать категории в \"Гигабэке\": https://u.t2.ru/gigaback",
+    "_id": 4976
+  },
+  {
+    "threadid": 332,
+    "type": "inbox",
+    "read": false,
+    "address": "t2.ru",
+    "number": "t2.ru",
+    "received": "2026-10-02 17:59:03",
+    "body": "Вы можете получать гигабайты за потраченный интернет. Для этого нужно выбрать категории в \"Гигабэке\": https://u.t2.ru/gigaback",
+    "_id": 4977
+  }
+]
+

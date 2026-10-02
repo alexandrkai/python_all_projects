@@ -16,19 +16,22 @@ def setup_logger(path_log_folder:str):
     # logger.addHandler(fh)
 
     # Логгер для событий с телефоном
-    critical_error_logger = logging.getLogger("critical_error_events")
-    critical_error_logger.setLevel(logging.DEBUG)
-    critical_error_logger.propagate = False
+    logger = logging.getLogger("critical_error_events")
+# Защита от повторной инициализации того же имени логгера
+    if getattr(logger, "_period_task_initialized", False):
+        return logger
+    logger.setLevel(logging.DEBUG)
+    logger.propagate = False
 
     fh_phone = RotatingFileHandler(os.path.join(
         path_log_folder, "critical_error.log"), maxBytes=5*1024*1024, backupCount=5)
     fmt_phone = logging.Formatter(
         "%(asctime)s [%(levelname)s] %(name)s (%(filename)s:%(lineno)d): %(message)s")
     fh_phone.setFormatter(fmt_phone)
-    critical_error_logger.addHandler(fh_phone)
+    logger.addHandler(fh_phone)
 
-    # return logger, phone_logger
-    return critical_error_logger
+    logger._period_task_initialized = True
+    return logger
 
 
 

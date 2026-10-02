@@ -1,0 +1,17 @@
+2026-10-02 19:05:39,800 [INFO] /storage/emulated/0/myfolder/projects/rest-api/app/config/config.py (config.py:126): 🔁 EMAIL_SENDERS прочитан из Redis (переопределяет .env)
+2026-10-02 19:05:39,809 [INFO] /storage/emulated/0/myfolder/projects/rest-api/app/config/config.py (config.py:126): 🔁 REDIS_URL прочитан из Redis (переопределяет .env)
+2026-10-02 19:05:39,922 [INFO] /storage/emulated/0/myfolder/projects/rest-api/app/config/config.py (config.py:336): Получены номера телефонов: ['+79998855693', '+79779988565']
+2026-10-02 19:05:45,214 [INFO] /storage/emulated/0/myfolder/projects/rest-api/app/config/config.py (config.py:126): 🔁 EMAIL_SENDERS прочитан из Redis (переопределяет .env)
+2026-10-02 19:05:45,222 [INFO] /storage/emulated/0/myfolder/projects/rest-api/app/config/config.py (config.py:126): 🔁 REDIS_URL прочитан из Redis (переопределяет .env)
+2026-10-02 19:05:45,287 [INFO] /storage/emulated/0/myfolder/projects/rest-api/app/config/config.py (config.py:336): Получены номера телефонов: ['+79998855693', '+79779988565']
+2026-10-02 19:21:21,974 [INFO] /storage/emulated/0/myfolder/projects/rest-api/app/config/config.py (config.py:174): 🔄 Обновление кэша конфигурации (env + Redis)
+2026-10-02 19:21:22,036 [INFO] /storage/emulated/0/myfolder/projects/rest-api/app/config/config.py (config.py:126): 🔁 EMAIL_SENDERS прочитан из Redis (переопределяет .env)
+2026-10-02 19:21:22,041 [INFO] /storage/emulated/0/myfolder/projects/rest-api/app/config/config.py (config.py:126): 🔁 REDIS_URL прочитан из Redis (переопределяет .env)
+2026-10-02 19:21:22,131 [INFO] /storage/emulated/0/myfolder/projects/rest-api/app/config/config.py (config.py:336): Получены номера телефонов: ['+79998855693', '+79779988565']
+2026-10-02 19:35:45,334 [INFO] /storage/emulated/0/myfolder/projects/rest-api/app/config/config.py (config.py:174): 🔄 Обновление кэша конфигурации (env + Redis)
+2026-10-02 19:35:45,439 [INFO] /storage/emulated/0/myfolder/projects/rest-api/app/config/config.py (config.py:126): 🔁 EMAIL_SENDERS прочитан из Redis (переопределяет .env)
+2026-10-02 19:35:45,449 [INFO] /storage/emulated/0/myfolder/projects/rest-api/app/config/config.py (config.py:126): 🔁 REDIS_URL прочитан из Redis (переопределяет .env)
+2026-10-02 19:35:45,545 [INFO] /storage/emulated/0/myfolder/projects/rest-api/app/config/config.py (config.py:336): Получены номера телефонов: ['+79998855693', '+79779988565']
+2026-10-02 19:35:45,601 [INFO] /storage/emulated/0/myfolder/projects/rest-api/app/config/config.py (config.py:126): 🔁 EMAIL_SENDERS прочитан из Redis (переопределяет .env)
+2026-10-02 19:35:45,605 [INFO] /storage/emulated/0/myfolder/projects/rest-api/app/config/config.py (config.py:126): 🔁 REDIS_URL прочитан из Redis (переопределяет .env)
+2026-10-02 19:35:45,640 [INFO] /storage/emulated/0/myfolder/projects/rest-api/app/config/config.py (config.py:336): Получены номера телефонов: ['+79998855693', '+79779988565']

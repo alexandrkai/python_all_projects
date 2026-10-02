@@ -1,0 +1,10 @@
+2026-10-02 19:05:45,137 [INFO] /storage/emulated/0/myfolder/projects/rest-api/app/routes/period_task.py (period_task.py:30): ℹ️ Запуск фоновой задачи - обновления конфигурации каждые 30 минут
+2026-10-02 19:05:45,289 [DEBUG] /storage/emulated/0/myfolder/projects/rest-api/app/routes/period_task.py (period_task.py:35): ✅ Выполнили фоновую задачу обновления конфигурации. Ждем 30 минут
+2026-10-02 19:05:45,317 [INFO] /storage/emulated/0/myfolder/projects/rest-api/app/routes/period_task.py (period_task.py:59): Запуск фоновой задачи - отправка канареек каждые 60 минут
+2026-10-02 19:05:46,241 [INFO] /storage/emulated/0/myfolder/projects/rest-api/app/routes/period_task.py (period_task.py:77): ✅ EMAIL Канарейка отправлена: HONOR8X|info@pulsesms.ru->kaiby@yandex.ru
+2026-10-02 19:05:46,424 [INFO] /storage/emulated/0/myfolder/projects/rest-api/app/routes/period_task.py (period_task.py:106): ✅ SMS Канарейка HONOR8X.0.(+79998855693)->+79175729812
+2026-10-02 19:05:46,557 [INFO] /storage/emulated/0/myfolder/projects/rest-api/app/routes/period_task.py (period_task.py:106): ✅ SMS Канарейка HONOR8X.1.(+79779988565)->+79175729812
+2026-10-02 19:05:46,557 [DEBUG] /storage/emulated/0/myfolder/projects/rest-api/app/routes/period_task.py (period_task.py:119): ✅ Выполнили фоновую задачу отправок канареек. Ждем 60 минут
+2026-10-02 19:05:46,558 [INFO] /storage/emulated/0/myfolder/projects/rest-api/app/routes/period_task.py (period_task.py:132): ℹ️ Запуск фоновой задачи - проверка autossh каждые 180 минут
+2026-10-02 19:35:45,558 [INFO] /storage/emulated/0/myfolder/projects/rest-api/app/routes/period_task.py (period_task.py:30): ℹ️ Запуск фоновой задачи - обновления конфигурации каждые 30 минут
+2026-10-02 19:35:45,642 [DEBUG] /storage/emulated/0/myfolder/projects/rest-api/app/routes/period_task.py (period_task.py:35): ✅ Выполнили фоновую задачу обновления конфигурации. Ждем 30 минут

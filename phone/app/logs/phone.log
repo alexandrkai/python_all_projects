@@ -731,3 +731,95 @@ FileNotFoundError: [Errno 2] No such file or directory: 'termux-sms-send'
 Детали: Ошибка: [Errno 2] No such file or directory: 'termux-sms-send'
 None
 ℹ️ 2026-10-02 19:02:03,867 [INFO] Туннель уже работает.
+ℹ️ 2026-10-02 20:20:15,837 [INFO] Лог-сессия начата: 2026-10-02 20:20:15.836926
+ℹ️ 2026-10-02 20:20:15,837 [INFO] Окружение: development
+ℹ️ 2026-10-02 20:20:17,687 [INFO] Запуск сервера на порту 5555
+ℹ️ 2026-10-02 20:20:17,689 [INFO] Период обновления сети: 200 минут
+ℹ️ 2026-10-02 20:20:17,689 [INFO] Период обновления конфигурации: 30 минут
+🐛2026-10-02 20:20:17,725 [DEBUG] asyncio:selector_events.py:64 - Using selector: EpollSelector
+ℹ️ 2026-10-02 20:20:17,955 [INFO] ============================================================
+ℹ️ 2026-10-02 20:20:17,956 [INFO] ЗАПУСК ПРИЛОЖЕНИЯ
+ℹ️ 2026-10-02 20:20:17,957 [INFO] ============================================================
+ℹ️ 2026-10-02 20:20:17,957 [INFO] Python version: 3.14.4 (main, Aug 20 2026, 10:41:58) [GCC 15.2.0]
+ℹ️ 2026-10-02 20:20:17,958 [INFO] FastAPI version: 0.142.2
+ℹ️ 2026-10-02 20:20:17,960 [INFO] Запуск фоновых задач...
+ℹ️ 2026-10-02 20:20:17,961 [INFO] Фоновые задачи успешно запущены
+ℹ️ 2026-10-02 20:20:17,961 [INFO] ============================================================
+ℹ️ 2026-10-02 20:20:18,830 [INFO] Email успешно отправлен на kaiby@yandex.ru
+🐛2026-10-02 20:20:18,840 [DEBUG] phone.core.common:common.py:71 - Выполняем команду ['termux-sms-send', '-s', '0', '-n', '+79175729812', '02.10.2026 20:20:18. HONOR8X. +79998855693. SMS.Канарейка']
+❌ 2026-10-02 20:20:18,870 [ERROR] phone.core.common:common.py:97 - ⚠️[Errno 2] No such file or directory: 'termux-sms-send'
+(<class 'FileNotFoundError'>, FileNotFoundError(2, 'No such file or directory'), <traceback object at 0x7fca19d2c840>)
+Traceback (most recent call last):
+  File "/mnt/d/myprogramms/Python/phone/app/core/common.py", line 73, in runShellCommand
+    process = subprocess.run(
+        command, capture_output=True, text=False, timeout=timeout)
+  File "/usr/lib/python3.14/subprocess.py", line 555, in run
+    with Popen(*popenargs, **kwargs) as process:
+         ~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.14/subprocess.py", line 1039, in __init__
+    self._execute_child(args, executable, preexec_fn, close_fds,
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                        pass_fds, cwd, env,
+                        ^^^^^^^^^^^^^^^^^^^
+    ...<5 lines>...
+                        gid, gids, uid, umask,
+                        ^^^^^^^^^^^^^^^^^^^^^^
+                        start_new_session, process_group)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.14/subprocess.py", line 1990, in _execute_child
+    raise child_exception_type(errno_num, err_msg, err_filename)
+FileNotFoundError: [Errno 2] No such file or directory: 'termux-sms-send'
+❌ 2026-10-02 20:20:18,891 [ERROR] phone.core.phone:phone.py:99 - ❌02.10.2026 20:20:18.HONOR8X(172.28.39.199).SMS_SEND: Слот 0 (+79998855693) -> +79175729812
+Детали: Ошибка: [Errno 2] No such file or directory: 'termux-sms-send'
+None
+ℹ️ 2026-10-02 20:20:18,953 [INFO] Туннель уже работает.
+ℹ️ 2026-10-02 20:20:18,956 [INFO] ============================================================
+ℹ️ 2026-10-02 20:20:18,957 [INFO] ОСТАНОВКА ПРИЛОЖЕНИЯ: остановка фоновых задач
+ℹ️ 2026-10-02 20:20:18,957 [INFO] ============================================================
+ℹ️ 2026-10-02 20:20:18,958 [INFO] Все фоновые задачи остановлены
+ℹ️ 2026-10-02 20:20:51,904 [INFO] Лог-сессия начата: 2026-10-02 20:20:51.904424
+ℹ️ 2026-10-02 20:20:51,905 [INFO] Окружение: development
+ℹ️ 2026-10-02 20:20:53,394 [INFO] Запуск сервера на порту 5555
+ℹ️ 2026-10-02 20:20:53,395 [INFO] Период обновления сети: 200 минут
+ℹ️ 2026-10-02 20:20:53,396 [INFO] Период обновления конфигурации: 30 минут
+🐛2026-10-02 20:20:53,433 [DEBUG] asyncio:selector_events.py:64 - Using selector: EpollSelector
+ℹ️ 2026-10-02 20:20:53,636 [INFO] ============================================================
+ℹ️ 2026-10-02 20:20:53,637 [INFO] ЗАПУСК ПРИЛОЖЕНИЯ
+ℹ️ 2026-10-02 20:20:53,638 [INFO] ============================================================
+ℹ️ 2026-10-02 20:20:53,639 [INFO] Python version: 3.14.4 (main, Aug 20 2026, 10:41:58) [GCC 15.2.0]
+ℹ️ 2026-10-02 20:20:53,639 [INFO] FastAPI version: 0.142.2
+ℹ️ 2026-10-02 20:20:53,640 [INFO] Запуск фоновых задач...
+ℹ️ 2026-10-02 20:20:53,642 [INFO] Фоновые задачи успешно запущены
+ℹ️ 2026-10-02 20:20:53,643 [INFO] ============================================================
+ℹ️ 2026-10-02 20:20:54,260 [INFO] Email успешно отправлен на kaiby@yandex.ru
+🐛2026-10-02 20:20:54,269 [DEBUG] phone.core.common:common.py:71 - Выполняем команду ['termux-sms-send', '-s', '0', '-n', '+79175729812', '02.10.2026 20:20:54. HONOR8X. +79998855693. SMS.Канарейка']
+❌ 2026-10-02 20:20:54,313 [ERROR] phone.core.common:common.py:97 - ⚠️[Errno 2] No such file or directory: 'termux-sms-send'
+(<class 'FileNotFoundError'>, FileNotFoundError(2, 'No such file or directory'), <traceback object at 0x776e79472c40>)
+Traceback (most recent call last):
+  File "/mnt/d/myprogramms/Python/phone/app/core/common.py", line 73, in runShellCommand
+    process = subprocess.run(
+        command, capture_output=True, text=False, timeout=timeout)
+  File "/usr/lib/python3.14/subprocess.py", line 555, in run
+    with Popen(*popenargs, **kwargs) as process:
+         ~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.14/subprocess.py", line 1039, in __init__
+    self._execute_child(args, executable, preexec_fn, close_fds,
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                        pass_fds, cwd, env,
+                        ^^^^^^^^^^^^^^^^^^^
+    ...<5 lines>...
+                        gid, gids, uid, umask,
+                        ^^^^^^^^^^^^^^^^^^^^^^
+                        start_new_session, process_group)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.14/subprocess.py", line 1990, in _execute_child
+    raise child_exception_type(errno_num, err_msg, err_filename)
+FileNotFoundError: [Errno 2] No such file or directory: 'termux-sms-send'
+❌ 2026-10-02 20:20:54,326 [ERROR] phone.core.phone:phone.py:99 - ❌02.10.2026 20:20:54.HONOR8X(172.28.39.199).SMS_SEND: Слот 0 (+79998855693) -> +79175729812
+Детали: Ошибка: [Errno 2] No such file or directory: 'termux-sms-send'
+None
+ℹ️ 2026-10-02 20:20:54,378 [INFO] Туннель уже работает.
+ℹ️ 2026-10-02 20:20:54,380 [INFO] ============================================================
+ℹ️ 2026-10-02 20:20:54,381 [INFO] ОСТАНОВКА ПРИЛОЖЕНИЯ: остановка фоновых задач
+ℹ️ 2026-10-02 20:20:54,382 [INFO] ============================================================
+ℹ️ 2026-10-02 20:20:54,383 [INFO] Все фоновые задачи остановлены
