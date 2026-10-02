@@ -1,0 +1,59 @@
+=== LOGGING CONFIGURATION ===
+✅PROJECT_ROOT: /mnt/d/myprogramms/Python/phone/app
+✅PATH_LOG_FOLDER: /mnt/d/myprogramms/Python/phone/app/logs
+✅PATH_CONFIG_FOLDER: /mnt/d/myprogramms/Python/phone/app/config
+✅ Директория логов создана/проверена: /mnt/d/myprogramms/Python/phone/app/logs
+✅ Директория конфигов создана/проверена: /mnt/d/myprogramms/Python/phone/app/config
+✅ Директория /mnt/d/myprogramms/Python/phone/app/logs доступна для записи
+✅Основной лог-файл: /mnt/d/myprogramms/Python/phone/app/logs/phone.log
+✅ Файловый обработчик добавлен
+ℹ️ 2026-10-02 19:01:57,129 [INFO] Лог-сессия начата: 2026-10-02 19:01:57.129298
+ℹ️ 2026-10-02 19:01:57,130 [INFO] Окружение: development
+✅ Логгер phone инициализирован в development режиме
+✅ Логи пишутся в: /mnt/d/myprogramms/Python/phone/app/logs/phone.log
+ℹ️ 2026-10-02 19:02:01,577 [INFO] [Fri Oct  2 19:02:01 2026] INFO: Starting API Service...
+❌ 2026-10-02 19:02:01,606 [ERROR] phone.__main__:run.py:24 - [Fri Oct  2 19:02:01 2026] ERROR: Failed to acquire wakelock: [Errno 2] No such file or directory: 'termux-wake-lock'
+None
+ℹ️ 2026-10-02 19:02:02,297 [INFO] [Fri Oct  2 19:02:02 2026] INFO: Uvicorn starting on http://0.0.0.0:8000
+ℹ️ 2026-10-02 19:02:02,299 [INFO] [Fri Oct  2 19:02:02 2026] INFO: Logging to standard output (handled by nohup)
+🐛2026-10-02 19:02:02,334 [DEBUG] asyncio:selector_events.py:64 - Using selector: EpollSelector
+INFO:     Started server process [70340]
+INFO:     Waiting for application startup.
+ℹ️ 2026-10-02 19:02:02,544 [INFO] ============================================================
+ℹ️ 2026-10-02 19:02:02,546 [INFO] ЗАПУСК ПРИЛОЖЕНИЯ
+ℹ️ 2026-10-02 19:02:02,547 [INFO] ============================================================
+ℹ️ 2026-10-02 19:02:02,548 [INFO] Python version: 3.14.4 (main, Aug 20 2026, 10:41:58) [GCC 15.2.0]
+ℹ️ 2026-10-02 19:02:02,549 [INFO] FastAPI version: 0.142.2
+ℹ️ 2026-10-02 19:02:02,550 [INFO] Запуск фоновых задач...
+ℹ️ 2026-10-02 19:02:02,551 [INFO] Фоновые задачи успешно запущены
+ℹ️ 2026-10-02 19:02:02,552 [INFO] ============================================================
+ℹ️ 2026-10-02 19:02:03,787 [INFO] Email успешно отправлен на kaiby@yandex.ru
+🐛2026-10-02 19:02:03,806 [DEBUG] phone.core.common:common.py:71 - Выполняем команду ['termux-sms-send', '-s', '0', '-n', '+79175729812', '02.10.2026 19:02:03. HONOR8X. +79998855693. SMS.Канарейка']
+❌ 2026-10-02 19:02:03,827 [ERROR] phone.core.common:common.py:97 - ⚠️[Errno 2] No such file or directory: 'termux-sms-send'
+(<class 'FileNotFoundError'>, FileNotFoundError(2, 'No such file or directory'), <traceback object at 0x7b234b044bc0>)
+Traceback (most recent call last):
+  File "/mnt/d/myprogramms/Python/phone/app/core/common.py", line 73, in runShellCommand
+    process = subprocess.run(
+        command, capture_output=True, text=False, timeout=timeout)
+  File "/usr/lib/python3.14/subprocess.py", line 555, in run
+    with Popen(*popenargs, **kwargs) as process:
+         ~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.14/subprocess.py", line 1039, in __init__
+    self._execute_child(args, executable, preexec_fn, close_fds,
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                        pass_fds, cwd, env,
+                        ^^^^^^^^^^^^^^^^^^^
+    ...<5 lines>...
+                        gid, gids, uid, umask,
+                        ^^^^^^^^^^^^^^^^^^^^^^
+                        start_new_session, process_group)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.14/subprocess.py", line 1990, in _execute_child
+    raise child_exception_type(errno_num, err_msg, err_filename)
+FileNotFoundError: [Errno 2] No such file or directory: 'termux-sms-send'
+❌ 2026-10-02 19:02:03,837 [ERROR] phone.core.phone:phone.py:99 - ❌02.10.2026 19:02:03.HONOR8X(172.28.39.199).SMS_SEND: Слот 0 (+79998855693) -> +79175729812
+Детали: Ошибка: [Errno 2] No such file or directory: 'termux-sms-send'
+None
+ℹ️ 2026-10-02 19:02:03,867 [INFO] Туннель уже работает.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://0.0.0.0:5555 (Press CTRL+C to quit)

@@ -12,7 +12,7 @@ from config.config import (
 )
 from schemas import EmailRequest, EmailSender, ResultStatus
 
-from app.core.log.log import get_logger
+from core.log.log import get_logger
 
 logger = get_logger(__name__)
 

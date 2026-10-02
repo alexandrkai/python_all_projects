@@ -9,7 +9,7 @@ from core.telegram.telega import DEFAULT_CHAT_ID, __send_message_to_telegram
 from dotenv import dotenv_values, load_dotenv
 from schemas import PhoneSender, Senders, SimStatus
 
-from app.core.log.config_logger import config_logger
+from core.log.config_logger import config_logger
 
 from .project_folders import (
     PATH_APPLICATION_FOLDER,

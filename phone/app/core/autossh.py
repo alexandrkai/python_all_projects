@@ -4,7 +4,7 @@ import time
 
 from config.config import Config
 
-from app.core.log.log import get_logger,critical_error_logger
+from core.log.log import get_logger,critical_error_logger
 
 logger = get_logger(__name__)
 

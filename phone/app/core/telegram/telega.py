@@ -1,7 +1,7 @@
 
 import requests
 from core.telegram.config import DEFAULT_CHAT_ID, TOKEN
-from app.core.log.log import get_logger
+from core.log.log import get_logger
 
 logger = get_logger(__name__)
 

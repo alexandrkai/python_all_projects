@@ -1,4 +1,4 @@
-#!/data/data/com.termux/files/usr/bin/sh
+/#!/data/data/com.termux/files/usr/bin/sh
 
 # 1. Проверяем, передан ли аргумент имени телефона
 # if [ -z "$1" ]; then
@@ -8,12 +8,12 @@
 # fi
 
 # 2. Экспортируем имя телефона в переменную окружения
-export PHONE_NAME="HONOR8X"
+export PHONE_NAME="HONOR20PRO"
 
 echo "🚀 Запуск приложения для телефона: $PHONE_NAME"
 
 # 3. Запускаем приложение в фоне с передачей переменной окружения
-nohup python run.py > api.log 2>&1 &
+nohup python app/run.py > api.log 2>&1 &
 PID=$!
 
 echo "✅ Приложение запущено в фоне (PID: $PID)"

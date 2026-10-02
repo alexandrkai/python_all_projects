@@ -4,7 +4,7 @@ import subprocess
 from typing import Optional, Dict, Any
 from config.config import Config
 from datetime import datetime
-from app.core.log.log import logger
+from core.log.log import logger
 
 async def run_subprocess_with_timeout_async(
     command: list[str],

@@ -23,7 +23,7 @@ from core.common import (
 )
 from core.email import myEmail
 from core.phone import Phone
-from app.core.log.log import get_logger
+from core.log.log import get_logger
 from schemas import (
     EmailRequest,
     ResultShellCommandSendSMS,

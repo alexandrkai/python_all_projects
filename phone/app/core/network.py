@@ -6,8 +6,8 @@ import subprocess
 import time
 from logging.handlers import RotatingFileHandler
 
-from app.config.project_folders import PATH_LOG_FOLDER
-from app.core.log.log import get_logger
+from config.project_folders import PATH_LOG_FOLDER
+from core.log.log import get_logger
 logger = get_logger(__name__)
 
 # # сделаем свой config_logger

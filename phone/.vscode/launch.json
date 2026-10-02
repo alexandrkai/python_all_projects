@@ -31,7 +31,7 @@
             "cwd": "/mnt/d/myprogramms/Python/phone",
             "env": {
                 "PHONE_NAME": "HONOR8X",
-                "PYTHONPATH": "/mnt/d/myprogramms/Python/phone"
+                "PYTHONPATH": "/mnt/d/myprogramms/Python/phone/app"
             },
             "justMyCode": true
         }

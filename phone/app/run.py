@@ -1,5 +1,4 @@
 #!/data/data/com.termux/files/usr/bin/python3
-# D:/myprogramms/Python/Phones/PROJECT/PHONE/app/run.py
 import atexit
 import os
 import signal
@@ -8,7 +7,7 @@ import sys
 import time
 
 from config.config import Config
-from app.core.log.log import get_logger
+from core.log.log import get_logger
 
 logger=get_logger(__name__)
 

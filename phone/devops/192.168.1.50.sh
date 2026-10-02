@@ -22,8 +22,6 @@ rsync -aviz -e 'ssh -p 8022' \
   pip install maturin
   pip install fastapi --no-build-isolation
 
-  ssh -p 8022 kai@192.168.1.50 "rm -rf /data/data/com.termux/files/home/storage/shared/myfolder/projects/rest-api/app; ls -la /data/data/com.termux/files/home/storage/shared/myfolder/projects/rest-api/"
+  ssh -p 8022 kai@192.168.1.50 "cd /data/data/com.termux/files/home/storage/shared/myfolder/projects/rest-api; rm -rf /data/data/com.termux/files/home/storage/shared/myfolder/projects/rest-api/app; ls -la /data/data/com.termux/files/home/storage/shared/myfolder/projects/rest-api/;mkdir -p app;"
 
-ssh -p 8022 kai@192.168.1.50 "rm -rf /data/data/com.termux/files/home/storage/shared/myfolder/projects/rest-api/app; ls -la /data/data/com.termux/files/home/storage/shared/myfolder/projects/rest-api/"
-
-ssh -t -p 8022 kai@192.168.1.70 "cd /data/data/com.termux/files/home/storage/shared/myfolder/projects/rest-api/app && exec bash"
+ ssh -p 8022 kai@192.168.1.50 "cd /data/data/com.termux/files/home/storage/shared/myfolder/projects/rest-api/app && exec bash"

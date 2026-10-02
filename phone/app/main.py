@@ -4,11 +4,11 @@ from fastapi import Request, status
 from fastapi.exceptions import RequestValidationError
 from fastapi.responses import JSONResponse
 
-from app.core.log.log import get_logger
+from core.log.log import get_logger
 
 # Импорты функций создания роутеров
-from app.routes.app import create_app
-from app.routes.routes import create_router_for_management, create_router_others
+from routes.app import create_app
+from routes.routes import create_router_for_management, create_router_others
 
 logger = get_logger(__file__)
 

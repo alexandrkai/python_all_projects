@@ -6,8 +6,8 @@ import fastapi
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from app.config.config import Config
-from app.core.log.log import critical_error_logger, get_logger
+from config.config import Config
+from core.log.log import critical_error_logger, get_logger
 
 from .period_task import task_autossh_tunnel, task_canary, task_update_configuration
 

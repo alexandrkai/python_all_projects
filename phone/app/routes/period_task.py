@@ -14,7 +14,7 @@ from core.email import myEmail
 from core.phone import Phone
 from schemas import EmailRequest, MessagePayload, SimStatus, SMSRequest
 
-from app.core.log.period_tasks import get_period_task_logger
+from core.log.period_tasks import get_period_task_logger
 
 logger = get_period_task_logger(PATH_LOG_FOLDER, __file__)
 

@@ -1,5 +1,5 @@
 
-from app.core.log.log import get_logger
+from core.log.log import get_logger
 import requests
 from core.telegram.telega import send_message_to_boot
 

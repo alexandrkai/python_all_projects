@@ -5,13 +5,11 @@ import os
 import sys
 from datetime import datetime
 
-from app.config.project_folders import (
+from config.project_folders import (
     PATH_APPLICATION_FOLDER,
     PATH_CONFIG_FOLDER,
     PATH_LOG_FOLDER,
 )
-# from app.config.config import Config, PATH_APPLICATION_FOL
-# DER,    PATH_CONFIG_FOLDER,    PATH_LOG_FOLDER
 from .critical_error_logger import setup_logger
 
 # Определяем пути

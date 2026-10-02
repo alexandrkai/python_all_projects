@@ -6,7 +6,7 @@ from config.config import (
     get_full_error_message,
     send_message_to_telegram,
 )
-from app.core.log.log import get_logger
+from core.log.log import get_logger
 from schemas import SIM, ResultShellCommandSendSMS, ResultStatus, SimStatus, SMSRequest
 
 from core.common import runShellCommand

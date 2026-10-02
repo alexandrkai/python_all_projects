@@ -7,7 +7,7 @@ from contextlib import contextmanager
 from typing import Any
 
 import redis
-from app.core.log.log import get_logger
+from core.log.log import get_logger
 from redis import ConnectionPool
 from redis.exceptions import WatchError
 
